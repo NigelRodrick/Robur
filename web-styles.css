@@ -455,12 +455,11 @@ section,
 /* Light theme Bento (exact Beginner.app: #F6F6F7, #E8E8E9, hover #fff, #D1D1D4) */
 .bento-container--light .bento-card {
     background: var(--bento-light-card-bg);
-    border-color: var(--bento-light-accent-border);
+    border: none;
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
 }
 .bento-container--light .bento-card:hover {
     background: #ffffff;
-    border-color: var(--bento-light-border-hover);
     box-shadow: var(--bento-light-shadow-hover);
 }
 .bento-container--light .bento-card .card-graphic { color: var(--bento-light-text-main); }
@@ -809,7 +808,7 @@ section {
     background: var(--card-bg);
     border-radius: var(--radius);
     overflow: hidden;
-    border: 1px solid var(--border);
+    border: none;
     padding: 0;
     transition: all 0.4s var(--ease-beginner);
     box-shadow: var(--shadow-card-float);
@@ -830,7 +829,6 @@ section {
 }
 .product-item:hover {
     background: var(--card-bg-hover);
-    border-color: var(--border-hover);
     transform: translateY(-6px);
     box-shadow: var(--shadow-card-hover);
 }
@@ -1013,12 +1011,11 @@ section {
     background: rgba(255, 255, 255, 0.9); /* soft light background instead of pure black behind videos */
     border: none;
     transition: all 0.4s var(--ease-beginner);
-    box-shadow: none;
+    box-shadow: var(--shadow-card-float);
     animation: divisionCardFloat 5s ease-in-out infinite;
 }
 .division-card:hover {
     background: #ffffff;
-    border-color: var(--bento-light-border-hover);
     transform: translateY(-6px);
     box-shadow: var(--bento-light-shadow-hover);
 }

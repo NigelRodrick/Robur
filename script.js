@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var outcomeSection = document.querySelector('.outcome-section');
     var outcomeSidebar = document.querySelector('.outcome-sidebar-video');
     var outcomeLastItem = document.querySelector('.outcome-section .outcome-content-layered .outcome-item:nth-child(2)');
+    var mainNav = document.querySelector('.main-nav');
     var ticking = false;
     function checkStickySections() {
         var stickPoint = window.innerHeight * 0.5;
@@ -47,16 +48,24 @@ document.addEventListener('DOMContentLoaded', function() {
             var ocRect = outcomeSidebar.getBoundingClientRect();
             var ocSecRect = outcomeSection.getBoundingClientRect();
             var lastOutcomeRect = outcomeLastItem ? outcomeLastItem.getBoundingClientRect() : null;
+            var navBottom = mainNav ? mainNav.getBoundingClientRect().bottom : 100;
             // Keep outcome video/header in sticky "center" while the last outcome card
             // has not yet fully passed the stickPoint.
             var lastOutcomeLeaving = lastOutcomeRect
                 ? lastOutcomeRect.bottom <= stickPoint
                 : ocSecRect.bottom <= 0;
+            // Hide outcome video once the last outcome card is fully inside/behind header.
+            var shouldHideOutcome = lastOutcomeRect
+                ? lastOutcomeRect.bottom <= navBottom
+                : ocSecRect.bottom <= navBottom;
             if (ocRect.top <= stickPoint && ocSecRect.bottom > 0 && !lastOutcomeLeaving) {
                 outcomeSidebar.classList.add('is-stuck');
             } else {
                 outcomeSidebar.classList.remove('is-stuck');
             }
+            outcomeSidebar.style.transition = 'opacity 0.25s ease';
+            outcomeSidebar.style.opacity = shouldHideOutcome ? '0' : '1';
+            outcomeSidebar.style.pointerEvents = shouldHideOutcome ? 'none' : '';
         }
         ticking = false;
     }
