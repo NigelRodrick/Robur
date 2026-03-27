@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Robur Mining Solutions delivers mining equipment, safety systems, and advisory services—backed by performance guarantees and tailored support for the Zimbabwean mining sector.">
+    <meta name="keywords" content="mining solutions, drilling tools, fire solutions, fluid solutions, mining technologies, strata solutions, PPE safety">
+    <meta name="author" content="Robur Mining Solutions">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#000000">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Robur Mining">
+    <meta name="msapplication-TileColor" content="#000000">
+    <meta name="msapplication-config" content="none">
+    
+    <title>Robur Mining Solutions - Beginner.app Style</title>
+    <link rel="stylesheet" href="web-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Inline fallback styles to ensure black background works -->
+    <style>
+        /* Critical fallback styles - these will work even if external CSS fails */
+        html, body {
+            background: #000000 !important;
+            background-color: #000000 !important;
+            color: #ffffff !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+        
+        /* Ensure core text is visible without overriding every element */
+        h1, h2, h3, h4, h5, h6, p, span, a {
+            color: #ffffff !important;
+        }
+        
+        /* Keep dark section backgrounds predictable */
+        .hero, .metrics-section, .products-section, .outcome-section, .acclaim-section {
+            background: #000000 !important;
+        }
+        
+        /* Mobile fallback styles */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 120px 0 20px 0 !important;
+                min-height: 100vh !important;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem !important;
+                text-align: center !important;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem !important;
+                text-align: center !important;
+            }
+            
+            .divisions-grid {
+                grid-template-columns: 1fr !important;
+                gap: 1rem !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <video class="background-refractions" autoplay loop muted playsinline preload="auto">
+        <source src="images/refractions.mp4" type="video/mp4">
+        <!-- Fallback: use main logo animation if refractions video cannot be played -->
+        <source src="images/logo1.mp4" type="video/mp4">
+    </video>
+
+    <!-- Navigation - Top Bar -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="images/final-logo.png" alt="Robur Mining Solutions" class="logo-image">
+            </div>
+            <div class="nav-links">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#metrics" class="nav-link">Metrics</a>
+                <a href="#products" class="nav-link">Products</a>
+                <a href="#outcome" class="nav-link">Outcome</a>
+                <a href="#acclaim" class="nav-link">Acclaim</a>
+                <a href="#divisions" class="nav-link">Divisions</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section - Beginner.app Clone -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <span class="title-line">One company,</span>
+                <span class="title-line">endless solutions,</span>
+                <span class="title-line">your mining challenges</span>
+                <span class="title-line">will fit nicely</span>
+                <span class="title-line">in your hands</span>
+            </h1>
+            <p class="hero-subtitle">We deliver measurable value to your operations: every investment in our products and services is designed to strengthen efficiency, safety, and profitability—enabling your business to succeed in demanding mining environments.</p>
+        </div>
+        <div class="hero-image-wrapper">
+            <video src="images/logo1.mp4" class="hero-logo-video" autoplay loop muted playsinline title="Robur Mining Solutions"></video>
+        </div>
+    </section>
+
+    <!-- Metrics Section - Vertical header + Bento Grid -->
+    <section id="metrics" class="metrics-section">
+        <div class="container">
+            <div class="sideways-section">
+                <div class="content-area">
+                    <div class="bento-container">
+                <div class="bento-card fade-in stagger-1">
+                    <h2 class="card-title">Consultations</h2>
+                    <p class="card-subtitle">Custom Solutions</p>
+                    <p class="card-text">Our advisory team delivers tailored consultations to assess your mining challenges and design customised solutions aligned with Robur’s product portfolio and technical expertise.</p>
+                </div>
+                <div class="bento-card tall-card fade-in stagger-2">
+                    <h2 class="card-title">Performance Guarantees</h2>
+                    <p class="card-subtitle">ROI-Focused Contracts</p>
+                    <p class="card-text">We structure performance-based agreements that align our compensation with your operational outcomes, ensuring shared incentives for efficiency, reliability, and long-term value.</p>
+                </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section - Video and product cards -->
+    <section id="products" class="products-section">
+        <div class="container">
+            <div class="sideways-section">
+                <aside class="products-sidebar-video fade-in">
+                    <div class="products-video-wrapper">
+                        <video class="products-video" autoplay loop muted playsinline preload="auto" title="Robur Mining Solutions - Products">
+                            <source src="products/products.mp4" type="video/mp4">
+                            <source src="images/products.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </aside>
+                <div class="content-area">
+                    <div class="products-content-layered">
+                        <div class="product-item fade-in stagger-1">
+                            <img src="images/gas monitoring.jpeg" alt="Gas Monitoring Equipment" class="product-image">
+                            <div class="product-text">
+                                <h4 class="product-title">Gas Monitoring Equipment</h4>
+                                <p class="product-description">Industry-grade gas detection and monitoring systems for mine safety compliance, hazard prevention, and environmental monitoring.</p>
+                            </div>
+                        </div>
+                        <div class="product-item fade-in stagger-2">
+                            <img src="images/cap lamps.jpeg" alt="Cap Lamps and Charging Units" class="product-image">
+                            <div class="product-text">
+                                <h4 class="product-title">Cap Lamps and Charging Units</h4>
+                                <p class="product-description">Certified cap lamps and charging systems for underground mining, meeting safety standards and operational reliability requirements.</p>
+                            </div>
+                        </div>
+                        <div class="product-item fade-in stagger-3">
+                            <img src="images/lifting equipment.jpeg" alt="Lifting Equipment" class="product-image">
+                            <div class="product-text">
+                                <h4 class="product-title">Lifting Equipment</h4>
+                                <p class="product-description">Engineered lifting equipment and accessories for mining applications, built for safety, durability, and compliance with industry standards.</p>
+                            </div>
+                        </div>
+                        <div class="product-item fade-in stagger-4">
+                            <img src="images/specialised ppe.jpeg" alt="Specialized Personal Protective Equipment" class="product-image">
+                            <div class="product-text">
+                                <h4 class="product-title">Specialized Personal Protective Equipment</h4>
+                                <p class="product-description">A full range of specialised PPE: helmets, protective clothing, footwear, respiratory protection, and safety accessories for mining and industrial use.</p>
+                            </div>
+                        </div>
+                        <div class="product-item fade-in stagger-5">
+                            <img src="images/charging accessories.jpeg" alt="Charging Accessories" class="product-image">
+                            <div class="product-text">
+                                <h4 class="product-title">Charging Accessories</h4>
+                                <p class="product-description">Charging accessories and power solutions for mining tools and safety equipment, supporting uptime and consistent performance.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Outcome Section - Text left, video right -->
+    <section id="outcome" class="outcome-section">
+        <div class="container">
+            <div class="sideways-section outcome-sideways">
+                <div class="content-area">
+                <div class="outcome-content-layered">
+                    <div class="outcome-item fade-in stagger-1">
+                        <h3 class="outcome-title">Proven Results</h3>
+                        <p class="outcome-description">Our solutions are proven to deliver measurable gains in operational efficiency, safety performance, and profitability across mining operations globally.</p>
+                    </div>
+                    
+                    <div class="outcome-item fade-in stagger-2">
+                        <h3 class="outcome-title">Client Success</h3>
+                        <p class="outcome-description">We define success by our clients’ results. Every engagement is structured to deliver clear value and sustainable outcomes for their operations.</p>
+                    </div>
+                </div>
+                </div>
+                <aside class="outcome-sidebar-video fade-in">
+                    <div class="outcome-video-wrapper">
+                        <video class="outcome-video" autoplay loop muted playsinline preload="auto" title="Robur Mining Solutions - Outcome">
+                            <source src="downloads/outcome.mp4" type="video/mp4">
+                            <source src="videos/outcome.mp4" type="video/mp4">
+                            <source src="images/outcome.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <!-- Acclaim Section - Header video on top, then testimonials -->
+    <section id="acclaim" class="acclaim-section">
+        <div class="container">
+            <div class="acclaim-header-video">
+                <video class="acclaim-header-vid" autoplay loop muted playsinline preload="auto" title="Acclaim - Robur Mining Solutions">
+                    <source src="images/acclaim.mp4" type="video/mp4">
+                    <source src="images/acclaims.mp4" type="video/mp4">
+                    <source src="images/acclaims-header.mp4" type="video/mp4">
+                    <source src="images/acclaim-header.mp4" type="video/mp4">
+                    <source src="downloads/acclaim.mp4" type="video/mp4">
+                    <source src="downloads/acclaims-header.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="sideways-section">
+                <div class="content-area">
+                <div class="acclaim-content-layered">
+                    <div class="acclaim-card fade-in stagger-1">
+                        <blockquote>"Great experience, Robur Mining Solutions provides quality products and exceptional customer service."</blockquote>
+                        <div class="acclaim-author">
+                            <div class="author-name">
+                                <strong>M.Sayi Pro</strong>
+                            </div>
+                            <span>PROCUREMENT DAVIS GRANITE</span>
+                        </div>
+                    </div>
+
+                    <div class="acclaim-card fade-in stagger-2">
+                        <blockquote>"Robur Mining Solutions, gets jobs done with velocity and tenacity."</blockquote>
+                        <div class="acclaim-author">
+                            <div class="author-name">
+                                <strong>Aaron MPOFU</strong>
+                            </div>
+                            <span>FINANCE ADMINISTRATOR CATHOLIC DIOCESE OF GWERU</span>
+                        </div>
+                    </div>
+
+                    <div class="acclaim-card fade-in stagger-3">
+                        <blockquote>"The Robur team are enthusiastic about giving practical and detailed solutions."</blockquote>
+                        <div class="acclaim-author">
+                            <div class="author-name">
+                                <strong>Ben Mukandi</strong>
+                            </div>
+                            <span>EXECUTIVE CHAIRMAN FREIGHTWORLD</span>
+                        </div>
+                    </div>
+
+                    <div class="acclaim-card fade-in stagger-4">
+                        <blockquote>"Allan and his Robur team are young, vibrant and all about delivering expert insight and tangible results."</blockquote>
+                        <div class="acclaim-author">
+                            <div class="author-name">
+                                <strong>Kundai Chidamba</strong>
+                            </div>
+                            <span>MANAGING DIRECTOR T & A DRILLING AND BLASTING</span>
+                        </div>
+                    </div>
+
+                    <div class="acclaim-card fade-in stagger-5">
+                        <blockquote>"They deliver perfectly crafted products 👌"</blockquote>
+                        <div class="acclaim-author">
+                            <div class="author-name">
+                                <strong>Tinashe Gwasera</strong>
+                            </div>
+                            <span>DAMO RESOURCES</span>
+                        </div>
+                    </div>
+
+                    <div class="acclaim-card fade-in stagger-6">
+                        <blockquote>"When ambition, limitlessness and expertise meet, you get Robur Mining Solutions."</blockquote>
+                        <div class="acclaim-author">
+                            <div class="author-name">
+                                <strong>Tinashe Manzungu</strong>
+                            </div>
+                            <span>CHIEF EXECUTIVE OFFICER ZIMBUILD</span>
+                        </div>
+                    </div>
+                </div>
+                    <a href="#about" class="section-cta">Learn more</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Divisions Section -->
+    <section id="divisions" class="divisions-section" style="background: #ffffff !important; background-color: #ffffff !important;">
+        <div class="container" style="background: #ffffff !important; background-color: #ffffff !important;">
+            <div class="divisions-grid">
+                <a href="drilling-tools.html" class="division-card scale-in stagger-1" data-division="Drilling Tools">
+                    <div class="division-logo-container">
+                        <video class="division-logo" autoplay loop muted playsinline preload="auto" title="Drilling Tools">
+                            <source src="images/robur drilling.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="division-overlay">
+                        <h3>Drilling Tools</h3>
+                        <p>Advanced drilling equipment and solutions</p>
+                        <span class="learn-more">Learn More →</span>
+                    </div>
+                </a>
+
+                <a href="fire-solutions.html" class="division-card scale-in stagger-2" data-division="Fire Solutions">
+                    <div class="division-logo-container">
+                        <video class="division-logo" autoplay loop muted playsinline preload="auto" title="Fire Solutions">
+                            <source src="images/robur fire solutions.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="division-overlay">
+                        <h3>Fire Solutions</h3>
+                        <p>Comprehensive fire safety systems</p>
+                        <span class="learn-more">Learn More →</span>
+                    </div>
+                </a>
+
+                <a href="fluid-solutions.html" class="division-card scale-in stagger-3" data-division="Fluid Solutions">
+                    <div class="division-logo-container">
+                        <video class="division-logo" autoplay loop muted playsinline preload="auto" title="Fluid Solutions">
+                            <source src="images/robur fluid solutions.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="division-overlay">
+                        <h3>Fluid Solutions</h3>
+                        <p>Advanced fluid management systems</p>
+                        <span class="learn-more">Learn More →</span>
+                    </div>
+                </a>
+
+                <a href="mining-technologies.html" class="division-card scale-in stagger-4" data-division="Mining Technologies">
+                    <div class="division-logo-container">
+                        <video class="division-logo" autoplay loop muted playsinline preload="auto" title="Mining Technologies">
+                            <source src="images/robur mining.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="division-overlay">
+                        <h3>Mining Technologies</h3>
+                        <p>Cutting-edge mining innovations</p>
+                        <span class="learn-more">Learn More →</span>
+                    </div>
+                </a>
+
+                <a href="strata-solutions.html" class="division-card scale-in stagger-5" data-division="Strata Solutions">
+                    <div class="division-logo-container">
+                        <video class="division-logo" autoplay loop muted playsinline preload="auto" title="Strata Solutions Logo">
+                            <source src="images/robur strata.mp4" type="video/mp4">
+                            <source src="images/robur-strata.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="division-overlay">
+                        <h3>Strata Solutions</h3>
+                        <p>Geological and strata management</p>
+                        <span class="learn-more">Learn More →</span>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    
+
+    
+
+    <!-- Floating More Button -->
+    <div class="floating-more">
+        <button class="floating-more-button" id="floatingMoreButton">
+            <span class="more-text">More</span>
+            <span class="more-icon">+</span>
+        </button>
+        <div class="floating-more-menu" id="floatingMoreMenu">
+            <div class="more-menu-item">
+                <a href="about.html" class="floating-more-link">About</a>
+                <div class="more-submenu">
+                    <a href="about.html" class="floating-more-sublink">Background</a>
+                    <a href="who-we-are.html" class="floating-more-sublink">Who we are</a>
+                    <a href="contacts.html" class="floating-more-sublink">Contacts</a>
+                </div>
+            </div>
+            <a href="investment-opportunities.html" class="floating-more-link">Investment Opportunities</a>
+            <div class="more-menu-item">
+                <a href="#community" class="floating-more-link">Community</a>
+                <div class="more-submenu">
+                    <a href="https://www.linkedin.com/company/roburmining/" target="_blank" rel="noopener noreferrer" class="floating-more-sublink">LinkedIn</a>
+                    <a href="https://www.facebook.com/share/1BDQdeGoye/" target="_blank" rel="noopener noreferrer" class="floating-more-sublink">Facebook</a>
+                    <a href="https://x.com/MiningRobuR" target="_blank" rel="noopener noreferrer" class="floating-more-sublink">Twitter</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-copyright">
+                    <p>&copy; 2026 Robur Mining Solutions. All rights reserved.</p>
+                    <p class="developer-credit">Developed by Fidinsky Tech Solutions</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    
+    <script>
+        // Adjust speed and force-play background refractions video
+        document.addEventListener('DOMContentLoaded', () => {
+            const refractionsVideo = document.querySelector('.background-refractions');
+            if (refractionsVideo) {
+                const setSpeed = () => { refractionsVideo.playbackRate = 1.25; };
+                ['loadedmetadata', 'loadeddata', 'canplay'].forEach(evt => {
+                    refractionsVideo.addEventListener(evt, setSpeed, { once: true });
+                });
+                // Fallback in case metadata event was already fired
+                setSpeed();
+                // Try to explicitly start playback (muted autoplay is usually allowed)
+                refractionsVideo.play().catch(() => {});
+            }
+        });
+    </script>
+
+    <script>
+        // Function to wrap blockquote text into line-by-line spans for true line-by-line translucency
+        function wrapBlockquoteLines() {
+            const blockquotes = document.querySelectorAll('.acclaim-section blockquote');
+            blockquotes.forEach(blockquote => {
+                // Check if already wrapped
+                if (blockquote.dataset.wrapped === 'true') return;
+                
+                let originalText = blockquote.textContent.trim();
+                // Remove leading and trailing quotes if present (both double and single quotes)
+                originalText = originalText.replace(/^["'"]+|["'"]+$/g, '');
+                originalText = originalText.replace(/^['']+|['']+$/g, '');
+                const words = originalText.split(' ');
+                
+                // Get computed styles for accurate measurement
+                const computedStyle = window.getComputedStyle(blockquote);
+                const containerWidth = blockquote.offsetWidth || blockquote.parentElement.offsetWidth || 600;
+                const fontSize = parseFloat(computedStyle.fontSize) || 16;
+                const fontFamily = computedStyle.fontFamily;
+                
+                // Create a temporary element to measure text width
+                const measureEl = document.createElement('span');
+                measureEl.style.position = 'absolute';
+                measureEl.style.visibility = 'hidden';
+                measureEl.style.whiteSpace = 'nowrap';
+                measureEl.style.fontSize = fontSize + 'px';
+                measureEl.style.fontFamily = fontFamily;
+                document.body.appendChild(measureEl);
+                
+                // Clear blockquote and rebuild with wrapped lines
+                blockquote.innerHTML = '';
+                
+                let currentLine = document.createElement('span');
+                currentLine.className = 'blockquote-line';
+                currentLine.style.display = 'block';
+                currentLine.style.margin = '0';
+                currentLine.style.padding = '0';
+                
+                let currentLineText = '';
+                
+                words.forEach((word, index) => {
+                    const testText = currentLineText + (currentLineText ? ' ' : '') + word;
+                    measureEl.textContent = testText;
+                    const textWidth = measureEl.offsetWidth;
+                    
+                    if (textWidth > containerWidth && currentLineText) {
+                        // Current line is full, start new line
+                        currentLine.textContent = currentLineText;
+                        blockquote.appendChild(currentLine);
+                        
+                        currentLine = document.createElement('span');
+                        currentLine.className = 'blockquote-line';
+                        currentLine.style.display = 'block';
+                        currentLine.style.margin = '0';
+                        currentLine.style.padding = '0';
+                        currentLineText = word;
+                    } else {
+                        currentLineText = testText;
+                    }
+                });
+                
+                // Add the last line
+                if (currentLineText) {
+                    currentLine.textContent = currentLineText;
+                    blockquote.appendChild(currentLine);
+                }
+                
+                // Clean up
+                document.body.removeChild(measureEl);
+                
+                blockquote.dataset.wrapped = 'true';
+            });
+        }
+        
+        // Wrap blockquotes on page load and resize
+        function initBlockquoteWrapping() {
+            // Wait a bit to ensure DOM is fully ready
+            setTimeout(() => {
+                wrapBlockquoteLines();
+                // Also run translucency after wrapping to ensure lines are processed
+                if (typeof handleScrollTranslucency === 'function') {
+                    handleScrollTranslucency();
+                }
+            }, 100);
+        }
+        
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initBlockquoteWrapping);
+        } else {
+            initBlockquoteWrapping();
+        }
+        window.addEventListener('resize', () => {
+            wrapBlockquoteLines();
+            if (typeof handleScrollTranslucency === 'function') {
+                handleScrollTranslucency();
+            }
+        });
+        
+        // Scroll translucency disabled - keep all content fully visible when scrolling
+        function handleScrollTranslucency() {
+            document.querySelectorAll('.blockquote-line, .title-line, .hero *, .hero-section *, .metrics-section *, .products-section *, .outcome-section *, .acclaim-section *, .divisions-section *').forEach(el => {
+                if (!el.closest('.main-nav') && !el.classList.contains('hero-image')) {
+                    el.classList.remove('translucent-text', 'translucent-text-light', 'translucent-text-medium', 'translucent-text-strong');
+                    el.style.opacity = '';
+                }
+            });
+            const heroSubtitle = document.querySelector('.hero-subtitle');
+            if (heroSubtitle) heroSubtitle.style.opacity = '1';
+            return;
+            const header = document.querySelector('.main-nav');
+            if (!header) return;
+            
+            const headerHeight = header.offsetHeight;
+            const headerRect = header.getBoundingClientRect();
+            const headerBottom = headerRect.bottom;
+            const headerTop = headerRect.top;
+            
+            // Get ALL text elements across all sections - process each independently
+            // Don't group by section - each element is processed on its own
+            // First get blockquote-line elements separately to ensure they're included
+            const blockquoteLines = document.querySelectorAll('.acclaim-section .blockquote-line');
+            // Get hero title lines separately
+            const heroTitleLines = document.querySelectorAll('.hero-title .title-line');
+            // Get other text elements - include products section elements specifically
+            const allTextElements = document.querySelectorAll('.hero-section h1, .hero-section h2, .hero-section h3, .hero-section h4, .hero-section h5, .hero-section h6, .hero-section p, .hero-section span, .hero-section a, .metrics-section h1, .metrics-section h2, .metrics-section h3, .metrics-section h4, .metrics-section h5, .metrics-section h6, .metrics-section p, .metrics-section span, .metrics-section a, .metrics-section li, .metrics-section td, .metrics-section th, .products-section h1, .products-section h2, .products-section h3, .products-section h4, .products-section h5, .products-section h6, .products-section p, .products-section span, .products-section a, .products-section li, .products-section td, .products-section th, .products-section .product-title, .products-section .product-description, .outcome-section h1, .outcome-section h2, .outcome-section h3, .outcome-section h4, .outcome-section h5, .outcome-section h6, .outcome-section p, .outcome-section span, .outcome-section a, .outcome-section li, .outcome-section td, .outcome-section th, .acclaim-section h1, .acclaim-section h2, .acclaim-section h3, .acclaim-section h4, .acclaim-section h5, .acclaim-section h6, .acclaim-section p, .acclaim-section a, .acclaim-section li, .acclaim-section td, .acclaim-section th, .divisions-section h1, .divisions-section h2, .divisions-section h3, .divisions-section h4, .divisions-section h5, .divisions-section h6, .divisions-section p, .divisions-section span, .divisions-section a, .divisions-section li, .divisions-section td, .divisions-section th, .contact-details-section h1, .contact-details-section h2, .contact-details-section h3, .contact-details-section h4, .contact-details-section h5, .contact-details-section h6, .contact-details-section p, .contact-details-section span, .contact-details-section a, .contact-details-section li, .contact-details-section td, .contact-details-section th');
+            
+            // Filter out any blockquote-line and title-line elements from allTextElements to avoid duplicates
+            // Also filter out container divs and elements without direct text content
+            const filteredTextElements = Array.from(allTextElements).filter(el => {
+                if (el.classList.contains('blockquote-line')) return false;
+                if (el.classList.contains('title-line')) return false;
+                if (el.tagName === 'DIV' && !el.textContent.trim()) return false;
+                if (el.classList.contains('container') || el.classList.contains('acclaim-grid') || el.classList.contains('acclaim-card')) return false;
+                return true;
+            });
+            
+            // Combine blockquote lines, hero title lines, and other elements
+            const combinedElements = filteredTextElements.concat(Array.from(blockquoteLines), Array.from(heroTitleLines));
+            
+            // Process each element completely independently
+            combinedElements.forEach(element => {
+                    // Skip navigation elements
+                    if (element.closest('.main-nav') ||
+                        element.closest('.nav-container') ||
+                        element.offsetHeight === 0 || // Skip hidden elements
+                        element.offsetWidth === 0) {
+                        return;
+                    }
+                    
+                    // Skip division logos - they should always be visible
+                    if (element.classList.contains('division-logo') ||
+                        element.closest('.division-logo-container') ||
+                        element.tagName === 'IMG' && element.closest('.division-card')) {
+                        element.style.opacity = '1';
+                        element.style.visibility = 'visible';
+                        return;
+                    }
+                    
+                    // Skip acclaim author info
+                    if (element.closest('.acclaim-author') || 
+                        element.classList.contains('author-name') || 
+                        element.classList.contains('author-company')) {
+                        return;
+                    }
+                    
+                    // Skip acclaim card containers - only process text elements inside them
+                    if (element.classList.contains('acclaim-card') || 
+                        element.closest('.acclaim-card') && (element.tagName === 'DIV' && !element.classList.contains('blockquote-line'))) {
+                        return;
+                    }
+                    
+                    // Skip blockquote elements themselves - only process their line children
+                    if (element.tagName === 'BLOCKQUOTE' && !element.classList.contains('blockquote-line')) {
+                        return;
+                    }
+                    
+                    // Skip large container divs that might cause whole-section blurring
+                    if (element.tagName === 'DIV' && 
+                        (element.classList.contains('acclaim-grid') || 
+                         element.classList.contains('container') ||
+                         element.classList.contains('section-header'))) {
+                        return;
+                    }
+                    
+                    // Process blockquote lines individually (they're now wrapped in spans)
+                    if (element.classList.contains('blockquote-line')) {
+                        // This is a line within a blockquote - process it individually
+                        const elementRect = element.getBoundingClientRect();
+                        const elementTop = elementRect.top;
+                        const elementBottom = elementRect.bottom;
+                        const elementHeight = elementRect.height;
+                        
+                        // Remove all translucency classes first
+                        element.classList.remove('translucent-text', 'translucent-text-light', 'translucent-text-medium', 'translucent-text-strong');
+                        element.style.opacity = '';
+                        
+                        // Check if this line is entering header
+                        const isInHeader = elementTop < headerBottom && elementBottom > headerRect.top;
+                        
+                        if (isInHeader) {
+                            // Calculate overlap with header
+                            const overlapTop = Math.max(elementTop, headerRect.top);
+                            const overlapBottom = Math.min(elementBottom, headerBottom);
+                            const overlapHeight = Math.max(0, overlapBottom - overlapTop);
+                            const overlapRatio = overlapHeight / elementHeight;
+                            
+                            // Calculate distance from header top
+                            const distanceFromHeaderTop = elementTop - headerRect.top;
+                            const fadeZone = 150;
+                            const fadeRatio = Math.min(Math.max(distanceFromHeaderTop / fadeZone, 0), 1);
+                            
+                            // Apply translucency based on how much is in header
+                            const combinedRatio = (overlapRatio + (1 - fadeRatio)) / 2;
+                            
+                            if (combinedRatio > 0.75) {
+                                element.classList.add('translucent-text-strong');
+                            } else if (combinedRatio > 0.5) {
+                                element.classList.add('translucent-text-medium');
+                            } else if (combinedRatio > 0.25) {
+                                element.classList.add('translucent-text-light');
+                            } else {
+                                element.classList.add('translucent-text');
+                            }
+                        } else if (elementBottom < headerRect.top) {
+                            element.style.opacity = '1';
+                        } else if (elementTop > headerBottom) {
+                            element.style.opacity = '1';
+                        }
+                        return; // Skip normal processing for blockquote lines
+                    }
+                    
+                    // Get the position of this specific element
+                    const elementRect = element.getBoundingClientRect();
+                    const elementTop = elementRect.top;
+                    const elementBottom = elementRect.bottom;
+                    const elementHeight = elementRect.height;
+                    
+                    // Remove all translucency classes first
+                    element.classList.remove('translucent-text', 'translucent-text-light', 'translucent-text-medium', 'translucent-text-strong');
+                    element.style.opacity = '';
+                    element.style.transition = 'opacity 0.3s ease';
+                    
+                    // Check if this specific line/element is entering or inside the header area
+                    // Element is in header when its top is below header top and its bottom is above header bottom
+                    const isInHeader = elementTop < headerBottom && elementBottom > headerTop;
+                    
+                    if (isInHeader) {
+                        // This line is entering/inside header area - make translucent based on its position
+                        // Calculate how much of this element is inside the header
+                        const overlapTop = Math.max(elementTop, headerTop);
+                        const overlapBottom = Math.min(elementBottom, headerBottom);
+                        const overlapHeight = Math.max(0, overlapBottom - overlapTop);
+                        const overlapRatio = elementHeight > 0 ? overlapHeight / elementHeight : 0;
+                        
+                        // Calculate distance from header top (for smooth fade effect)
+                        const distanceFromHeaderTop = elementTop - headerTop;
+                        const fadeZone = 100; // Distance over which translucency fades in (smoother transition)
+                        const fadeRatio = Math.min(Math.max(distanceFromHeaderTop / fadeZone, 0), 1);
+                        
+                        // Calculate how much of the element is actually behind the header
+                        const elementCenter = (elementTop + elementBottom) / 2;
+                        const isBehindHeader = elementCenter < headerBottom && elementCenter > headerTop;
+                        
+                        // Apply translucency based on how much is in header and position
+                        // More translucent when more of the element is in header
+                        const combinedRatio = isBehindHeader ? 
+                            Math.max(overlapRatio, 1 - fadeRatio) : 
+                            (overlapRatio + (1 - fadeRatio)) / 2;
+                        
+                        if (combinedRatio > 0.7) {
+                            element.classList.add('translucent-text-strong'); // Most translucent (0.3 opacity)
+                        } else if (combinedRatio > 0.45) {
+                            element.classList.add('translucent-text-medium'); // Medium (0.4 opacity)
+                        } else if (combinedRatio > 0.2) {
+                            element.classList.add('translucent-text-light'); // Light (0.5 opacity)
+                        } else {
+                            element.classList.add('translucent-text'); // Slight (0.3 opacity)
+                        }
+                    } else if (elementBottom < headerTop) {
+                        // Element is above header - fully opaque
+                        element.style.opacity = '1';
+                        element.classList.remove('translucent-text', 'translucent-text-light', 'translucent-text-medium', 'translucent-text-strong');
+                    } else if (elementTop > headerBottom) {
+                        // Element has passed header from bottom - fully opaque
+                        element.style.opacity = '1';
+                        element.classList.remove('translucent-text', 'translucent-text-light', 'translucent-text-medium', 'translucent-text-strong');
+                    }
+            });
+        }
+
+        // Function to wrap nav link text into spans for line-by-line translucency
+        function wrapNavLinkText() {
+            const navLinks = document.querySelectorAll('.main-nav .nav-link');
+            navLinks.forEach(navLink => {
+                // Check if already wrapped
+                if (navLink.dataset.wrapped === 'true') return;
+                
+                const originalText = navLink.textContent.trim();
+                const words = originalText.split(' ');
+                
+                // Clear and rebuild with wrapped words
+                navLink.innerHTML = '';
+                words.forEach((word, index) => {
+                    const span = document.createElement('span');
+                    span.className = 'nav-link-word';
+                    span.textContent = word + (index < words.length - 1 ? ' ' : '');
+                    navLink.appendChild(span);
+                });
+                
+                navLink.dataset.wrapped = 'true';
+            });
+        }
+        
+        // Header translucency disabled - keep nav links fully visible
+        function handleHeaderTranslucency() {
+            document.querySelectorAll('.main-nav .nav-link-word, .main-nav .nav-link').forEach(el => {
+                el.classList.remove('header-translucent', 'header-translucent-light', 'header-translucent-medium', 'header-translucent-strong');
+            });
+            return;
+            const header = document.querySelector('.main-nav');
+            if (!header) return;
+            
+            const headerRect = header.getBoundingClientRect();
+            const headerTop = headerRect.top;
+            const headerBottom = headerRect.bottom;
+            
+            // Get all nav link words (wrapped spans) or fallback to nav links
+            const navLinkWords = document.querySelectorAll('.main-nav .nav-link-word, .main-nav .nav-link');
+            
+            // Get all content elements that could be behind the header
+            const contentElements = document.querySelectorAll('.metrics-section h1, .metrics-section h2, .metrics-section h3, .metrics-section h4, .metrics-section h5, .metrics-section h6, .metrics-section p, .metrics-section span, .products-section h1, .products-section h2, .products-section h3, .products-section h4, .products-section h5, .products-section h6, .products-section p, .products-section span, .outcome-section h1, .outcome-section h2, .outcome-section h3, .outcome-section h4, .outcome-section h5, .outcome-section h6, .outcome-section p, .outcome-section span, .acclaim-section h1, .acclaim-section h2, .acclaim-section h3, .acclaim-section h4, .acclaim-section h5, .acclaim-section h6, .acclaim-section p, .acclaim-section .blockquote-line, .divisions-section h1, .divisions-section h2, .divisions-section h3, .divisions-section h4, .divisions-section h5, .divisions-section h6, .divisions-section p, .divisions-section span, .contact-details-section h1, .contact-details-section h2, .contact-details-section h3, .contact-details-section h4, .contact-details-section h5, .contact-details-section h6, .contact-details-section p, .contact-details-section span');
+            
+            navLinkWords.forEach(navElement => {
+                const navRect = navElement.getBoundingClientRect();
+                const navTop = navRect.top;
+                const navBottom = navRect.bottom;
+                const navLeft = navRect.left;
+                const navRight = navRect.right;
+                
+                // Check if any content element is behind this nav element
+                let hasContentBehind = false;
+                let maxOverlap = 0;
+                
+                contentElements.forEach(element => {
+                    // Skip hidden elements
+                    if (element.offsetHeight === 0 || element.offsetWidth === 0) return;
+                    
+                    const elementRect = element.getBoundingClientRect();
+                    const elementTop = elementRect.top;
+                    const elementBottom = elementRect.bottom;
+                    const elementLeft = elementRect.left;
+                    const elementRight = elementRect.right;
+                    
+                    // Check if element overlaps with nav element vertically and horizontally
+                    const verticalOverlap = elementTop < navBottom && elementBottom > navTop;
+                    const horizontalOverlap = elementLeft < navRight && elementRight > navLeft;
+                    
+                    if (verticalOverlap && horizontalOverlap) {
+                        // Calculate overlap ratio
+                        const overlapTop = Math.max(elementTop, navTop);
+                        const overlapBottom = Math.min(elementBottom, navBottom);
+                        const overlapHeight = Math.max(0, overlapBottom - overlapTop);
+                        const navHeight = navBottom - navTop;
+                        const overlapRatio = navHeight > 0 ? overlapHeight / navHeight : 0;
+                        
+                        if (overlapRatio > maxOverlap) {
+                            maxOverlap = overlapRatio;
+                        }
+                        
+                        hasContentBehind = true;
+                    }
+                });
+                
+                // Apply translucency based on content behind
+                navElement.classList.remove('header-translucent', 'header-translucent-light', 'header-translucent-medium', 'header-translucent-strong');
+                
+                if (hasContentBehind) {
+                    if (maxOverlap > 0.75) {
+                        navElement.classList.add('header-translucent-strong');
+                    } else if (maxOverlap > 0.5) {
+                        navElement.classList.add('header-translucent-medium');
+                    } else if (maxOverlap > 0.25) {
+                        navElement.classList.add('header-translucent-light');
+                    } else {
+                        navElement.classList.add('header-translucent');
+                    }
+                }
+            });
+        }
+
+        // Add scroll event listener with throttling for performance
+        let scrollTimeout;
+        window.addEventListener('scroll', () => {
+            if (scrollTimeout) {
+                cancelAnimationFrame(scrollTimeout);
+            }
+            scrollTimeout = requestAnimationFrame(() => {
+                handleScrollTranslucency();
+                handleHeaderTranslucency();
+            });
+        });
+        
+        // Wrap nav links on page load
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                wrapNavLinkText();
+                handleScrollTranslucency();
+                handleHeaderTranslucency();
+            });
+        } else {
+            wrapNavLinkText();
+            handleScrollTranslucency();
+            handleHeaderTranslucency();
+        }
+    </script>
+
+    <script>
+        // Highlight active nav link based on scroll position
+        function updateActiveNavLink() {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const scrollPosition = window.scrollY + 150; // Offset for header height
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                const sectionId = section.getAttribute('id');
+
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${sectionId}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+
+            // Handle home section (at top of page)
+            if (scrollPosition < 200) {
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#home') {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        }
+
+        // Update on scroll
+        window.addEventListener('scroll', updateActiveNavLink);
+        // Update on page load
+        document.addEventListener('DOMContentLoaded', updateActiveNavLink);
+    </script>
+</body>
+</html> 
