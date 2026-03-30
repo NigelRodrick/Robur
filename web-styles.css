@@ -28,8 +28,8 @@
     --letter-spacing-wide: 0.02em;
     /* High-contrast minimalist (Beginner.app) - dark theme */
     --bg: #000000;
-    --card-bg: rgba(255, 255, 255, 0.04);
-    --card-bg-hover: rgba(255, 255, 255, 0.08);
+    --card-bg: rgba(0, 0, 0, 0.82);
+    --card-bg-hover: rgba(0, 0, 0, 0.92);
     --border: rgba(255, 255, 255, 0.1);
     --border-hover: rgba(255, 255, 255, 0.18);
     --shadow-card-hover-soft: 0 20px 40px rgba(0, 0, 0, 0.2);
