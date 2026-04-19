@@ -304,6 +304,13 @@ section,
     object-position: left center;
 }
 
+/* Metrics: no grey “ghost” panel behind header image (was rgba white 4%) */
+.metrics-section .bento-header-box {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
 .bento-label {
     display: block;
     font-size: 0.75rem;
@@ -692,13 +699,13 @@ section {
 .products-vertical-label {
     flex-shrink: 0;
 }
-/* Dark panel behind white-on-transparent branding PNGs (Products + Outcome sidebars) */
+/* Panel behind white-on-transparent branding PNGs — pure black (no grey #0d1117 tint) */
 .products-section .products-video-wrapper,
 .outcome-section .outcome-video-wrapper {
-    background: #0d1117;
+    background: #000000;
     padding: clamp(1.25rem, 3vw, 2rem);
     box-sizing: border-box;
-    box-shadow: var(--shadow-card-float);
+    box-shadow: none;
 }
 .products-section .products-video-wrapper {
     width: 100%;
