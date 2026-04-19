@@ -1,17 +1,17 @@
 // Ensure products and outcome section videos play (autoplay + programmatic play fallback)
 document.addEventListener('DOMContentLoaded', function() {
     var productsVideo = document.querySelector('.products-video');
-    if (productsVideo) {
+    if (productsVideo && productsVideo.tagName === 'VIDEO') {
         productsVideo.muted = true;
         productsVideo.play().catch(function() {});
     }
     var outcomeVideo = document.querySelector('.outcome-video');
-    if (outcomeVideo) {
+    if (outcomeVideo && outcomeVideo.tagName === 'VIDEO') {
         outcomeVideo.muted = true;
         outcomeVideo.play().catch(function() {});
     }
     var acclaimHeaderVid = document.querySelector('.acclaim-header-vid');
-    if (acclaimHeaderVid) {
+    if (acclaimHeaderVid && acclaimHeaderVid.tagName === 'VIDEO') {
         acclaimHeaderVid.muted = true;
         acclaimHeaderVid.play().catch(function() {});
     }

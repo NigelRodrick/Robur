@@ -295,6 +295,15 @@ section,
 .bento-header-box--light .section-subtitle { color: var(--bento-light-text-muted); opacity: 1; }
 .divisions-section .bento-title { font-size: 2rem; }
 
+.bento-header-brand-img {
+    display: block;
+    max-width: min(100%, 320px);
+    height: auto;
+    max-height: 3.5rem;
+    object-fit: contain;
+    object-position: left center;
+}
+
 .bento-label {
     display: block;
     font-size: 0.75rem;
@@ -702,6 +711,11 @@ section {
     display: block;
     border-radius: 12px;
 }
+.products-section img.products-video {
+    height: auto;
+    max-height: 90vh;
+    object-fit: contain;
+}
 .products-wrapper { position: relative; }
 .products-tab { text-align: left; }
 .products-tab.bento-header-box { margin-bottom: 2rem; }
@@ -915,6 +929,11 @@ section {
     object-fit: contain;
     display: block;
     border-radius: 12px;
+}
+.outcome-section img.outcome-video {
+    height: auto;
+    max-height: 70vh;
+    object-fit: contain;
 }
 
 /* ========== Acclaim ========== */
@@ -1423,8 +1442,13 @@ section {
     .hero-content { margin-left: 0; }
     .hero-image-wrapper { margin-left: 0; max-width: 100%; }
     .hero-logo-video { height: 50vh; }
-    .products-section .products-video { height: 50vh; }
-    .outcome-section .outcome-video { height: 50vh; }
+    .products-section .products-video:not(img) { height: 50vh; }
+    .outcome-section .outcome-video:not(img) { height: 50vh; }
+    .products-section img.products-video,
+    .outcome-section img.outcome-video {
+        height: auto;
+        max-height: 50vh;
+    }
     .hero-title { font-size: 2rem; text-align: center; }
     .hero-subtitle { text-align: center; }
     .divisions-grid { grid-template-columns: 1fr; }
