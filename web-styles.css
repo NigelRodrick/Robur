@@ -1074,16 +1074,16 @@ section {
     overflow: hidden;
     text-decoration: none;
     color: inherit;
-    background: rgba(255, 255, 255, 0.9); /* soft light background instead of pure black behind videos */
+    background: transparent;
     border: none;
     transition: all 0.4s var(--ease-beginner);
-    box-shadow: var(--shadow-card-float);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.06);
     animation: divisionCardFloat 5s ease-in-out infinite;
 }
 .division-card:hover {
-    background: #ffffff;
+    background: transparent;
     transform: translateY(-6px);
-    box-shadow: var(--bento-light-shadow-hover);
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.1);
 }
 .division-logo-container {
     position: absolute;
@@ -1092,11 +1092,16 @@ section {
     align-items: center;
     justify-content: center;
     padding: 1.5rem;
+    background: #ffffff;
 }
 .division-logo {
     max-width: 80%;
     max-height: 80%;
     object-fit: contain;
+    background-color: #ffffff;
+}
+video.division-logo {
+    background-color: #ffffff;
 }
 
 /* Keep card motion subtle and intentional (avoid constant visual jitter) */
