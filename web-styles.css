@@ -753,21 +753,15 @@ section {
     display: block;
     text-align: left;
 }
-/* Inner wrapper carries layout + float animation (isolated from outer .product-item) */
+/* Inner wrapper: layout (float motion applied via script.js — CSS animation was unreliable) */
 .products-section .product-item .section-float {
     display: grid;
     grid-template-columns: 200px 1fr;
     align-items: stretch;
     width: 100%;
     min-height: 280px;
-    animation: sectionContentFloat 5.5s ease-in-out infinite;
     will-change: transform;
 }
-.products-section .product-item:nth-child(1) .section-float { animation-delay: 0s; }
-.products-section .product-item:nth-child(2) .section-float { animation-delay: 0.35s; }
-.products-section .product-item:nth-child(3) .section-float { animation-delay: 0.7s; }
-.products-section .product-item:nth-child(4) .section-float { animation-delay: 1.05s; }
-.products-section .product-item:nth-child(5) .section-float { animation-delay: 1.4s; }
 .products-section .section-float .product-image,
 .products-section .product-item .product-image {
     width: 200px;
@@ -930,11 +924,8 @@ section {
     transition: none;
 }
 .outcome-section .outcome-item .section-float {
-    animation: sectionContentFloat 5.5s ease-in-out infinite;
     will-change: transform;
 }
-.outcome-section .outcome-item:nth-child(1) .section-float { animation-delay: 0s; }
-.outcome-section .outcome-item:nth-child(2) .section-float { animation-delay: 0.55s; }
 .outcome-section .outcome-item:hover {
     background: transparent;
     box-shadow: none;
@@ -1099,17 +1090,6 @@ section {
     max-width: 80%;
     max-height: 80%;
     object-fit: contain;
-}
-
-@keyframes sectionContentFloat {
-    0%, 100% { transform: translate3d(0, 0, 0); }
-    50% { transform: translate3d(0, -20px, 0); }
-}
-@media (prefers-reduced-motion: reduce) {
-    .products-section .product-item .section-float,
-    .outcome-section .outcome-item .section-float {
-        animation: none !important;
-    }
 }
 
 /* Keep card motion subtle and intentional (avoid constant visual jitter) */
