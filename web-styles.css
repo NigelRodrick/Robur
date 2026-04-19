@@ -701,6 +701,10 @@ section {
     border-radius: 12px;
     overflow: hidden;
     transition: transform 0.25s ease-out;
+    /* White-on-transparent PNG (Products.png) needs a dark backing on the light section */
+    background: #0d1117;
+    padding: clamp(1.25rem, 3vw, 2rem);
+    box-sizing: border-box;
 }
 .products-section .products-video {
     width: 100%;
@@ -920,6 +924,10 @@ section {
     overflow: hidden;
     transition: transform 0.25s ease-out;
     will-change: transform;
+    /* White-on-transparent PNG (Outcome.png) visible on light section */
+    background: #0d1117;
+    padding: clamp(1.25rem, 3vw, 2rem);
+    box-sizing: border-box;
 }
 .outcome-section .outcome-video {
     width: 100%;
