@@ -932,39 +932,3 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
-
-// Products & Outcome: vertical float via rAF (inline transform; reliable vs CSS animation overrides)
-(function sectionFloatRaf() {
-    function run() {
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            return;
-        }
-        var nodes = document.querySelectorAll('.products-section .section-float, .outcome-section .section-float');
-        if (!nodes.length) {
-            return;
-        }
-        var list = Array.prototype.slice.call(nodes);
-        var amplitude = 20;
-        var omega = 0.0011;
-        var t0 = performance.now();
-        list.forEach(function (el, i) {
-            el.style.willChange = 'transform';
-            el.setAttribute('data-float-phase', String(i * 0.9));
-        });
-        function tick(now) {
-            var t = now - t0;
-            list.forEach(function (el) {
-                var phase = parseFloat(el.getAttribute('data-float-phase') || '0', 10) || 0;
-                var y = amplitude * Math.sin(t * omega + phase);
-                el.style.transform = 'translate3d(0, ' + y.toFixed(2) + 'px, 0)';
-            });
-            requestAnimationFrame(tick);
-        }
-        requestAnimationFrame(tick);
-    }
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', run);
-    } else {
-        run();
-    }
-})();

@@ -414,6 +414,39 @@
     </footer>
 
     <script src="script.js"></script>
+    <!-- Products/Outcome float: inline so it always runs with this page (not blocked by cached script.js) -->
+    <script>
+    (function () {
+        function startFloatMotion() {
+            var nodes = document.querySelectorAll('.products-section .section-float, .outcome-section .section-float');
+            if (!nodes.length) return;
+            var list = Array.prototype.slice.call(nodes);
+            var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            var amplitude = reduced ? 10 : 32;
+            var speed = reduced ? 0.0007 : 0.0014;
+            var t0 = performance.now();
+            list.forEach(function (el, i) {
+                el.style.willChange = 'transform';
+                el.setAttribute('data-ph', String(i * 1.1));
+            });
+            function tick(now) {
+                var t = now - t0;
+                list.forEach(function (el) {
+                    var ph = parseFloat(el.getAttribute('data-ph') || '0', 10) || 0;
+                    var y = amplitude * Math.sin(t * speed + ph);
+                    el.style.setProperty('transform', 'translate3d(0, ' + y.toFixed(2) + 'px, 0)', 'important');
+                });
+                requestAnimationFrame(tick);
+            }
+            requestAnimationFrame(tick);
+        }
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', startFloatMotion);
+        } else {
+            startFloatMotion();
+        }
+    })();
+    </script>
     
     <script>
         // Adjust speed and force-play background refractions video
