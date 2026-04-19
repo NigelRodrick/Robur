@@ -262,7 +262,8 @@ const enhancedObserver = new IntersectionObserver((entries) => {
 
 // Observe all enhanced elements
 document.addEventListener('DOMContentLoaded', () => {
-    const enhancedElements = document.querySelectorAll('.division-card, .acclaim-card, .metric-item, .contact-item, .product-item, .bento-card, .section-header');
+    /* Exclude .product-item — inline transform/transition breaks sectionContentFloat in CSS */
+    const enhancedElements = document.querySelectorAll('.division-card, .acclaim-card, .metric-item, .contact-item, .bento-card, .section-header');
     
     enhancedElements.forEach(el => {
         el.style.opacity = '0';
