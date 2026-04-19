@@ -692,6 +692,14 @@ section {
 .products-vertical-label {
     flex-shrink: 0;
 }
+/* Dark panel behind white-on-transparent branding PNGs (Products + Outcome sidebars) */
+.products-section .products-video-wrapper,
+.outcome-section .outcome-video-wrapper {
+    background: #0d1117;
+    padding: clamp(1.25rem, 3vw, 2rem);
+    box-sizing: border-box;
+    box-shadow: var(--shadow-card-float);
+}
 .products-section .products-video-wrapper {
     width: 100%;
     max-width: 900px;
@@ -701,10 +709,6 @@ section {
     border-radius: 12px;
     overflow: hidden;
     transition: transform 0.25s ease-out;
-    /* White-on-transparent PNG (Products.png) needs a dark backing on the light section */
-    background: #0d1117;
-    padding: clamp(1.25rem, 3vw, 2rem);
-    box-sizing: border-box;
 }
 .products-section .products-video {
     width: 100%;
@@ -924,10 +928,6 @@ section {
     overflow: hidden;
     transition: transform 0.25s ease-out;
     will-change: transform;
-    /* White-on-transparent PNG (Outcome.png) visible on light section */
-    background: #0d1117;
-    padding: clamp(1.25rem, 3vw, 2rem);
-    box-sizing: border-box;
 }
 .outcome-section .outcome-video {
     width: 100%;
