@@ -67,6 +67,11 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+/* Letterboxing / unloaded frame: white instead of default black */
+video {
+    background-color: #ffffff;
+}
+
 .background-refractions {
     position: fixed;
     inset: 0;
@@ -76,6 +81,7 @@ body {
     z-index: 0;
     pointer-events: none;
     opacity: 0.9;
+    background-color: #ffffff;
 }
 
 /* Keep all main content layers above the refractions background */
@@ -213,7 +219,7 @@ section,
     box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
     animation: heroLogoFloat 10s ease-in-out infinite;
     mix-blend-mode: lighten; /* let refractions' colors replace dark areas */
-    background-color: transparent;
+    background-color: #ffffff;
 }
 
 @keyframes heroLogoFloat {
@@ -1098,10 +1104,6 @@ section {
     max-width: 80%;
     max-height: 80%;
     object-fit: contain;
-    background-color: #ffffff;
-}
-video.division-logo {
-    background-color: #ffffff;
 }
 
 /* Keep card motion subtle and intentional (avoid constant visual jitter) */
@@ -1442,6 +1444,7 @@ video.division-logo {
     max-height: 145px;
     object-fit: contain;
     border-radius: 10px;
+    background-color: #ffffff;
 }
 .about-link { display: block; color: #ff6b35; text-decoration: none; margin: 1rem 0; font-weight: 500; }
 .contact-info-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.65rem; margin-top: 0.4rem; }
