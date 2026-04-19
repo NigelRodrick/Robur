@@ -750,11 +750,25 @@ section {
 .products-section .product-item {
     min-height: 280px;
     height: auto;
+    display: block;
+    text-align: left;
+}
+/* Inner wrapper carries layout + float animation (isolated from outer .product-item) */
+.products-section .product-item .section-float {
     display: grid;
     grid-template-columns: 200px 1fr;
     align-items: stretch;
-    text-align: left;
+    width: 100%;
+    min-height: 280px;
+    animation: sectionContentFloat 5.5s ease-in-out infinite;
+    will-change: transform;
 }
+.products-section .product-item:nth-child(1) .section-float { animation-delay: 0s; }
+.products-section .product-item:nth-child(2) .section-float { animation-delay: 0.35s; }
+.products-section .product-item:nth-child(3) .section-float { animation-delay: 0.7s; }
+.products-section .product-item:nth-child(4) .section-float { animation-delay: 1.05s; }
+.products-section .product-item:nth-child(5) .section-float { animation-delay: 1.4s; }
+.products-section .section-float .product-image,
 .products-section .product-item .product-image {
     width: 200px;
     height: 200px;
@@ -766,6 +780,7 @@ section {
     border-radius: 14px;
     box-shadow: 0 16px 48px rgba(0, 0, 0, 0.22);
 }
+.products-section .section-float .product-text,
 .products-section .product-item .product-text {
     display: flex;
     flex-direction: column;
@@ -782,14 +797,18 @@ section {
     box-shadow: none;
     transition: opacity 0.3s var(--ease-beginner);
 }
+.products-section .section-float:hover .product-text,
 .products-section .product-item:hover .product-text {
     background: transparent;
     box-shadow: none;
 }
+.products-section .section-float .product-title,
+.products-section .section-float .product-description,
 .products-section .product-item .product-title,
 .products-section .product-item .product-description {
     text-align: left;
 }
+.products-section .section-float .product-title,
 .products-section .product-item .product-title {
     margin: 0;
     font-size: 1.2rem;
@@ -798,6 +817,7 @@ section {
     color: var(--text-main);
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
+.products-section .section-float .product-description,
 .products-section .product-item .product-description {
     margin: 0;
     padding: 0;
@@ -824,8 +844,15 @@ section {
 }
 @media (max-width: 600px) {
     .products-content-layered { grid-template-columns: 1fr; }
-    .products-section .product-item { display: flex; flex-direction: column; height: auto; min-height: 280px; }
+    .products-section .product-item { display: block; height: auto; min-height: 280px; }
+    .products-section .product-item .section-float {
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+    }
+    .products-section .section-float .product-image,
     .products-section .product-item .product-image { width: 100%; min-width: 100%; height: 180px; grid-row: auto; }
+    .products-section .section-float .product-text,
     .products-section .product-item .product-text { min-height: 0; padding: 1.25rem 0 0; margin: 0; }
 }
 .product-item {
@@ -837,7 +864,7 @@ section {
     transition: all 0.4s var(--ease-beginner);
     box-shadow: var(--shadow-card-float);
 }
-/* Products index: no card chrome — gentle float animation */
+/* Products index: no card chrome — float animation on inner .section-float only */
 .products-section .product-item {
     background: transparent;
     backdrop-filter: none;
@@ -845,23 +872,16 @@ section {
     border: none !important;
     box-shadow: none;
     overflow: visible;
-    /* transition:all on .product-item fights transform keyframes; do not transition transform */
     transition: none;
-    animation: sectionContentFloat 8s ease-in-out infinite;
-    will-change: transform;
 }
-.products-section .product-item:nth-child(1) { animation-delay: 0s; }
-.products-section .product-item:nth-child(2) { animation-delay: 0.45s; }
-.products-section .product-item:nth-child(3) { animation-delay: 0.9s; }
-.products-section .product-item:nth-child(4) { animation-delay: 1.35s; }
-.products-section .product-item:nth-child(5) { animation-delay: 1.8s; }
 .products-section .product-item:hover {
     background: transparent;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
     box-shadow: none;
 }
-.products-section .product-item:hover .product-image {
+.products-section .product-item:hover .product-image,
+.products-section .section-float:hover .product-image {
     box-shadow: 0 20px 56px rgba(0, 0, 0, 0.28);
 }
 .product-image {
@@ -908,11 +928,13 @@ section {
     border-radius: 0;
     max-width: 800px;
     transition: none;
-    animation: sectionContentFloat 8s ease-in-out infinite;
+}
+.outcome-section .outcome-item .section-float {
+    animation: sectionContentFloat 5.5s ease-in-out infinite;
     will-change: transform;
 }
-.outcome-section .outcome-item:nth-child(1) { animation-delay: 0s; }
-.outcome-section .outcome-item:nth-child(2) { animation-delay: 0.55s; }
+.outcome-section .outcome-item:nth-child(1) .section-float { animation-delay: 0s; }
+.outcome-section .outcome-item:nth-child(2) .section-float { animation-delay: 0.55s; }
 .outcome-section .outcome-item:hover {
     background: transparent;
     box-shadow: none;
@@ -1080,12 +1102,12 @@ section {
 }
 
 @keyframes sectionContentFloat {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-12px); }
+    0%, 100% { transform: translate3d(0, 0, 0); }
+    50% { transform: translate3d(0, -20px, 0); }
 }
 @media (prefers-reduced-motion: reduce) {
-    .products-section .product-item,
-    .outcome-section .outcome-item {
+    .products-section .product-item .section-float,
+    .outcome-section .outcome-item .section-float {
         animation: none !important;
     }
 }
