@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fire Solutions</title>
+    <title>Solutions - Robur Mining Solutions</title>
     <link rel="stylesheet" href="web-styles.css">
     <style>
         html {
@@ -27,79 +27,52 @@
                 background-attachment: scroll;
             }
         }
-        /* Top menu — Fire Solutions categories */
-        .fire-topnav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
+        /* Fire header: same layout as index (.main-nav tabs right, logo left) */
+        .fire-solutions-nav.main-nav {
             background: rgba(26, 10, 5, 0.94);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.12);
         }
-        .fire-topnav-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 0.6rem 1rem 0.65rem;
+        .fire-solutions-nav .nav-logo a {
+            display: block;
+            line-height: 0;
         }
-        .fire-topnav-brand {
-            flex-shrink: 0;
-            color: #fff;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            letter-spacing: 0.04em;
-            opacity: 0.95;
-            white-space: nowrap;
-        }
-        .fire-topnav-brand:hover { opacity: 1; }
-        .fire-topnav-links {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem 1.15rem;
-            flex: 1;
+        .fire-solutions-nav .nav-links {
+            display: flex !important;
+            margin-left: auto;
+            gap: 2rem;
+            flex-wrap: nowrap;
             min-width: 0;
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
             scrollbar-width: thin;
             scrollbar-color: rgba(255, 255, 255, 0.35) transparent;
-            padding-bottom: 2px;
-            mask-image: linear-gradient(to right, #000 calc(100% - 1.5rem), transparent);
-            -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 1.5rem), transparent);
+            padding-bottom: 0.25rem;
+            mask-image: linear-gradient(to right, #000 calc(100% - 2rem), transparent);
+            -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 2rem), transparent);
         }
-        .fire-topnav-links::-webkit-scrollbar { height: 4px; }
-        .fire-topnav-links::-webkit-scrollbar-thumb {
+        .fire-solutions-nav .nav-links::-webkit-scrollbar { height: 4px; }
+        .fire-solutions-nav .nav-links::-webkit-scrollbar-thumb {
             background: rgba(255, 255, 255, 0.35);
             border-radius: 4px;
         }
-        .fire-topnav-links a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 0.82rem;
-            font-weight: 500;
-            letter-spacing: 0.02em;
-            white-space: nowrap;
-            opacity: 0.88;
-            padding: 0.35rem 0;
-            border-bottom: 2px solid transparent;
-            transition: opacity 0.2s, border-color 0.2s;
+        .fire-solutions-nav .nav-link {
+            color: #fff !important;
+            flex-shrink: 0;
         }
-        .fire-topnav-links a:hover {
-            opacity: 1;
-            border-bottom-color: rgba(255, 140, 80, 0.85);
+        .fire-solutions-nav .nav-link:hover {
+            opacity: 0.85;
+            color: #fff !important;
         }
         .fire-page {
             max-width: 1100px;
             margin: 0 auto;
-            padding: calc(3.5rem + 52px) 1.5rem 3rem clamp(1.5rem, 4vw, 2rem);
+            /* Clear fixed nav: match index logo bar (~112px + vertical padding) */
+            padding: clamp(9rem, 20vw, 10.5rem) 1.5rem 3rem clamp(1.5rem, 4vw, 2rem);
         }
         .fire-section {
-            scroll-margin-top: 72px;
+            scroll-margin-top: 100px;
             margin-top: 2.75rem;
             padding: 1.5rem 1.25rem;
             border-radius: 14px;
@@ -152,19 +125,45 @@
         .fire-back:hover {
             opacity: 1;
         }
+        @media (max-width: 768px) {
+            .fire-solutions-nav .nav-logo .logo-image {
+                height: 52px;
+            }
+            .fire-solutions-nav.main-nav .nav-container {
+                padding-top: 0.65rem;
+                padding-bottom: 0.65rem;
+                gap: 1rem;
+            }
+            .fire-solutions-nav .nav-links {
+                gap: 1.25rem;
+            }
+            .fire-solutions-nav .nav-link {
+                font-size: 0.85rem;
+            }
+            .fire-page {
+                padding-top: clamp(5.5rem, 22vw, 7rem);
+            }
+            .fire-section {
+                scroll-margin-top: 72px;
+            }
+        }
     </style>
 </head>
 <body>
-    <nav class="fire-topnav" aria-label="Fire Solutions product categories">
-        <div class="fire-topnav-inner">
-            <a href="index.html" class="fire-topnav-brand">Fire Solutions</a>
-            <div class="fire-topnav-links">
-                <a href="#extinguishers">Extinguishers</a>
-                <a href="#sprinkler-systems">Sprinkler systems</a>
-                <a href="#fire-hydrants">Fire hydrants</a>
-                <a href="#aerosol-generators">Aerosol generators</a>
-                <a href="#amfes">AMFEs</a>
-                <a href="#smart-alarm-systems">Smart Alarm Systems and Services</a>
+    <nav class="main-nav fire-solutions-nav" aria-label="Solutions product categories">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html" title="Robur Mining Solutions — home">
+                    <img src="images/final-logo.png" alt="Robur Mining Solutions" class="logo-image" decoding="async">
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="#extinguishers" class="nav-link">Extinguishers</a>
+                <a href="#sprinkler-systems" class="nav-link">Sprinkler systems</a>
+                <a href="#fire-hydrants" class="nav-link">Hydrants</a>
+                <a href="#aerosol-generators" class="nav-link">Aerosol generators</a>
+                <a href="#amfes" class="nav-link">AMFEs</a>
+                <a href="#smart-alarm-systems" class="nav-link">Smart Alarm Systems and Services</a>
             </div>
         </div>
     </nav>
@@ -172,8 +171,8 @@
     <main class="fire-page">
         <a href="index.html" class="fire-back">← Back to main</a>
         <div class="fire-images">
-            <img src="images/fire-image-1.jpeg" alt="Robur Fire Solutions" decoding="async">
-            <img src="images/fire-image-2.jpeg" alt="Robur Fire Solutions" decoding="async">
+            <img src="images/fire-image-1.jpeg" alt="Robur Fire Solutions" decoding="async" fetchpriority="high">
+            <img src="images/fire-image-2.jpeg" alt="Robur Fire Solutions" decoding="async" loading="lazy">
         </div>
 
         <section id="extinguishers" class="fire-section">
@@ -185,7 +184,7 @@
             <p>Integrated sprinkler suppression and delivery systems designed for reliable operation in demanding underground and surface environments.</p>
         </section>
         <section id="fire-hydrants" class="fire-section">
-            <h2>Fire hydrants</h2>
+            <h2>Hydrants</h2>
             <p>Hydrant infrastructure, accessories, and layout guidance to ensure effective water supply for firefighting across your operation.</p>
         </section>
         <section id="aerosol-generators" class="fire-section">
@@ -229,6 +228,6 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </body>
 </html>

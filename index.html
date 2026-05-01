@@ -19,8 +19,10 @@
     </script>
     
     <title>Robur Mining Solutions - Beginner.app Style</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="web-styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Inline fallback styles to ensure black background works -->
     <style>
@@ -68,7 +70,7 @@
     </style>
 </head>
 <body>
-    <video class="background-refractions" autoplay loop muted playsinline preload="auto" title="Background video — © Robur Mining Solutions" aria-label="Background video — © Robur Mining Solutions">
+    <video class="background-refractions" autoplay loop muted playsinline preload="metadata" title="Background video — © Robur Mining Solutions" aria-label="Background video — © Robur Mining Solutions">
         <source src="images/refractions.mp4" type="video/mp4">
         <!-- Fallback: use main logo animation if refractions video cannot be played -->
         <source src="images/logo1.mp4" type="video/mp4">
@@ -78,7 +80,7 @@
     <nav class="main-nav">
         <div class="nav-container">
             <div class="nav-logo">
-                <img src="images/final-logo.png" alt="Robur Mining Solutions" class="logo-image">
+                <img src="images/final-logo.png" alt="Robur Mining Solutions" class="logo-image" fetchpriority="high" decoding="async">
             </div>
             <div class="nav-links">
                 <a href="#home" class="nav-link">Home</a>
@@ -111,7 +113,7 @@
             <div class="sideways-section">
                 <div class="content-area">
                     <div class="bento-header-box">
-                        <img src="images/acclaim.png" alt="Acclaim" class="bento-header-brand-img" decoding="async">
+                        <img src="images/acclaim.png" alt="Acclaim" class="bento-header-brand-img" decoding="async" loading="lazy">
                     </div>
                     <div class="bento-container">
                 <div class="bento-card fade-in stagger-1">
@@ -143,7 +145,7 @@
                     <div class="products-content-layered">
                         <div class="product-item">
                             <div class="section-float">
-                            <img src="images/gas monitoring.jpeg" alt="Gas Monitoring Equipment" class="product-image">
+                            <img src="images/gas monitoring.jpeg" alt="Gas Monitoring Equipment" class="product-image" loading="lazy" decoding="async">
                             <div class="product-text">
                                 <h4 class="product-title">Gas Monitoring Equipment</h4>
                                 <p class="product-description">Industry-grade gas detection and monitoring systems for mine safety compliance, hazard prevention, and environmental monitoring.</p>
@@ -152,7 +154,7 @@
                         </div>
                         <div class="product-item">
                             <div class="section-float">
-                            <img src="images/cap lamps.jpeg" alt="Cap Lamps and Charging Units" class="product-image">
+                            <img src="images/cap lamps.jpeg" alt="Cap Lamps and Charging Units" class="product-image" loading="lazy" decoding="async">
                             <div class="product-text">
                                 <h4 class="product-title">Cap Lamps and Charging Units</h4>
                                 <p class="product-description">Certified cap lamps and charging systems for underground mining, meeting safety standards and operational reliability requirements.</p>
@@ -161,7 +163,7 @@
                         </div>
                         <div class="product-item">
                             <div class="section-float">
-                            <img src="images/lifting equipment.jpeg" alt="Lifting Equipment" class="product-image">
+                            <img src="images/lifting equipment.jpeg" alt="Lifting Equipment" class="product-image" loading="lazy" decoding="async">
                             <div class="product-text">
                                 <h4 class="product-title">Lifting Equipment</h4>
                                 <p class="product-description">Engineered lifting equipment and accessories for mining applications, built for safety, durability, and compliance with industry standards.</p>
@@ -170,7 +172,7 @@
                         </div>
                         <div class="product-item">
                             <div class="section-float">
-                            <img src="images/specialised ppe.jpeg" alt="Specialized Personal Protective Equipment" class="product-image">
+                            <img src="images/specialised ppe.jpeg" alt="Specialized Personal Protective Equipment" class="product-image" loading="lazy" decoding="async">
                             <div class="product-text">
                                 <h4 class="product-title">Specialized Personal Protective Equipment</h4>
                                 <p class="product-description">A full range of specialised PPE: helmets, protective clothing, footwear, respiratory protection, and safety accessories for mining and industrial use.</p>
@@ -179,7 +181,7 @@
                         </div>
                         <div class="product-item">
                             <div class="section-float">
-                            <img src="images/charging accessories.jpeg" alt="Charging Accessories" class="product-image">
+                            <img src="images/charging accessories.jpeg" alt="Charging Accessories" class="product-image" loading="lazy" decoding="async">
                             <div class="product-text">
                                 <h4 class="product-title">Charging Accessories</h4>
                                 <p class="product-description">Charging accessories and power solutions for mining tools and safety equipment, supporting uptime and consistent performance.</p>
@@ -226,7 +228,7 @@
     <section id="acclaim" class="acclaim-section">
         <div class="container">
             <div class="acclaim-header-video">
-                <img src="images/acclaim.png" alt="Acclaim" class="acclaim-header-vid" decoding="async">
+                <img src="images/acclaim.png" alt="Acclaim" class="acclaim-header-vid" decoding="async" loading="lazy">
             </div>
             <div class="sideways-section">
                 <div class="content-area">
@@ -303,7 +305,7 @@
             <div class="divisions-grid">
                 <a href="drilling-tools.html" class="division-card scale-in stagger-1" data-division="Drilling Tools">
                     <div class="division-logo-container">
-                        <video class="division-logo" autoplay loop muted playsinline preload="auto" title="Drilling Tools — division video © Robur Mining Solutions">
+                        <video class="division-logo" autoplay loop muted playsinline preload="none" title="Drilling Tools — division video © Robur Mining Solutions">
                             <source src="images/robur drilling.mp4" type="video/mp4">
                         </video>
                     </div>
@@ -316,7 +318,7 @@
 
                 <a href="fire-solutions.html" class="division-card scale-in stagger-2" data-division="Fire Solutions">
                     <div class="division-logo-container">
-                        <video class="division-logo" autoplay loop muted playsinline preload="auto" title="Fire Solutions — division video © Robur Mining Solutions">
+                        <video class="division-logo" autoplay loop muted playsinline preload="none" title="Fire Solutions — division video © Robur Mining Solutions">
                             <source src="images/robur fire solutions.mp4" type="video/mp4">
                         </video>
                     </div>
@@ -329,7 +331,7 @@
 
                 <a href="fluid-solutions.html" class="division-card scale-in stagger-3" data-division="Fluid Solutions">
                     <div class="division-logo-container">
-                        <video class="division-logo" autoplay loop muted playsinline preload="auto" title="Fluid Solutions — division video © Robur Mining Solutions">
+                        <video class="division-logo" autoplay loop muted playsinline preload="none" title="Fluid Solutions — division video © Robur Mining Solutions">
                             <source src="images/robur fluid solutions.mp4" type="video/mp4">
                         </video>
                     </div>
@@ -342,7 +344,7 @@
 
                 <a href="mining-technologies.html" class="division-card scale-in stagger-4" data-division="Mining Technologies">
                     <div class="division-logo-container">
-                        <video class="division-logo" autoplay loop muted playsinline preload="auto" title="Mining Technologies — division video © Robur Mining Solutions">
+                        <video class="division-logo" autoplay loop muted playsinline preload="none" title="Mining Technologies — division video © Robur Mining Solutions">
                             <source src="images/robur mining.mp4" type="video/mp4">
                         </video>
                     </div>
@@ -355,7 +357,7 @@
 
                 <a href="strata-solutions.html" class="division-card scale-in stagger-5" data-division="Strata Solutions">
                     <div class="division-logo-container">
-                        <video class="division-logo" autoplay loop muted playsinline preload="auto" title="Strata Solutions — division video © Robur Mining Solutions">
+                        <video class="division-logo" autoplay loop muted playsinline preload="none" title="Strata Solutions — division video © Robur Mining Solutions">
                             <source src="images/robur strata.mp4" type="video/mp4">
                             <source src="images/robur-strata.mp4" type="video/mp4">
                         </video>
@@ -414,7 +416,7 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
     <!-- Products/Outcome float: inline so it always runs with this page (not blocked by cached script.js) -->
     <script>
     (function () {

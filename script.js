@@ -16,6 +16,27 @@ document.addEventListener('DOMContentLoaded', function() {
         acclaimHeaderVid.play().catch(function() {});
     }
 
+    // Division card videos: defer download/play until near viewport (preload="none" on index)
+    var divisionVideos = document.querySelectorAll('video.division-logo');
+    function playDivisionVideo(v) {
+        v.muted = true;
+        if (v.readyState < 1) v.load();
+        var p = v.play();
+        if (p && p.catch) p.catch(function() {});
+    }
+    if (divisionVideos.length) {
+        if ('IntersectionObserver' in window) {
+            var divIo = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) playDivisionVideo(entry.target);
+                });
+            }, { rootMargin: '120px', threshold: 0.02 });
+            divisionVideos.forEach(function(v) { divIo.observe(v); });
+        } else {
+            divisionVideos.forEach(playDivisionVideo);
+        }
+    }
+
     // Products & Outcome sidebars: appear with first item, fix in middle while in section, move away with last item
     var productsSection = document.querySelector('.products-section');
     var productsSidebar = document.querySelector('.products-sidebar-video');
