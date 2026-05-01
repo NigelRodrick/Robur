@@ -6,6 +6,9 @@
     <title>Fire Solutions</title>
     <link rel="stylesheet" href="web-styles.css">
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
         html, body {
             margin: 0;
             min-height: 100%;
@@ -24,10 +27,98 @@
                 background-attachment: scroll;
             }
         }
+        /* Top menu — Fire Solutions categories */
+        .fire-topnav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(26, 10, 5, 0.94);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        }
+        .fire-topnav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.6rem 1rem 0.65rem;
+        }
+        .fire-topnav-brand {
+            flex-shrink: 0;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.04em;
+            opacity: 0.95;
+            white-space: nowrap;
+        }
+        .fire-topnav-brand:hover { opacity: 1; }
+        .fire-topnav-links {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem 1.15rem;
+            flex: 1;
+            min-width: 0;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.35) transparent;
+            padding-bottom: 2px;
+            mask-image: linear-gradient(to right, #000 calc(100% - 1.5rem), transparent);
+            -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 1.5rem), transparent);
+        }
+        .fire-topnav-links::-webkit-scrollbar { height: 4px; }
+        .fire-topnav-links::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.35);
+            border-radius: 4px;
+        }
+        .fire-topnav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.82rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            white-space: nowrap;
+            opacity: 0.88;
+            padding: 0.35rem 0;
+            border-bottom: 2px solid transparent;
+            transition: opacity 0.2s, border-color 0.2s;
+        }
+        .fire-topnav-links a:hover {
+            opacity: 1;
+            border-bottom-color: rgba(255, 140, 80, 0.85);
+        }
         .fire-page {
             max-width: 1100px;
             margin: 0 auto;
-            padding: clamp(5rem, 12vw, 7rem) 1.5rem 3rem;
+            padding: calc(3.5rem + 52px) 1.5rem 3rem clamp(1.5rem, 4vw, 2rem);
+        }
+        .fire-section {
+            scroll-margin-top: 72px;
+            margin-top: 2.75rem;
+            padding: 1.5rem 1.25rem;
+            border-radius: 14px;
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .fire-section:first-of-type { margin-top: 2rem; }
+        .fire-section h2 {
+            margin: 0 0 0.65rem;
+            font-size: clamp(1.15rem, 2.5vw, 1.35rem);
+            font-weight: 600;
+            color: #fff;
+            letter-spacing: 0.03em;
+        }
+        .fire-section p {
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.55;
+            color: rgba(255, 255, 255, 0.82);
         }
         .fire-images {
             display: grid;
@@ -64,12 +155,51 @@
     </style>
 </head>
 <body>
+    <nav class="fire-topnav" aria-label="Fire Solutions product categories">
+        <div class="fire-topnav-inner">
+            <a href="index.html" class="fire-topnav-brand">Fire Solutions</a>
+            <div class="fire-topnav-links">
+                <a href="#extinguishers">Extinguishers</a>
+                <a href="#sprinkler-systems">Sprinkler systems</a>
+                <a href="#fire-hydrants">Fire hydrants</a>
+                <a href="#aerosol-generators">Aerosol generators</a>
+                <a href="#amfes">AMFEs</a>
+                <a href="#smart-alarm-systems">Smart Alarm Systems and Services</a>
+            </div>
+        </div>
+    </nav>
+
     <main class="fire-page">
         <a href="index.html" class="fire-back">← Back to main</a>
         <div class="fire-images">
             <img src="images/fire-image-1.jpeg" alt="Robur Fire Solutions" decoding="async">
             <img src="images/fire-image-2.jpeg" alt="Robur Fire Solutions" decoding="async">
         </div>
+
+        <section id="extinguishers" class="fire-section">
+            <h2>Extinguishers</h2>
+            <p>Portable and fixed extinguisher solutions for mining and industrial fire protection, selected and supported to match your site hazards and compliance requirements.</p>
+        </section>
+        <section id="sprinkler-systems" class="fire-section">
+            <h2>Sprinkler systems</h2>
+            <p>Integrated sprinkler suppression and delivery systems designed for reliable operation in demanding underground and surface environments.</p>
+        </section>
+        <section id="fire-hydrants" class="fire-section">
+            <h2>Fire hydrants</h2>
+            <p>Hydrant infrastructure, accessories, and layout guidance to ensure effective water supply for firefighting across your operation.</p>
+        </section>
+        <section id="aerosol-generators" class="fire-section">
+            <h2>Aerosol generators</h2>
+            <p>Aerosol fire suppression technology for enclosed spaces and equipment areas where rapid, residue-conscious protection is required.</p>
+        </section>
+        <section id="amfes" class="fire-section">
+            <h2>AMFEs</h2>
+            <p>Automatic Miniature Fire Extinguishing units and related products for localized protection of switchgear, cabinets, and high-value assets.</p>
+        </section>
+        <section id="smart-alarm-systems" class="fire-section">
+            <h2>Smart Alarm Systems and Services</h2>
+            <p>Detection, notification, and monitoring solutions with advisory and service support to keep your alarm strategy aligned with site risk and regulations.</p>
+        </section>
     </main>
 
     <!-- Floating More Button (same as main page) -->
