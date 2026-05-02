@@ -38,6 +38,21 @@
             display: block;
             line-height: 0;
         }
+        /* Same media as index Fire Solutions division card */
+        .fire-solutions-nav .fire-solutions-nav-logo-wrap {
+            display: block;
+            height: 112px;
+            max-width: min(280px, 42vw);
+            border-radius: 10px;
+            overflow: hidden;
+            background: #fff;
+        }
+        .fire-solutions-nav video.fire-solutions-nav-logo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
         .fire-solutions-nav .nav-links {
             display: flex !important;
             margin-left: auto;
@@ -93,6 +108,52 @@
             line-height: 1.55;
             color: rgba(255, 255, 255, 0.82);
         }
+        /* More panel: company story + links (Fire Solutions page only) */
+        .floating-more-menu.fire-solutions-more-menu {
+            min-width: min(340px, calc(100vw - 2rem));
+            max-width: 400px;
+            max-height: min(72vh, 560px);
+            overflow-x: hidden;
+            overflow-y: auto;
+            padding: 1rem 1.15rem;
+            -webkit-overflow-scrolling: touch;
+        }
+        .fire-more-story {
+            color: rgba(255, 255, 255, 0.88);
+            font-size: 0.82rem;
+            line-height: 1.5;
+        }
+        .fire-more-story h3 {
+            margin: 0 0 0.45rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #fff;
+            letter-spacing: 0.03em;
+        }
+        .fire-more-story p {
+            margin: 0 0 0.65rem;
+            color: rgba(255, 255, 255, 0.82);
+        }
+        .fire-more-story h3:not(:first-child) {
+            margin-top: 1.15rem;
+        }
+        .fire-more-story ul.fire-more-core-list {
+            margin: 0.25rem 0 0.5rem;
+            padding-left: 1.15rem;
+            color: rgba(255, 255, 255, 0.85);
+        }
+        .fire-more-story ul.fire-more-core-list li {
+            margin-bottom: 0.45rem;
+            line-height: 1.45;
+        }
+        .fire-more-story ul.fire-more-core-list li:last-child {
+            margin-bottom: 0;
+        }
+        .fire-more-nav-divider {
+            border: none;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            margin: 1rem 0 0.75rem;
+        }
         .fire-images {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -126,8 +187,10 @@
             opacity: 1;
         }
         @media (max-width: 768px) {
-            .fire-solutions-nav .nav-logo .logo-image {
+            .fire-solutions-nav .fire-solutions-nav-logo-wrap {
                 height: 52px;
+                max-width: min(200px, 55vw);
+                border-radius: 8px;
             }
             .fire-solutions-nav.main-nav .nav-container {
                 padding-top: 0.65rem;
@@ -154,7 +217,11 @@
         <div class="nav-container">
             <div class="nav-logo">
                 <a href="index.html" title="Robur Mining Solutions — home">
-                    <img src="images/final-logo.png" alt="Robur Mining Solutions" class="logo-image" decoding="async">
+                    <span class="fire-solutions-nav-logo-wrap">
+                        <video class="fire-solutions-nav-logo division-logo" autoplay loop muted playsinline preload="metadata" title="Fire Solutions — division video © Robur Mining Solutions">
+                            <source src="images/robur fire solutions.mp4" type="video/mp4">
+                        </video>
+                    </span>
                 </a>
             </div>
             <div class="nav-links">
@@ -207,7 +274,27 @@
             <span class="more-text">More</span>
             <span class="more-icon">+</span>
         </button>
-        <div class="floating-more-menu" id="floatingMoreMenu">
+        <div class="floating-more-menu fire-solutions-more-menu" id="floatingMoreMenu">
+            <div class="fire-more-story" role="region" aria-label="About Robur Fire Solutions">
+                <h3>Who we are</h3>
+                <p>Robur Fire Solutions is a new age company which offers comprehensive expertise in fire detection and suppression systems and equipment through sales, installation and maintenance for all industries including: mining, manufacturing, transport and construction.</p>
+                <p>With unsurpassed innovation we assert ourselves beyond all your fire hazards and challenges by providing you unparalleled solutions.</p>
+
+                <h3>Our mission</h3>
+                <p>To continue giving our customers confidence and ultimate satisfaction in terms of fire safety.</p>
+
+                <h3>Our vision</h3>
+                <p>We intend to constantly improve by changing, developing and renewing fire technology in the most practical and economic means.</p>
+
+                <h3>Core values</h3>
+                <p>The principles that define how we work with customers and partners:</p>
+                <ul class="fire-more-core-list">
+                    <li><strong>Integrity</strong></li>
+                    <li><strong>Optimism</strong></li>
+                    <li><strong>Innovation</strong></li>
+                </ul>
+            </div>
+            <hr class="fire-more-nav-divider">
             <div class="more-menu-item">
                 <a href="about.html" class="floating-more-link">About</a>
                 <div class="more-submenu">
