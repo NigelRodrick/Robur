@@ -2,13 +2,13 @@
    Robur Mining Solutions - Website Styles
    ============================================ */
 
-/* Bagerich display font */
+/* Bagerich — default site font (single file; range keeps bold/medium on this face vs. falling back to Inter) */
 @font-face {
     font-family: 'Bagerich';
     src: url('Bagerich/Bagerich-Regular.woff2') format('woff2'),
          url('Bagerich/Bagerich-Regular.woff') format('woff'),
          url('Bagerich/Bagerich.ttf') format('truetype');
-    font-weight: normal;
+    font-weight: 100 900;
     font-style: normal;
     font-display: swap;
 }
@@ -51,13 +51,20 @@
     --bento-light-border-hover: #cfcfd1;
     --bento-light-shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.05);
     --radius: 28px;
+    /* Default font stack: Bagerich first; Inter + system UI only as fallbacks */
+    --font-default: 'Bagerich', 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --title-rule-accent: rgba(255, 130, 90, 0.55);
+    --title-rule-accent-light: rgba(0, 0, 0, 0.22);
 }
 
 /* Reset & Base */
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html {
+    scroll-behavior: smooth;
+    font-family: var(--font-default);
+}
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family: var(--font-default);
     margin: 0;
     padding: 0;
     background: var(--bg);
@@ -65,6 +72,14 @@ body {
     line-height: 1.6;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
 }
 
 /* Letterboxing / unloaded frame: white instead of default black */
@@ -151,31 +166,39 @@ section,
 .nav-link {
     color: var(--text-main);
     text-decoration: none;
-    font-weight: 500;
-    font-size: 0.95rem;
-    letter-spacing: 0.02em;
-    padding-bottom: 0.25rem;
-    border-bottom: 2px solid transparent;
+    font-weight: 600;
+    font-size: clamp(0.78rem, 1.35vw, 0.88rem);
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    padding-bottom: 0.2rem;
+    border-bottom: 1px solid transparent;
     transition:
         color 0.2s ease,
         opacity 0.2s ease,
         border-color 0.2s ease,
-        font-size 0.2s ease,
         letter-spacing 0.2s ease,
         transform 0.2s ease;
 }
-.nav-link:hover { opacity: 0.85; color: var(--text-main); }
+.nav-link:hover {
+    opacity: 1;
+    color: var(--text-main);
+    letter-spacing: 0.09em;
+    border-bottom-color: rgba(255, 255, 255, 0.45);
+}
 .nav-link.active {
     opacity: 1;
-    font-size: 1.12rem;
+    font-size: clamp(0.82rem, 1.45vw, 0.95rem);
     font-weight: 600;
     color: var(--text-main);
-    letter-spacing: 0.06em;
+    letter-spacing: 0.09em;
     transform: translateY(-1px);
     border-bottom-color: #ffffff;
 }
 .main-nav.nav-on-light .nav-link { color: var(--bento-light-text-main); }
-.main-nav.nav-on-light .nav-link:hover,
+.main-nav.nav-on-light .nav-link:hover {
+    color: var(--bento-light-text-main);
+    border-bottom-color: rgba(0, 0, 0, 0.35);
+}
 .main-nav.nav-on-light .nav-link.active { color: var(--bento-light-text-main); }
 
 /* Translucency for nav when content scrolls behind */
@@ -217,7 +240,7 @@ section,
 .about-tab-title,
 .contacts-tab-title,
 .who-we-are-tab-title {
-    font-family: 'Bagerich', 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family: var(--font-default);
     letter-spacing: 0.03em;
 }
 .title-line { display: block; }
@@ -227,7 +250,7 @@ section,
     max-width: 600px;
     margin: 0;
     color: var(--text-muted);
-    font-family: 'Bagerich', 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family: var(--font-default);
     letter-spacing: 0.02em;
 }
 .hero-footnote {
@@ -300,6 +323,22 @@ section,
     margin: 0 0 0.25rem;
     letter-spacing: var(--letter-spacing-tight);
     color: var(--text-main);
+    position: relative;
+    padding-bottom: 0.75rem;
+}
+.bento-title::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: min(5rem, 70%);
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--title-rule-accent), rgba(255, 200, 160, 0.2), transparent);
+}
+.bento-header-box--light .bento-title::after,
+.divisions-section .bento-title::after {
+    background: linear-gradient(90deg, var(--title-rule-accent-light), rgba(0, 0, 0, 0.06), transparent);
 }
 .bento-header-box .section-subtitle { margin: 0; }
 .bento-header-box--right { text-align: right; margin-left: auto; }
@@ -373,6 +412,7 @@ section,
 
 /* Card title: 24px, semibold */
 .bento-card .card-title {
+    font-family: var(--font-default);
     font-size: 24px;
     font-weight: 600;
     margin: 0 0 16px;
@@ -479,7 +519,7 @@ section,
 .vertical-text {
     writing-mode: vertical-rl;
     transform: rotate(180deg);
-    font-family: 'Inter', -apple-system, sans-serif;
+    font-family: var(--font-default);
     font-size: 11px;
     font-weight: 800;
     letter-spacing: 0.3em;
@@ -618,6 +658,41 @@ section {
     margin: 0 0 0.5rem;
     letter-spacing: var(--letter-spacing-tight);
     color: var(--text-main);
+    position: relative;
+    padding-bottom: 0.85rem;
+}
+.section-title::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: min(5.5rem, 42vw);
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--title-rule-accent),
+        rgba(255, 200, 160, 0.35),
+        var(--title-rule-accent),
+        transparent
+    );
+}
+.section-header.bento-header-box .section-title::after,
+.bento-header-box .section-title::after {
+    left: 0;
+    transform: none;
+}
+.divisions-section .section-title::after {
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--title-rule-accent-light),
+        rgba(0, 0, 0, 0.12),
+        var(--title-rule-accent-light),
+        transparent
+    );
 }
 .section-subtitle {
     font-size: 1.1rem;
@@ -865,7 +940,15 @@ section {
     object-fit: cover;
     flex-shrink: 0;
 }
-.product-title { font-size: 1.22rem; font-weight: 600; margin: 1rem 1rem 0.5rem; flex-shrink: 0; color: var(--text-main); }
+.product-title {
+    font-family: var(--font-default);
+    font-size: 1.22rem;
+    font-weight: 600;
+    margin: 1rem 1rem 0.5rem;
+    flex-shrink: 0;
+    color: var(--text-main);
+    letter-spacing: 0.02em;
+}
 .product-description { margin: 0 1rem 1.25rem; font-size: 15px; font-weight: 400; flex: 1; color: var(--text-muted); line-height: 1.6; }
 
 /* ========== Outcome ========== */
@@ -911,7 +994,14 @@ section {
     background: transparent;
     box-shadow: none;
 }
-.outcome-title { font-size: 1.5rem; font-weight: 600; margin: 0 0 1rem; letter-spacing: var(--letter-spacing-tight); color: var(--text-main); }
+.outcome-title {
+    font-family: var(--font-default);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0 0 1rem;
+    letter-spacing: var(--letter-spacing-tight);
+    color: var(--text-main);
+}
 .outcome-description { margin: 0; font-weight: 400; color: var(--text-muted); line-height: 1.5; }
 
 /* Outcome section video – same treatment as products (sticky, centers when stuck) */
@@ -982,7 +1072,25 @@ section {
     background: transparent;
 }
 .acclaim-tab.bento-header-box .acclaim-tab-title { margin: 0; }
-.acclaim-tab-title { font-size: 2rem; font-weight: 700; margin: 0 0 2rem; letter-spacing: var(--letter-spacing-tight); color: var(--text-main); }
+.acclaim-tab-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 2rem;
+    letter-spacing: var(--letter-spacing-tight);
+    color: var(--text-main);
+    position: relative;
+    padding-bottom: 0.75rem;
+}
+.acclaim-tab-title::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: min(5rem, 70%);
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--title-rule-accent), rgba(255, 200, 160, 0.2), transparent);
+}
 .acclaim-content-layered {
     display: flex;
     flex-direction: column;
@@ -1228,7 +1336,12 @@ section {
     border-color: #000 !important;
     color: #000 !important;
 }
-.floating-more-button .more-text { font-size: 0.9rem; }
+.floating-more-button .more-text {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+}
 .floating-more-button .more-icon { font-size: 1.5rem; line-height: 1; }
 .floating-more-menu {
     position: absolute;
@@ -1254,6 +1367,7 @@ section {
     text-decoration: none;
     padding: 0.5rem 0;
     font-size: 0.95rem;
+    letter-spacing: 0.03em;
     transition: opacity 0.3s;
 }
 .floating-more-link:hover, .floating-more-sublink:hover { opacity: 0.8; }

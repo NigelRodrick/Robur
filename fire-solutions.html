@@ -4,8 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solutions - Robur Mining Solutions</title>
+    <link rel="preload" as="image" href="images/fire-theme.jpeg" fetchpriority="high">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="Bagerich/Bagerich-Regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="web-styles.css">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"></noscript>
     <style>
+        :root {
+            --fire-font: var(--font-default);
+            --fire-cream: rgba(255, 248, 242, 0.98);
+            --fire-cream-muted: rgba(255, 235, 224, 0.88);
+            --fire-accent-line: rgba(255, 140, 95, 0.55);
+        }
         html {
             scroll-behavior: smooth;
         }
@@ -15,12 +27,25 @@
         }
         body {
             min-height: 100vh;
+            font-family: var(--fire-font);
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
             background-color: #1a0a05;
             background-image: url('images/fire-theme.jpeg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             background-attachment: fixed;
+        }
+        button,
+        .floating-more-button {
+            font-family: var(--fire-font);
+        }
+        .floating-more-button .more-text {
+            letter-spacing: 0.06em;
+            font-weight: 600;
+            font-size: 0.72rem !important;
+            text-transform: uppercase;
         }
         @media (max-width: 768px) {
             body {
@@ -64,36 +89,53 @@
             justify-content: center;
             align-items: center;
             flex-wrap: wrap;
-            gap: 0.5rem 1.15rem;
+            gap: 0.35rem 1.35rem;
             min-width: 0;
             overflow-x: visible;
-            padding-bottom: 0.15rem;
+            padding: 0.2rem 0 0.25rem;
         }
         .fire-solutions-nav .nav-link {
-            color: #fff !important;
+            color: var(--fire-cream) !important;
             flex-shrink: 0;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.75);
+            font-size: clamp(0.8rem, 1.65vw, 0.95rem);
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            text-decoration: none;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+            border-bottom: 1px solid transparent;
+            padding-bottom: 0.2rem;
+            transition:
+                color 0.2s ease,
+                opacity 0.2s ease,
+                border-color 0.2s ease,
+                letter-spacing 0.2s ease;
         }
         .fire-solutions-nav .nav-link:hover {
-            opacity: 0.85;
+            opacity: 1;
             color: #fff !important;
+            letter-spacing: 0.08em;
+            border-bottom-color: var(--fire-accent-line);
         }
         .fire-solutions-nav .fire-back {
             display: inline-flex !important;
             align-items: center;
-            gap: 0.35rem;
-            color: #fff !important;
+            gap: 0.4rem;
+            color: var(--fire-cream) !important;
             text-decoration: none;
-            font-size: 0.92rem;
+            font-size: clamp(0.85rem, 1.8vw, 0.98rem);
             font-weight: 600;
+            letter-spacing: 0.04em;
             opacity: 1;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85);
-            line-height: 1.2;
-            margin-top: 0.35rem;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.85);
+            line-height: 1.25;
+            margin-top: 0.4rem;
+            transition: color 0.2s ease, opacity 0.2s ease, letter-spacing 0.2s ease;
         }
         .fire-solutions-nav .fire-back:hover {
-            opacity: 0.92;
+            opacity: 1;
             color: #fff !important;
+            letter-spacing: 0.06em;
         }
         .fire-solutions-nav .fire-solutions-nav-logo-wrap {
             display: block;
@@ -141,17 +183,38 @@
             margin-top: 1.75rem;
         }
         .fire-section h2 {
-            margin: 0 0 0.5rem;
-            padding: 0.25rem clamp(0.75rem, 3vw, 1.25rem) 0.5rem;
-            font-size: clamp(1.15rem, 2.5vw, 1.35rem);
-            font-weight: 600;
-            color: #fff;
-            letter-spacing: 0.03em;
+            position: relative;
+            margin: 0 0 1.15rem;
+            padding: 0.5rem clamp(0.75rem, 3vw, 1.5rem) 1rem;
+            font-size: clamp(1.75rem, 5.2vw, 2.65rem);
+            font-weight: 700;
+            line-height: 1.12;
+            color: var(--fire-cream);
+            letter-spacing: -0.02em;
             text-align: center;
             background: transparent;
             text-shadow:
-                0 1px 2px rgba(0, 0, 0, 0.85),
-                0 0 20px rgba(0, 0, 0, 0.45);
+                0 2px 6px rgba(0, 0, 0, 0.9),
+                0 0 36px rgba(0, 0, 0, 0.45);
+        }
+        .fire-section h2::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: 0.35rem;
+            transform: translateX(-50%);
+            width: min(5.5rem, 42vw);
+            height: 2px;
+            border-radius: 2px;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                var(--fire-accent-line),
+                rgba(255, 200, 160, 0.35),
+                var(--fire-accent-line),
+                transparent
+            );
+            opacity: 0.95;
         }
         .fire-section .fire-section-figure {
             margin: 0;
@@ -177,16 +240,15 @@
         .fire-hydrant-gallery,
         .fire-aerosol-gallery,
         .fire-smart-alarm-gallery,
-        .fire-amfes-gallery,
-        .fire-services-gallery {
-            --fire-gallery-gap: clamp(0.5rem, 1.5vw, 1rem);
+        .fire-amfes-gallery {
+            --fire-gallery-gap: clamp(0.65rem, 1.75vw, 1.15rem);
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: var(--fire-gallery-gap);
             width: 100%;
-            max-width: none;
-            margin: 0;
-            padding: 0 clamp(0.5rem, 2vw, 1rem);
+            max-width: min(72rem, 100%);
+            margin: 0 auto;
+            padding: 0 clamp(0.75rem, 3vw, 1.5rem);
             box-sizing: border-box;
         }
         @media (max-width: 480px) {
@@ -195,8 +257,7 @@
             .fire-hydrant-gallery,
             .fire-aerosol-gallery,
             .fire-smart-alarm-gallery,
-            .fire-amfes-gallery,
-            .fire-services-gallery {
+            .fire-amfes-gallery {
                 grid-template-columns: 1fr;
             }
         }
@@ -205,21 +266,23 @@
         .fire-hydrant-gallery .fire-section-figure,
         .fire-aerosol-gallery .fire-section-figure,
         .fire-smart-alarm-gallery .fire-section-figure,
-        .fire-amfes-gallery .fire-section-figure,
-        .fire-services-gallery .fire-section-figure {
+        .fire-amfes-gallery .fire-section-figure {
             margin: 0;
             min-width: 0;
             min-height: 0;
             aspect-ratio: 1;
             overflow: hidden;
+            border-radius: clamp(4px, 1vw, 10px);
+            box-shadow:
+                0 12px 32px rgba(0, 0, 0, 0.35),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.06);
         }
         .fire-extinguisher-gallery .fire-section-figure img,
         .fire-sprinkler-gallery .fire-section-figure img,
         .fire-hydrant-gallery .fire-section-figure img,
         .fire-aerosol-gallery .fire-section-figure img,
         .fire-smart-alarm-gallery .fire-section-figure img,
-        .fire-amfes-gallery .fire-section-figure img,
-        .fire-services-gallery .fire-section-figure img {
+        .fire-amfes-gallery .fire-section-figure img {
             width: 100%;
             height: 100%;
             max-height: none;
@@ -232,8 +295,10 @@
             max-height: min(72vh, 560px);
             overflow-x: hidden;
             overflow-y: auto;
-            padding: 1rem 1.15rem;
+            padding: 1.15rem 1.35rem;
             -webkit-overflow-scrolling: touch;
+            font-size: 0.95rem;
+            letter-spacing: 0.02em;
             background: linear-gradient(
                 160deg,
                 rgba(45, 22, 14, 0.92) 0%,
@@ -249,7 +314,8 @@
         }
         .fire-solutions-more-menu .floating-more-link,
         .fire-solutions-more-menu .floating-more-sublink {
-            color: rgba(255, 248, 242, 0.95);
+            color: var(--fire-cream-muted);
+            letter-spacing: 0.03em;
         }
         .fire-solutions-more-menu .floating-more-link:hover,
         .fire-solutions-more-menu .floating-more-sublink:hover {
@@ -263,14 +329,16 @@
             margin-bottom: 0.35rem;
         }
         .fire-more-accordion .fire-more-accordion-toggle {
-            padding: 0.45rem 0;
-            font-weight: 500;
+            padding: 0.5rem 0;
+            font-weight: 600;
+            font-size: 0.92rem;
+            letter-spacing: 0.04em;
         }
         .fire-more-accordion-panel .fire-more-panel-inner {
-            padding: 0.15rem 0 0.65rem 0.65rem;
-            font-size: 0.8rem;
-            line-height: 1.5;
-            color: rgba(255, 240, 230, 0.88);
+            padding: 0.2rem 0 0.75rem 0.75rem;
+            font-size: 0.84rem;
+            line-height: 1.58;
+            color: var(--fire-cream-muted);
             border-left: 2px solid rgba(255, 120, 72, 0.35);
             margin-bottom: 0.25rem;
         }
@@ -329,7 +397,8 @@
                 gap: 0.45rem 0.85rem;
             }
             .fire-solutions-nav .nav-link {
-                font-size: 0.85rem;
+                font-size: clamp(0.72rem, 3.2vw, 0.82rem);
+                letter-spacing: 0.05em;
             }
             .fire-page {
                 padding-top: clamp(5.5rem, 22vw, 7rem);
@@ -346,7 +415,7 @@
             <div class="nav-logo">
                 <a href="index.html" title="Robur Mining Solutions — home">
                     <span class="fire-solutions-nav-logo-wrap">
-                        <video class="fire-solutions-nav-logo division-logo" autoplay loop muted playsinline preload="metadata" title="Fire Solutions — division video © Robur Mining Solutions">
+                        <video class="fire-solutions-nav-logo division-logo" autoplay loop muted playsinline preload="none" title="Fire Solutions — division video © Robur Mining Solutions">
                             <source src="images/robur fire solutions.mp4" type="video/mp4">
                         </video>
                     </span>
@@ -452,11 +521,6 @@
         </section>
         <section id="fire-services" class="fire-section">
             <h2>Services</h2>
-            <div class="fire-services-gallery" role="group" aria-label="Services">
-                <figure class="fire-section-figure">
-                    <img src="images/maintenance_support.jpg" alt="Installation and maintenance support for fire systems" decoding="async" loading="lazy">
-                </figure>
-            </div>
         </section>
     </main>
 

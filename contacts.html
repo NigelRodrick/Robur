@@ -21,9 +21,10 @@
     <title>Contacts - Robur Mining Solutions</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="Bagerich/Bagerich-Regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="web-styles.css">
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"></noscript>
     
     <!-- Inline fallback styles to ensure black background works -->
     <style>
@@ -64,7 +65,7 @@
 <body>
     <!-- Back to Home Link -->
     <div style="position: fixed; top: 20px; left: 20px; z-index: 1000;">
-        <a href="index.html#from=contacts" style="display: inline-flex; align-items: center; gap: 0.5rem; color: #ffffff; text-decoration: none; padding: 0.75rem 1.5rem; background: rgba(255, 255, 255, 0.1); border-radius: 8px; backdrop-filter: blur(10px); transition: all 0.3s ease; font-family: 'Inter', sans-serif; font-size: 0.9rem;">
+        <a href="index.html#from=contacts" style="display: inline-flex; align-items: center; gap: 0.5rem; color: #ffffff; text-decoration: none; padding: 0.75rem 1.5rem; background: rgba(255, 255, 255, 0.1); border-radius: 8px; backdrop-filter: blur(10px); transition: all 0.3s ease; font-size: 0.9rem;">
             <span>â†</span>
             <span>Back to Home</span>
         </a>
@@ -112,7 +113,7 @@
                     </div>
                 </div>
                 <div class="about-logo-bottom">
-                    <video src="images/logo1.mp4" class="about-logo-video" autoplay loop muted playsinline title="Robur Mining Solutions — logo video © Robur Mining Solutions"></video>
+                    <video src="images/logo1.mp4" class="about-logo-video" autoplay loop muted playsinline preload="none" title="Robur Mining Solutions — logo video © Robur Mining Solutions"></video>
                 </div>
             </div>
         </div>

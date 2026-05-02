@@ -21,8 +21,11 @@
     <title>Robur Mining Solutions - Beginner.app Style</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="Bagerich/Bagerich-Regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="web-styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preload" as="image" href="images/final-logo.png" fetchpriority="high">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"></noscript>
     
     <!-- Inline fallback styles to ensure black background works -->
     <style>
@@ -70,7 +73,7 @@
     </style>
 </head>
 <body>
-    <video class="background-refractions" autoplay loop muted playsinline preload="metadata" title="Background video — © Robur Mining Solutions" aria-label="Background video — © Robur Mining Solutions">
+    <video class="background-refractions" autoplay loop muted playsinline preload="none" title="Background video — © Robur Mining Solutions" aria-label="Background video — © Robur Mining Solutions">
         <source src="images/refractions.mp4" type="video/mp4">
         <!-- Fallback: use main logo animation if refractions video cannot be played -->
         <source src="images/logo1.mp4" type="video/mp4">
@@ -80,7 +83,7 @@
     <nav class="main-nav">
         <div class="nav-container">
             <div class="nav-logo">
-                <img src="images/final-logo.png" alt="Robur Mining Solutions" class="logo-image" fetchpriority="high" decoding="async">
+                <img src="images/final-logo.png" alt="Robur Mining Solutions" class="logo-image" fetchpriority="high" decoding="async" loading="eager">
             </div>
             <div class="nav-links">
                 <a href="#home" class="nav-link">Home</a>
@@ -138,7 +141,7 @@
             <div class="sideways-section">
                 <aside class="products-sidebar-video fade-in">
                     <div class="products-video-wrapper">
-                        <img src="images/products-section.png" alt="Products" class="products-video" decoding="async">
+                        <img src="images/products-section.png" alt="Products" class="products-video" decoding="async" loading="lazy">
                     </div>
                 </aside>
                 <div class="content-area">
@@ -217,7 +220,7 @@
                 </div>
                 <aside class="outcome-sidebar-video fade-in">
                     <div class="outcome-video-wrapper">
-                        <img src="images/outcome-section.png" alt="Outcome" class="outcome-video" decoding="async">
+                        <img src="images/outcome-section.png" alt="Outcome" class="outcome-video" decoding="async" loading="lazy">
                     </div>
                 </aside>
             </div>
