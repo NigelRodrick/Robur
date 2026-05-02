@@ -1262,7 +1262,8 @@ section {
     margin-bottom: 0.5rem;
     display: none;
 }
-.more-menu-item.about-open .more-submenu {
+.more-menu-item.about-open .more-submenu,
+.more-menu-item.is-open .more-submenu {
     display: block;
 }
 .more-menu-item { margin-bottom: 0.5rem; }

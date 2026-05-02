@@ -881,6 +881,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                     return;
                 }
+
+                // Fire Solutions page: accordion toggles (Who we are / mission / vision / core values)
+                if (this.classList.contains('fire-more-accordion-toggle')) {
+                    e.preventDefault();
+                    const parentItem = this.closest('.more-menu-item');
+                    if (parentItem) {
+                        parentItem.classList.toggle('is-open');
+                    }
+                    return;
+                }
                 
                 // Check if it's an external link (starts with http or is a .html file)
                 if (targetId.startsWith('http') || targetId.endsWith('.html')) {
