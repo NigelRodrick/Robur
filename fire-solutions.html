@@ -293,6 +293,17 @@
             object-fit: cover;
             object-position: center;
         }
+        /* Services: one tile — centred; slightly larger than a single 3-col cell, same square + cover */
+        .fire-services-gallery {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .fire-services-gallery .fire-section-figure {
+            width: min(32rem, 92vw);
+            max-width: 100%;
+            flex: 0 0 auto;
+        }
         .floating-more-menu.fire-solutions-more-menu {
             min-width: min(340px, calc(100vw - 2rem));
             max-width: 400px;
@@ -527,7 +538,7 @@
             <h2>Services</h2>
             <div class="fire-services-gallery" role="group" aria-label="Fire safety services">
                 <figure class="fire-section-figure">
-                    <img src="images/fire-services/services.jpeg" alt="Fire detection and suppression services — sales, installation, and maintenance" decoding="async" loading="lazy">
+                    <img src="images/fire-services/services.jpeg" alt="Fire services — sales, installation, and maintenance" decoding="async" loading="lazy">
                 </figure>
             </div>
         </section>
