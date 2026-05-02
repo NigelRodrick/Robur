@@ -46,6 +46,7 @@
         }
         .fire-solutions-nav .nav-logo .fire-back {
             margin: 0;
+            margin-top: 0.35rem;
             align-self: flex-start;
         }
         .fire-solutions-nav.main-nav .nav-container {
@@ -88,7 +89,7 @@
             opacity: 1;
             text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85);
             line-height: 1.2;
-            margin-bottom: 0.15rem;
+            margin-top: 0.35rem;
         }
         .fire-solutions-nav .fire-back:hover {
             opacity: 0.92;
@@ -178,17 +179,37 @@
         .fire-smart-alarm-gallery,
         .fire-amfes-gallery,
         .fire-services-gallery {
-            --fire-gallery-gap: clamp(1rem, 3vw, 1.65rem);
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-content: center;
+            --fire-gallery-gap: clamp(0.5rem, 1.5vw, 1rem);
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
             gap: var(--fire-gallery-gap);
-            max-width: min(44rem, calc(100% - 2.5rem));
-            margin-left: auto;
-            margin-right: auto;
-            padding: 0 clamp(1rem, 4vw, 1.75rem);
+            width: 100%;
+            max-width: none;
+            margin: 0;
+            padding: 0 clamp(0.5rem, 2vw, 1rem);
             box-sizing: border-box;
+        }
+        @media (max-width: 900px) {
+            .fire-extinguisher-gallery,
+            .fire-sprinkler-gallery,
+            .fire-hydrant-gallery,
+            .fire-aerosol-gallery,
+            .fire-smart-alarm-gallery,
+            .fire-amfes-gallery,
+            .fire-services-gallery {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+        @media (max-width: 480px) {
+            .fire-extinguisher-gallery,
+            .fire-sprinkler-gallery,
+            .fire-hydrant-gallery,
+            .fire-aerosol-gallery,
+            .fire-smart-alarm-gallery,
+            .fire-amfes-gallery,
+            .fire-services-gallery {
+                grid-template-columns: 1fr;
+            }
         }
         .fire-extinguisher-gallery .fire-section-figure,
         .fire-sprinkler-gallery .fire-section-figure,
@@ -198,8 +219,7 @@
         .fire-amfes-gallery .fire-section-figure,
         .fire-services-gallery .fire-section-figure {
             margin: 0;
-            flex: 0 0 auto;
-            width: min(13.5rem, calc((100% - var(--fire-gallery-gap)) / 2));
+            min-width: 0;
             min-height: 0;
             aspect-ratio: 1;
             overflow: hidden;
@@ -216,17 +236,6 @@
             max-height: none;
             object-fit: cover;
             object-position: center;
-        }
-        @media (max-width: 520px) {
-            .fire-extinguisher-gallery .fire-section-figure,
-            .fire-sprinkler-gallery .fire-section-figure,
-            .fire-hydrant-gallery .fire-section-figure,
-            .fire-aerosol-gallery .fire-section-figure,
-            .fire-smart-alarm-gallery .fire-section-figure,
-            .fire-amfes-gallery .fire-section-figure,
-            .fire-services-gallery .fire-section-figure {
-                width: min(18.5rem, 100%);
-            }
         }
         .floating-more-menu.fire-solutions-more-menu {
             min-width: min(340px, calc(100vw - 2rem));
@@ -346,7 +355,6 @@
     <nav class="main-nav fire-solutions-nav" aria-label="Solutions product categories">
         <div class="nav-container">
             <div class="nav-logo">
-                <a href="index.html" class="fire-back" title="Back to home" aria-label="Back to home">← Home</a>
                 <a href="index.html" title="Robur Mining Solutions — home">
                     <span class="fire-solutions-nav-logo-wrap">
                         <video class="fire-solutions-nav-logo division-logo" autoplay loop muted playsinline preload="metadata" title="Fire Solutions — division video © Robur Mining Solutions">
@@ -354,6 +362,7 @@
                         </video>
                     </span>
                 </a>
+                <a href="index.html" class="fire-back" title="Back to home" aria-label="Back to home">← Home</a>
             </div>
             <div class="nav-links">
                 <a href="#extinguishers" class="nav-link">Extinguishers</a>
