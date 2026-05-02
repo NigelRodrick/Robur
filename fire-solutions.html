@@ -293,16 +293,24 @@
             object-fit: cover;
             object-position: center;
         }
-        /* Services: one tile — centred; slightly larger than a single 3-col cell, same square + cover */
-        .fire-services-gallery {
+        /* Services: image directly under heading, centred, larger tile */
+        #fire-services h2 {
+            margin-bottom: 0.35rem;
+            padding-bottom: 0.75rem;
+        }
+        #fire-services .fire-services-gallery {
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
+            margin-top: 0;
+            padding-top: 0;
+            gap: 0;
         }
-        .fire-services-gallery .fire-section-figure {
-            width: min(32rem, 92vw);
+        #fire-services .fire-services-gallery .fire-section-figure {
+            width: min(50rem, calc(100vw - 2.5rem));
             max-width: 100%;
             flex: 0 0 auto;
+            margin-top: 0;
         }
         .floating-more-menu.fire-solutions-more-menu {
             min-width: min(340px, calc(100vw - 2rem));
