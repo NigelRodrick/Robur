@@ -181,24 +181,13 @@
         .fire-services-gallery {
             --fire-gallery-gap: clamp(0.5rem, 1.5vw, 1rem);
             display: grid;
-            grid-template-columns: repeat(4, minmax(0, 1fr));
+            grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: var(--fire-gallery-gap);
             width: 100%;
             max-width: none;
             margin: 0;
             padding: 0 clamp(0.5rem, 2vw, 1rem);
             box-sizing: border-box;
-        }
-        @media (max-width: 900px) {
-            .fire-extinguisher-gallery,
-            .fire-sprinkler-gallery,
-            .fire-hydrant-gallery,
-            .fire-aerosol-gallery,
-            .fire-smart-alarm-gallery,
-            .fire-amfes-gallery,
-            .fire-services-gallery {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
         }
         @media (max-width: 480px) {
             .fire-extinguisher-gallery,
