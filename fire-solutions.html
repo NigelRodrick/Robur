@@ -40,7 +40,7 @@
             align-items: flex-start;
             gap: 0.35rem;
         }
-        .fire-solutions-nav .nav-logo > a:first-of-type {
+        .fire-solutions-nav .nav-logo > a[href="index.html"]:not(.fire-back) {
             display: block;
             line-height: 0;
         }
@@ -71,22 +71,28 @@
         .fire-solutions-nav .nav-link {
             color: #fff !important;
             flex-shrink: 0;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.75);
         }
         .fire-solutions-nav .nav-link:hover {
             opacity: 0.85;
             color: #fff !important;
         }
-        .fire-back {
-            display: inline-flex;
+        .fire-solutions-nav .fire-back {
+            display: inline-flex !important;
             align-items: center;
-            gap: 0.5rem;
-            color: #fff;
+            gap: 0.35rem;
+            color: #fff !important;
             text-decoration: none;
-            font-size: 0.88rem;
-            opacity: 0.9;
-        }
-        .fire-back:hover {
+            font-size: 0.92rem;
+            font-weight: 600;
             opacity: 1;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85);
+            line-height: 1.2;
+            margin-bottom: 0.15rem;
+        }
+        .fire-solutions-nav .fire-back:hover {
+            opacity: 0.92;
+            color: #fff !important;
         }
         .fire-solutions-nav .fire-solutions-nav-logo-wrap {
             display: block;
@@ -149,7 +155,7 @@
         .fire-section .fire-section-figure {
             margin: 0;
             border-radius: 0;
-            overflow: visible;
+            overflow: hidden;
             line-height: 0;
         }
         .fire-section .fire-section-figure img {
@@ -170,27 +176,57 @@
         .fire-hydrant-gallery,
         .fire-aerosol-gallery,
         .fire-smart-alarm-gallery,
-        .fire-amfes-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(min(100%, 10rem), 1fr));
-            gap: 0;
-            margin: 0;
+        .fire-amfes-gallery,
+        .fire-services-gallery {
+            --fire-gallery-gap: clamp(1rem, 3vw, 1.65rem);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-content: center;
+            gap: var(--fire-gallery-gap);
+            max-width: min(44rem, calc(100% - 2.5rem));
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 clamp(1rem, 4vw, 1.75rem);
+            box-sizing: border-box;
         }
         .fire-extinguisher-gallery .fire-section-figure,
         .fire-sprinkler-gallery .fire-section-figure,
         .fire-hydrant-gallery .fire-section-figure,
         .fire-aerosol-gallery .fire-section-figure,
         .fire-smart-alarm-gallery .fire-section-figure,
-        .fire-amfes-gallery .fire-section-figure {
+        .fire-amfes-gallery .fire-section-figure,
+        .fire-services-gallery .fire-section-figure {
             margin: 0;
+            flex: 0 0 auto;
+            width: min(13.5rem, calc((100% - var(--fire-gallery-gap)) / 2));
+            min-height: 0;
+            aspect-ratio: 1;
+            overflow: hidden;
         }
         .fire-extinguisher-gallery .fire-section-figure img,
         .fire-sprinkler-gallery .fire-section-figure img,
         .fire-hydrant-gallery .fire-section-figure img,
         .fire-aerosol-gallery .fire-section-figure img,
         .fire-smart-alarm-gallery .fire-section-figure img,
-        .fire-amfes-gallery .fire-section-figure img {
+        .fire-amfes-gallery .fire-section-figure img,
+        .fire-services-gallery .fire-section-figure img {
+            width: 100%;
+            height: 100%;
             max-height: none;
+            object-fit: cover;
+            object-position: center;
+        }
+        @media (max-width: 520px) {
+            .fire-extinguisher-gallery .fire-section-figure,
+            .fire-sprinkler-gallery .fire-section-figure,
+            .fire-hydrant-gallery .fire-section-figure,
+            .fire-aerosol-gallery .fire-section-figure,
+            .fire-smart-alarm-gallery .fire-section-figure,
+            .fire-amfes-gallery .fire-section-figure,
+            .fire-services-gallery .fire-section-figure {
+                width: min(18.5rem, 100%);
+            }
         }
         .floating-more-menu.fire-solutions-more-menu {
             min-width: min(340px, calc(100vw - 2rem));
@@ -291,6 +327,12 @@
                 padding-bottom: 0.65rem;
                 gap: 0.65rem;
             }
+            .fire-solutions-nav .nav-links {
+                gap: 0.45rem 0.85rem;
+            }
+            .fire-solutions-nav .nav-link {
+                font-size: 0.85rem;
+            }
             .fire-page {
                 padding-top: clamp(5.5rem, 22vw, 7rem);
             }
@@ -301,9 +343,10 @@
     </style>
 </head>
 <body>
-    <nav class="main-nav fire-solutions-nav" aria-label="Home — Robur Fire Solutions">
+    <nav class="main-nav fire-solutions-nav" aria-label="Solutions product categories">
         <div class="nav-container">
             <div class="nav-logo">
+                <a href="index.html" class="fire-back" title="Back to home" aria-label="Back to home">← Home</a>
                 <a href="index.html" title="Robur Mining Solutions — home">
                     <span class="fire-solutions-nav-logo-wrap">
                         <video class="fire-solutions-nav-logo division-logo" autoplay loop muted playsinline preload="metadata" title="Fire Solutions — division video © Robur Mining Solutions">
@@ -311,6 +354,15 @@
                         </video>
                     </span>
                 </a>
+            </div>
+            <div class="nav-links">
+                <a href="#extinguishers" class="nav-link">Extinguishers</a>
+                <a href="#sprinkler-systems" class="nav-link">Sprinkler Systems</a>
+                <a href="#fire-hydrants" class="nav-link">Hydrants</a>
+                <a href="#aerosol-generators" class="nav-link">Aerosol Generators</a>
+                <a href="#amfes" class="nav-link">AMFEs</a>
+                <a href="#smart-alarm-systems" class="nav-link">Smart Alarm Systems</a>
+                <a href="#fire-services" class="nav-link">Services</a>
             </div>
         </div>
     </nav>
@@ -360,9 +412,6 @@
             <h2>Hydrants</h2>
             <div class="fire-hydrant-gallery" role="group" aria-label="Hydrant and water supply products">
                 <figure class="fire-section-figure">
-                    <img src="images/fluid_management.jpg" alt="Fluid and water infrastructure for firefighting and hydrant systems" decoding="async" loading="lazy">
-                </figure>
-                <figure class="fire-section-figure">
                     <img src="images/hydrants/hydrant.jpeg" alt="Fire hydrant equipment" decoding="async" loading="lazy">
                 </figure>
                 <figure class="fire-section-figure">
@@ -385,9 +434,6 @@
             <h2>AMFEs</h2>
             <div class="fire-amfes-gallery" role="group" aria-label="AMFE — automatic miniature fire extinguishing products">
                 <figure class="fire-section-figure">
-                    <img src="images/cap lamps.jpeg" alt="Electrical cabinets and site equipment suited to localized fire protection" decoding="async" loading="lazy">
-                </figure>
-                <figure class="fire-section-figure">
                     <img src="images/amfes/afmes.jpeg" alt="AMFE automatic miniature fire extinguishing unit" decoding="async" loading="lazy">
                 </figure>
             </div>
@@ -395,9 +441,6 @@
         <section id="smart-alarm-systems" class="fire-section">
             <h2>Smart Alarm Systems</h2>
             <div class="fire-smart-alarm-gallery" role="group" aria-label="Smart alarm and monitoring products">
-                <figure class="fire-section-figure">
-                    <img src="images/gas monitoring.jpeg" alt="Gas detection and alarm monitoring equipment" decoding="async" loading="lazy">
-                </figure>
                 <figure class="fire-section-figure">
                     <img src="images/smart-alarm/smart-alarm-systems.jpeg" alt="Smart alarm system equipment" decoding="async" loading="lazy">
                 </figure>
@@ -411,10 +454,66 @@
         </section>
         <section id="fire-services" class="fire-section">
             <h2>Services</h2>
-            <figure class="fire-section-figure">
-                <img src="images/maintenance_support.jpg" alt="Installation and maintenance support for fire systems" decoding="async" loading="lazy">
-            </figure>
+            <div class="fire-services-gallery" role="group" aria-label="Services">
+                <figure class="fire-section-figure">
+                    <img src="images/maintenance_support.jpg" alt="Installation and maintenance support for fire systems" decoding="async" loading="lazy">
+                </figure>
+            </div>
         </section>
     </main>
+
+    <div class="floating-more">
+        <button class="floating-more-button" id="floatingMoreButton" type="button">
+            <span class="more-text">More</span>
+            <span class="more-icon">+</span>
+        </button>
+        <div class="floating-more-menu fire-solutions-more-menu" id="floatingMoreMenu">
+            <div class="fire-more-accordion" role="region" aria-label="About Robur Fire Solutions">
+                <div class="more-menu-item fire-more-accordion-item">
+                    <a href="#" class="floating-more-link fire-more-accordion-toggle">Who We Are</a>
+                    <div class="more-submenu fire-more-accordion-panel">
+                        <div class="fire-more-panel-inner">
+                            <p>Robur Fire Solutions is a new age company which offers comprehensive expertise in fire detection and suppression systems and equipment through sales, installation and maintenance for all industries including: mining, manufacturing, transport and construction.</p>
+                            <p>With unsurpassed innovation we assert ourselves beyond all your fire hazards and challenges by providing you unparalleled solutions.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="more-menu-item fire-more-accordion-item">
+                    <a href="#" class="floating-more-link fire-more-accordion-toggle">Our Mission</a>
+                    <div class="more-submenu fire-more-accordion-panel">
+                        <div class="fire-more-panel-inner">
+                            <p>To continue giving our customers confidence and ultimate satisfaction in terms of fire safety.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="more-menu-item fire-more-accordion-item">
+                    <a href="#" class="floating-more-link fire-more-accordion-toggle">Our Vision</a>
+                    <div class="more-submenu fire-more-accordion-panel">
+                        <div class="fire-more-panel-inner">
+                            <p>We intend to constantly improve by changing, developing and renewing fire technology in the most practical and economic means.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="more-menu-item fire-more-accordion-item">
+                    <a href="#" class="floating-more-link fire-more-accordion-toggle">Core Values</a>
+                    <div class="more-submenu fire-more-accordion-panel">
+                        <div class="fire-more-panel-inner">
+                            <p>The principles that define how we work with customers and partners:</p>
+                            <ul class="fire-more-core-list">
+                                <li><strong>Integrity</strong></li>
+                                <li><strong>Optimism</strong></li>
+                                <li><strong>Innovation</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="fire-more-nav-divider">
+            <a href="contacts.html" class="floating-more-link">Contacts</a>
+            <a href="investment-opportunities.html" class="floating-more-link">Investments</a>
+        </div>
+    </div>
+
+    <script src="script.js" defer></script>
 </body>
 </html>
