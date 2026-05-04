@@ -118,7 +118,6 @@
             }
 
             var extensions = ["jpg", "jpeg", "png", "webp"];
-            var smartNames = ["smart", "smart1", "smart2", "smart3", "smart4", "smart5", "smart6", "smart7"];
             var sourceDirs = ["images/smart-alarm", "images/smart"];
 
             function tryLoadImage(url) {
@@ -150,16 +149,48 @@
                 return null;
             }
 
+            function buildCandidateNames() {
+                var list = [];
+                var seen = Object.create(null);
+
+                function pushUnique(name) {
+                    if (!name || seen[name]) return;
+                    seen[name] = true;
+                    list.push(name);
+                }
+
+                // Exact names requested by user
+                pushUnique("smart");
+                for (var i = 1; i <= 7; i += 1) pushUnique("smart" + i);
+
+                // Common variants to auto-include all available smart assets
+                for (var j = 1; j <= 40; j += 1) {
+                    pushUnique("smart" + j);
+                    pushUnique("smart-" + j);
+                    pushUnique("smart_" + j);
+                    pushUnique("smart " + j);
+                    pushUnique("smart-alarm-systems" + j);
+                    pushUnique("smart_alarm_systems" + j);
+                }
+                pushUnique("smart-alarm-systems");
+                pushUnique("smart_alarm_systems");
+
+                return list;
+            }
+
             async function buildSmartGrid() {
                 if (!grid) return;
                 var added = 0;
-                var missing = [];
-                for (var i = 0; i < smartNames.length; i += 1) {
-                    var src = await resolveSmartImage(smartNames[i]);
+                var seenSrc = Object.create(null);
+                var candidates = buildCandidateNames();
+
+                for (var i = 0; i < candidates.length; i += 1) {
+                    var src = await resolveSmartImage(candidates[i]);
                     if (!src) {
-                        missing.push(smartNames[i]);
                         continue;
                     }
+                    if (seenSrc[src]) continue;
+                    seenSrc[src] = true;
 
                     var figure = document.createElement("figure");
                     figure.className = "smart-grid-item";
@@ -174,41 +205,11 @@
                     added += 1;
                 }
 
-                /* Fallback to existing smart-alarm asset names already used in this repo */
-                if (added === 0) {
-                    var fallbackNames = [
-                        "images/smart-alarm/smart-alarm-systems.jpeg",
-                        "images/smart-alarm/smart-alarm-systems1.jpeg",
-                        "images/smart-alarm/smart-alarm-systems3.jpeg"
-                    ];
-                    for (var j = 0; j < fallbackNames.length; j += 1) {
-                        var hit = await tryLoadImage(fallbackNames[j]);
-                        if (!hit) continue;
-
-                        var fallbackFigure = document.createElement("figure");
-                        fallbackFigure.className = "smart-grid-item";
-
-                        var fallbackImg = document.createElement("img");
-                        fallbackImg.src = hit;
-                        fallbackImg.alt = "Smart alarm image";
-                        fallbackImg.loading = "lazy";
-
-                        fallbackFigure.appendChild(fallbackImg);
-                        grid.appendChild(fallbackFigure);
-                        added += 1;
-                    }
-                }
-
                 if (added === 0) {
                     var empty = document.createElement("p");
                     empty.className = "smart-empty";
-                    empty.textContent = "No smart1-smart7 images were found in images/smart-alarm or images/smart.";
+                    empty.textContent = "No smart images were found in images/smart-alarm or images/smart.";
                     grid.replaceWith(empty);
-                } else if (missing.length > 0) {
-                    var info = document.createElement("p");
-                    info.className = "smart-missing";
-                    info.textContent = "Missing smart images: " + missing.join(", ") + ".";
-                    grid.insertAdjacentElement("afterend", info);
                 }
             }
 
