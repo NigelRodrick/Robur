@@ -159,6 +159,21 @@
         @media (max-width: 560px) {
             .smart-grid { grid-template-columns: 1fr; }
         }
+        .smart-page-footnote {
+            width: 100%;
+            max-width: min(72rem, 100%);
+            text-align: center;
+            padding: 1.25rem 1rem 1.75rem;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        .smart-page-footnote p {
+            margin: 0;
+            font-size: 0.78rem;
+            letter-spacing: 0.05em;
+            color: rgba(255, 255, 255, 0.72);
+            line-height: 1.5;
+        }
     </style>
 </head>
 <body>
@@ -179,6 +194,10 @@
             ></iframe>
         </div>
     </main>
+
+    <footer class="smart-page-footnote" aria-label="Developer credit">
+        <p>Developed by Fidisnky Tech Solutions</p>
+    </footer>
 
     <script>
         (function () {

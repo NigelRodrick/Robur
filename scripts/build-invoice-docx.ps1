@@ -41,7 +41,7 @@ $core = @'
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 <dc:title>Invoice - Robur Mining Solutions</dc:title>
-<dc:creator>Fidinsky Tech Solutions</dc:creator>
+<dc:creator>Fidisnky Tech Solutions</dc:creator>
 <dcterms:created xsi:type="dcterms:W3CDTF">2026-05-04T12:00:00Z</dcterms:created>
 </cp:coreProperties>
 '@
@@ -111,7 +111,7 @@ $w = "http://schemas.openxmlformats.org/wordprocessingml/2006/main"
 [void]$body.Append((Xml-P "Web development - Robur Mining Solutions site"))
 [void]$body.Append((Xml-P ""))
 [void]$body.Append((Xml-P "Bill to: Robur Mining Solutions"))
-[void]$body.Append((Xml-P "From: Fidinsky Tech Solutions"))
+[void]$body.Append((Xml-P "From: Fidisnky Tech Solutions"))
 [void]$body.Append((Xml-P "Invoice #: ROBUR-WEB-2026-001"))
 [void]$body.Append((Xml-P "Date: 4 May 2026"))
 [void]$body.Append((Xml-P ""))
