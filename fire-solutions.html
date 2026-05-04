@@ -298,6 +298,78 @@
                 aspect-ratio: 16 / 9;
             }
         }
+        /* Aerosol + AMFEs: titles share one row; images row below (AMFE title + picture stacked on the right) */
+        .fire-aerosol-amfe-pane {
+            display: contents;
+        }
+        .fire-aerosol-amfe-pair {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto;
+            grid-template-areas:
+                "aero-title amfe-title"
+                "aero-img amfe-img";
+            column-gap: clamp(1rem, 3vw, 2rem);
+            row-gap: clamp(0.65rem, 1.75vw, 1.15rem);
+            align-items: start;
+            width: 100%;
+            max-width: min(72rem, 100%);
+            margin: 2.5rem auto 0;
+            padding: 0 clamp(0.75rem, 3vw, 1.5rem);
+            box-sizing: border-box;
+        }
+        .fire-aerosol-amfe-pair #aerosol-generators {
+            grid-area: aero-title;
+        }
+        .fire-aerosol-amfe-pair #amfes {
+            grid-area: amfe-title;
+        }
+        .fire-aerosol-amfe-pair .fire-aerosol-gallery {
+            grid-area: aero-img;
+            grid-template-columns: 1fr;
+            max-width: none;
+            padding: 0;
+            min-width: 0;
+        }
+        .fire-aerosol-amfe-pair .fire-amfes-gallery {
+            grid-area: amfe-img;
+            grid-template-columns: 1fr;
+            max-width: none;
+            padding: 0;
+            min-width: 0;
+        }
+        .fire-aerosol-amfe-pair h2[id] {
+            scroll-margin-top: 100px;
+            min-width: 0;
+        }
+        @media (max-width: 768px) {
+            .fire-aerosol-amfe-pair {
+                grid-template-columns: 1fr;
+                grid-template-areas:
+                    "aero-title"
+                    "aero-img"
+                    "amfe-title"
+                    "amfe-img";
+                margin-top: 2.5rem;
+            }
+        }
+        /* Smart Alarm: two tiles span the same width as three product columns; row height matches a 3-square row */
+        #smart-alarm-systems .fire-smart-alarm-gallery {
+            grid-template-columns: repeat(6, minmax(0, 1fr));
+        }
+        #smart-alarm-systems .fire-smart-alarm-gallery .fire-section-figure {
+            grid-column: span 3;
+            aspect-ratio: 3 / 2;
+        }
+        @media (max-width: 480px) {
+            #smart-alarm-systems .fire-smart-alarm-gallery {
+                grid-template-columns: 1fr;
+            }
+            #smart-alarm-systems .fire-smart-alarm-gallery .fire-section-figure {
+                grid-column: auto;
+                aspect-ratio: 16 / 9;
+            }
+        }
         .fire-extinguisher-gallery .fire-section-figure img,
         .fire-sprinkler-gallery .fire-section-figure img,
         .fire-hydrant-gallery .fire-section-figure img,
@@ -506,33 +578,29 @@
                 </figure>
             </div>
         </section>
-        <section id="aerosol-generators" class="fire-section">
-            <h2>Aerosol Generators</h2>
-            <div class="fire-aerosol-gallery" role="group" aria-label="Aerosol generator products">
-                <figure class="fire-section-figure">
-                    <img src="images/fireball.jpg" alt="Aerosol and advanced suppression technology" decoding="async" loading="lazy">
-                </figure>
-                <figure class="fire-section-figure">
-                    <img src="images/aerosols/aerosol.jpeg" alt="Aerosol fire suppression generator" decoding="async" loading="lazy">
-                </figure>
-            </div>
-        </section>
-        <section id="amfes" class="fire-section">
-            <h2>AMFEs</h2>
-            <div class="fire-amfes-gallery" role="group" aria-label="AMFE — automatic miniature fire extinguishing products">
-                <figure class="fire-section-figure">
-                    <img src="images/amfes/afmes.jpeg" alt="AMFE automatic miniature fire extinguishing unit" decoding="async" loading="lazy">
-                </figure>
-            </div>
-        </section>
+        <div class="fire-aerosol-amfe-pair">
+            <section class="fire-section fire-aerosol-amfe-pane" aria-labelledby="aerosol-generators">
+                <h2 id="aerosol-generators">Aerosol Generators</h2>
+                <div class="fire-aerosol-gallery" role="group" aria-label="Aerosol generator products">
+                    <figure class="fire-section-figure">
+                        <img src="images/aerosols/aerosol.jpeg" alt="Aerosol fire suppression generator" decoding="async" loading="lazy">
+                    </figure>
+                </div>
+            </section>
+            <section class="fire-section fire-aerosol-amfe-pane" aria-labelledby="amfes">
+                <h2 id="amfes">AMFEs</h2>
+                <div class="fire-amfes-gallery" role="group" aria-label="AMFE — automatic miniature fire extinguishing products">
+                    <figure class="fire-section-figure">
+                        <img src="images/amfes/afmes.jpeg" alt="AMFE automatic miniature fire extinguishing unit" decoding="async" loading="lazy">
+                    </figure>
+                </div>
+            </section>
+        </div>
         <section id="smart-alarm-systems" class="fire-section">
             <h2>Smart Alarm Systems</h2>
             <div class="fire-smart-alarm-gallery" role="group" aria-label="Smart alarm and monitoring products">
                 <figure class="fire-section-figure">
                     <img src="images/smart-alarm/smart-alarm-systems.jpeg" alt="Smart alarm system equipment" decoding="async" loading="lazy">
-                </figure>
-                <figure class="fire-section-figure">
-                    <img src="images/smart-alarm/smart-alarm-systems1.jpeg" alt="Smart alarm system equipment" decoding="async" loading="lazy">
                 </figure>
                 <figure class="fire-section-figure">
                     <img src="images/smart-alarm/smart-alarm-systems3.jpeg" alt="Smart alarm system equipment" decoding="async" loading="lazy">
