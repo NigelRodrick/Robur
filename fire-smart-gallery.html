@@ -117,7 +117,7 @@
                 topEl.src = topImage;
             }
 
-            var extensions = ["jpg", "jpeg", "png", "webp"];
+            var gridExtensions = ["webp"];
             var sourceDirs = ["images/smart-alarm", "images/smart"];
 
             function tryLoadImage(url) {
@@ -139,8 +139,8 @@
                 ];
                 for (var d = 0; d < sourceDirs.length; d += 1) {
                     for (var b = 0; b < baseNames.length; b += 1) {
-                        for (var e = 0; e < extensions.length; e += 1) {
-                            var candidate = sourceDirs[d] + "/" + baseNames[b] + "." + extensions[e];
+                        for (var e = 0; e < gridExtensions.length; e += 1) {
+                            var candidate = sourceDirs[d] + "/" + baseNames[b] + "." + gridExtensions[e];
                             var hit = await tryLoadImage(candidate);
                             if (hit) return hit;
                         }
@@ -208,7 +208,7 @@
                 if (added === 0) {
                     var empty = document.createElement("p");
                     empty.className = "smart-empty";
-                    empty.textContent = "No smart images were found in images/smart-alarm or images/smart.";
+                    empty.textContent = "No .webp smart images were found in images/smart-alarm or images/smart.";
                     grid.replaceWith(empty);
                 }
             }
