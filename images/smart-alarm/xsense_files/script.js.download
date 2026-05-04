@@ -1,0 +1,281 @@
+console.log("IM in");
+
+const BASE_URL = `https://apps.trackordernow.com/s/api`;
+
+(async () => {
+  // add new script order lookup to theme theme
+  var scripts = `https://apps.synctrack.io/order-tracking/order-lookup/dist/order-lookup.js`;
+  var script = document.createElement("script");
+  script.src = scripts + "?v=" + Date.now();
+  // window.addEventListener("DOMContentLoaded", (event) => {
+  //     console.log("DOM fully loaded and parsed");
+  document.body.appendChild(script);
+  // });
+
+  // end
+  if (!(window.__st.t === "checkout")) return;
+  const axiosSrc =
+    "https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js";
+
+  loadScript = (src) => {
+    return new Promise(function (onload, onerror) {
+      let script;
+      script = document.createElement("script");
+      Object.assign(script, { src, onload, onerror });
+      document.head.appendChild(script);
+    });
+  };
+
+  await loadScript(axiosSrc);
+  const axios = window.axios;
+
+  const shop = Shopify.shop;
+
+  const isTrackingExist = document.querySelector(
+    "[data-tracking-number-link='true']"
+  );
+
+  let loader, alertMessage;
+  let isLoading = false;
+
+  let orderName = document.querySelector(".os-order-number").innerHTML;
+  orderName = orderName.slice(orderName.indexOf("#")).trim();
+
+  const trackingNumber = isTrackingExist?.innerHTML ?? null;
+
+  const trackingLink = `https://${shop}/apps/order-tracking?tracking_number=${trackingNumber}`;
+
+  const loadSettings = async () => {
+    try {
+      const urlParams = {
+        shop,
+        api_key: "098686217004031998",
+        scope: "omegatheme",
+        role: "admin",
+      };
+      const queryString = encodeURIComponent(JSON.stringify(urlParams));
+      const response = await axios.get(BASE_URL + "/setting/tracking-link", {
+        params: {
+          shop,
+          urlParams: queryString,
+        },
+      });
+      if (!response.data || response.data.state !== 1) return;
+      const { addLinkToOrder, linkDescription, replaceCourierLink } =
+        response.data.data;
+      if (isTrackingExist) {
+        if (addLinkToOrder) addLinkToOrderFn(linkDescription);
+        if (replaceCourierLink) replaceCourierLinkFn();
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const loadCss = () => {
+    const styles = `
+      .omg-tracking-link .noti-section {
+        margin-top: 1rem;
+      }
+      .omg-tracking-link .form-group {
+        width: 100%;
+        display: flex;
+        gap: 1rem;
+        align-items: baseline;
+      }
+      .omg-tracking-link .form-group input {
+        display: block;
+        padding: 0.5rem 0.5rem;
+        margin-top: 0.5rem;
+        flex: 1;
+        border-bottom: 1px solid #ccc;
+      }
+      .omg-tracking-link .form-group button {
+        padding: 0.5rem 1rem;
+        border: 1px solid #1878b9;
+        border-radius: 5px;
+        transition: all ease-out 0.2s;
+      }
+      .omg-tracking-link .form-group button:hover {
+        color: #fff;
+        background-color: #1878b9;
+      }
+      .omg-tracking-link .message {
+        color: #198606;
+      }
+      .lds-dual-ring {
+        display: inline-block;
+        width: 1.3rem;
+        height: 1.3rem;
+      }
+      .lds-dual-ring:after {
+        content: " ";
+        display: block;
+        width: 1rem;
+        height: 1rem;
+        border-radius: 50%;
+        border: 3px solid #1878b9;
+        border-color: #1878b9 transparent #1878b9 transparent;
+        animation: lds-dual-ring 1.2s linear infinite;
+      }
+      #omg-submit:hover > .lds-dual-ring:after {
+        border: 3px solid #fff;
+        border-color: #fff transparent #fff transparent;
+      }
+      @keyframes lds-dual-ring {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    `;
+    const styleSheet = document.createElement("style");
+    styleSheet.setAttribute("type", "text/css");
+    styleSheet.innerText = styles;
+    document.head.appendChild(styleSheet);
+  };
+
+  const addLinkToOrderFn = (linkDescription) => {
+    const wrapper = document.querySelector(".omg-tracking-link");
+    const linkElement = document.createElement("a");
+    linkElement.setAttribute("target", "_blank");
+    linkElement.setAttribute("href", trackingLink);
+    linkElement.innerHTML = linkDescription;
+
+    wrapper.appendChild(linkElement);
+  };
+
+  const replaceCourierLinkFn = () => {
+    const linkElement = document.querySelector(
+      "[data-tracking-number-link='true']"
+    );
+    linkElement.setAttribute("href", trackingLink);
+  };
+
+  const addNotiSelect = () => {
+    const container = document.createElement("div");
+    container.classList.add("noti-section");
+
+    const label = document.createElement("label");
+    label.setAttribute("for", "noti-input");
+    label.innerHTML = "Enter your email here to get shipping update";
+
+    const formGroup = document.createElement("div");
+    formGroup.classList.add("form-group");
+
+    const inputElement = document.createElement("input");
+    inputElement.setAttribute("id", "noti-input");
+    inputElement.setAttribute("type", "email");
+    inputElement.setAttribute("placeholder", "Please enter your email");
+
+    const confirmButton = document.createElement("button");
+    confirmButton.setAttribute("id", "omg-submit");
+    confirmButton.innerHTML = "Confirm";
+    confirmButton.addEventListener("click", () => {
+      saveEmailNoti();
+    });
+
+    formGroup.appendChild(inputElement);
+    formGroup.appendChild(confirmButton);
+    label.appendChild(formGroup);
+    container.appendChild(label);
+
+    const hanger = document.querySelector(".step__sections").children[0];
+    if (hanger) {
+      hanger.appendChild(container);
+    }
+  };
+
+  const validateEmail = (email) => {
+    const re =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  };
+
+  const saveEmailNoti = async () => {
+    if (isLoading) return;
+    const email = document.querySelector("#noti-input").value;
+    if (!validateEmail(email)) {
+      showAlert("Please input a valid email address");
+      return;
+    }
+    hideAlert();
+    startLoading();
+    const container = document.querySelector(".noti-section");
+
+    const message = document.createElement("span");
+    message.classList.add("message");
+    message.innerHTML =
+      "&#10003; Emails will be sent to you when order tracking update";
+
+    const params = {
+      action: "registerEmailNoti",
+      shop,
+      order_name: orderName,
+      email: email,
+    };
+    if (trackingNumber) params["tracking_number"] = trackingNumber;
+    const formData = new FormData();
+    for ([key, value] of Object.entries(params)) {
+      formData.append([key], value);
+    }
+    const response = await axios.post(BASE_URL, formData);
+    stopLoading();
+    if (response.data.status != 0) {
+      showAlert(response.data.msg);
+      return;
+    }
+    container.replaceChildren(message);
+  };
+
+  const startLoading = () => {
+    isLoading = true;
+    const button = document.querySelector("#omg-submit");
+    button.innerHTML = "";
+    button.appendChild(loader);
+  };
+
+  const stopLoading = () => {
+    isLoading = false;
+    const button = document.querySelector("#omg-submit");
+    if (button) {
+      button.innerHTML = "Confirm";
+    }
+  };
+
+  const showAlert = (msg) => {
+    container = document.querySelector(".noti-section");
+    alertMessage.innerHTML = msg;
+    container.appendChild(alertMessage);
+  };
+
+  const hideAlert = () => {
+    container = document.querySelector(".noti-section");
+    alert = document.querySelector(".alert-msg");
+    if (alert) {
+      container.removeChild(alert);
+    }
+  };
+
+  const initUI = () => {
+    const wrapper = document.createElement("div");
+
+    const hanger = document.querySelector(".step__sections").children[0];
+    hanger.classList.add("omg-tracking-link");
+    hanger.appendChild(document.createElement("br"));
+    hanger.appendChild(wrapper);
+
+    loader = document.createElement("div");
+    loader.classList.add("lds-dual-ring");
+
+    alertMessage = document.createElement("span");
+    alertMessage.classList.add("alert-msg");
+    alertMessage.style.color = "red";
+  };
+
+  initUI();
+  loadCss();
+  loadSettings();
+})();

@@ -129,6 +129,30 @@
         #smartGrid {
             background: transparent;
         }
+        .smart-xsense-wrap {
+            width: 100%;
+            max-width: min(72rem, 100%);
+            margin: clamp(0.5rem, 2vw, 1.25rem) 0 0;
+            padding: 0;
+            border-radius: clamp(4px, 1vw, 10px);
+            overflow: hidden;
+            background: transparent;
+        }
+        .smart-xsense-frame {
+            display: block;
+            width: 100%;
+            min-height: min(720px, 85vh);
+            height: 85vh;
+            max-height: 1400px;
+            border: none;
+            background: #fff;
+        }
+        @media (max-width: 560px) {
+            .smart-xsense-frame {
+                min-height: 60vh;
+                height: 75vh;
+            }
+        }
         @media (max-width: 900px) {
             .smart-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
         }
@@ -144,6 +168,16 @@
         </figure>
 
         <section id="smartGrid" class="smart-grid" aria-label="Smart image gallery"></section>
+
+        <div class="smart-xsense-wrap">
+            <iframe
+                class="smart-xsense-frame"
+                title="X-Sense (saved page)"
+                src="images/smart-alarm/xsense.html"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+        </div>
     </main>
 
     <script>
