@@ -154,6 +154,16 @@ section,
     min-height: auto;
 }
 .nav-logo { margin-right: auto; }
+/* Home link sits to the right of the logo on the main site */
+.main-nav .nav-logo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem 1.25rem;
+}
+.main-nav .nav-logo .logo-image {
+    flex-shrink: 0;
+}
 .nav-logo .logo-image {
     height: 112px;
     width: auto;

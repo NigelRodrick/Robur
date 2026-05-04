@@ -61,18 +61,21 @@
         .fire-solutions-nav .nav-logo {
             margin-right: 0;
             display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 0.35rem;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 0.75rem 1rem;
+            flex-wrap: wrap;
         }
         .fire-solutions-nav .nav-logo > a[href="index.html"]:not(.fire-back) {
             display: block;
             line-height: 0;
+            flex-shrink: 0;
         }
         .fire-solutions-nav .nav-logo .fire-back {
             margin: 0;
-            margin-top: 0.35rem;
-            align-self: flex-start;
+            align-self: center;
+            flex-shrink: 0;
         }
         .fire-solutions-nav.main-nav .nav-container {
             display: grid;
@@ -129,7 +132,7 @@
             opacity: 1;
             text-shadow: 0 1px 4px rgba(0, 0, 0, 0.85);
             line-height: 1.25;
-            margin-top: 0.4rem;
+            margin-top: 0;
             transition: color 0.2s ease, opacity 0.2s ease, letter-spacing 0.2s ease;
         }
         .fire-solutions-nav .fire-back:hover {
@@ -508,10 +511,7 @@
                 text-align: center;
             }
             .fire-solutions-nav .nav-logo {
-                align-items: center;
-            }
-            .fire-solutions-nav .nav-logo .fire-back {
-                align-self: center;
+                justify-content: center;
             }
             .fire-solutions-nav .nav-links {
                 justify-content: center;
@@ -538,9 +538,9 @@
             .fire-page {
                 padding-top: clamp(5.5rem, 22vw, 7rem);
             }
-        .fire-section {
-            scroll-margin-top: 82px;
-        }
+            .fire-section {
+                scroll-margin-top: 82px;
+            }
         }
     </style>
 </head>
