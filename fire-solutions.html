@@ -297,9 +297,6 @@
             #fire-hydrants .fire-hydrant-gallery .fire-section-figure {
                 aspect-ratio: 16 / 9;
             }
-            #fire-services .fire-services-gallery .fire-section-figure {
-                aspect-ratio: 16 / 9;
-            }
         }
         /* Aerosol + AMFEs: titles share one row; images row below (AMFE title + picture stacked on the right) */
         .fire-aerosol-amfe-pane {
@@ -390,10 +387,42 @@
             margin-bottom: 0.35rem;
             padding-bottom: 0.75rem;
         }
-        /* Services: full gallery width (same max-width / padding as other product rows) */
+        /* Services: same gallery track width as other rows; full image visible (no crop) */
         #fire-services .fire-services-gallery .fire-section-figure {
             grid-column: 1 / -1;
-            aspect-ratio: 3 / 1;
+            aspect-ratio: auto;
+            min-height: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.28);
+        }
+        #fire-services .fire-services-gallery .fire-section-figure img {
+            width: 100%;
+            height: auto;
+            max-height: none;
+            object-fit: contain;
+            object-position: center;
+        }
+        .fire-page-footer {
+            margin-top: 2rem;
+            padding: 1.5rem clamp(0.75rem, 3vw, 1.5rem) calc(2rem + env(safe-area-inset-bottom, 0px));
+            text-align: center;
+            border-top: 1px solid rgba(255, 120, 72, 0.28);
+        }
+        .fire-page-footer-inner {
+            max-width: min(72rem, 100%);
+            margin: 0 auto;
+        }
+        .fire-page-footer-inner p {
+            margin: 0.4rem 0;
+            font-size: 0.86rem;
+            letter-spacing: 0.03em;
+            color: var(--fire-cream-muted);
+        }
+        .fire-page-footer-inner .fire-page-footer-dev {
+            color: var(--fire-cream);
+            opacity: 0.92;
         }
         .floating-more-menu.fire-solutions-more-menu {
             min-width: min(340px, calc(100vw - 2rem));
@@ -661,6 +690,13 @@
             <a href="investment-opportunities.html" class="floating-more-link">Investments</a>
         </div>
     </div>
+
+    <footer class="fire-page-footer" aria-label="Copyright and credits">
+        <div class="fire-page-footer-inner">
+            <p>&copy; 2026 Robur Mining Solutions. All rights reserved.</p>
+            <p class="fire-page-footer-dev">Developed by Fidinsky Tech Solutions</p>
+        </div>
+    </footer>
 
     <script src="script.js" defer></script>
 </body>
