@@ -79,7 +79,7 @@
             grid-template-columns: auto minmax(0, 1fr);
             align-items: start;
             gap: 0.75rem 1.25rem;
-            padding: 0.75rem clamp(0.5rem, 2vw, 1.25rem) 1rem;
+            padding: 0.9rem clamp(0.5rem, 2vw, 1.25rem) 1rem;
             max-width: 100%;
             box-sizing: border-box;
         }
@@ -160,11 +160,11 @@
             margin: 0;
             box-sizing: border-box;
             /* Clear fixed nav; edge-to-edge images on the body background */
-            padding: clamp(9rem, 20vw, 10.5rem) 0 2rem 0;
+            padding: clamp(9.35rem, 20vw, 10.85rem) 0 2rem 0;
         }
         /* Product blocks sit directly on the fire background — no card / glass panels */
         .fire-section {
-            scroll-margin-top: 100px;
+            scroll-margin-top: 115px;
             margin-top: 2.5rem;
             padding: 0;
             max-width: none;
@@ -297,6 +297,9 @@
             #fire-hydrants .fire-hydrant-gallery .fire-section-figure {
                 aspect-ratio: 16 / 9;
             }
+            #fire-services .fire-services-gallery .fire-section-figure {
+                aspect-ratio: 16 / 9;
+            }
         }
         /* Aerosol + AMFEs: titles share one row; images row below (AMFE title + picture stacked on the right) */
         .fire-aerosol-amfe-pane {
@@ -339,7 +342,7 @@
             min-width: 0;
         }
         .fire-aerosol-amfe-pair h2[id] {
-            scroll-margin-top: 100px;
+            scroll-margin-top: 115px;
             min-width: 0;
         }
         @media (max-width: 768px) {
@@ -383,24 +386,14 @@
             object-fit: cover;
             object-position: center;
         }
-        /* Services: image directly under heading, centred, larger tile */
         #fire-services h2 {
             margin-bottom: 0.35rem;
             padding-bottom: 0.75rem;
         }
-        #fire-services .fire-services-gallery {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            margin-top: 0;
-            padding-top: 0;
-            gap: 0;
-        }
+        /* Services: full gallery width (same max-width / padding as other product rows) */
         #fire-services .fire-services-gallery .fire-section-figure {
-            width: min(50rem, calc(100vw - 2.5rem));
-            max-width: 100%;
-            flex: 0 0 auto;
-            margin-top: 0;
+            grid-column: 1 / -1;
+            aspect-ratio: 3 / 1;
         }
         .floating-more-menu.fire-solutions-more-menu {
             min-width: min(340px, calc(100vw - 2rem));
@@ -516,9 +509,9 @@
             .fire-page {
                 padding-top: clamp(5.5rem, 22vw, 7rem);
             }
-            .fire-section {
-                scroll-margin-top: 72px;
-            }
+        .fire-section {
+            scroll-margin-top: 82px;
+        }
         }
     </style>
 </head>
