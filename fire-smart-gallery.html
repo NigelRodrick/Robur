@@ -127,6 +127,15 @@
             var gridExtensions = ["webp"];
             var sourceDirs = ["images/smart-alarm", "images/smart"];
 
+            function pathKey(src) {
+                try {
+                    var p = new URL(src, window.location.href).pathname;
+                    return p.replace(/\/+/g, "/").toLowerCase();
+                } catch (err) {
+                    return (src || "").replace(/\\/g, "/").toLowerCase();
+                }
+            }
+
             function tryLoadImage(url) {
                 return new Promise(function (resolve) {
                     var img = new Image();
@@ -188,16 +197,26 @@
             async function buildSmartGrid() {
                 if (!grid) return;
                 var added = 0;
-                var seenSrc = Object.create(null);
+                var seenPath = Object.create(null);
                 var candidates = buildCandidateNames();
+                var heroKey = topEl && topEl.src ? pathKey(topEl.src) : "";
+                var heroIsExtinguisher =
+                    (topImage && topImage.toLowerCase().indexOf("extinguisher") !== -1) ||
+                    (heroKey && heroKey.indexOf("extinguisher") !== -1);
 
                 for (var i = 0; i < candidates.length; i += 1) {
-                    var src = await resolveSmartImage(candidates[i]);
+                    var cand = candidates[i];
+                    if (heroIsExtinguisher && cand === "smart") {
+                        continue;
+                    }
+                    var src = await resolveSmartImage(cand);
                     if (!src) {
                         continue;
                     }
-                    if (seenSrc[src]) continue;
-                    seenSrc[src] = true;
+                    var pk = pathKey(src);
+                    if (heroKey && pk === heroKey) continue;
+                    if (seenPath[pk]) continue;
+                    seenPath[pk] = true;
 
                     var figure = document.createElement("figure");
                     figure.className = "smart-grid-item";
