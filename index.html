@@ -47,22 +47,36 @@
         .hero, .metrics-section, .products-section, .outcome-section, .acclaim-section {
             background: #000000 !important;
         }
+
+        /* Hero headline left-aligned (not centred) */
+        #home.hero {
+            justify-content: flex-start !important;
+        }
+        #home.hero .hero-content {
+            text-align: left !important;
+        }
+        #home.hero .hero-title {
+            text-align: left !important;
+            align-items: flex-start !important;
+        }
         
         /* Mobile fallback styles */
         @media (max-width: 768px) {
             .hero {
-                padding: 120px 0 20px 0 !important;
+                padding: 120px 1.25rem 20px 1.25rem !important;
                 min-height: 100vh !important;
+                align-items: stretch !important;
+                justify-content: flex-start !important;
             }
             
             .hero-title {
                 font-size: 2.5rem !important;
-                text-align: center !important;
+                text-align: left !important;
             }
             
             .hero-subtitle {
                 font-size: 1rem !important;
-                text-align: center !important;
+                text-align: left !important;
             }
             
             .divisions-grid {
@@ -115,9 +129,6 @@
         <div class="container">
             <div class="sideways-section">
                 <div class="content-area">
-                    <div class="bento-header-box">
-                        <img src="images/acclaim.png" alt="Acclaim" class="bento-header-brand-img" decoding="async" loading="lazy">
-                    </div>
                     <div class="bento-container">
                 <div class="bento-card fade-in stagger-1">
                     <h2 class="card-title">Consultations</h2>

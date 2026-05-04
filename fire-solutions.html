@@ -280,6 +280,24 @@
                 0 12px 32px rgba(0, 0, 0, 0.35),
                 inset 0 0 0 1px rgba(255, 255, 255, 0.06);
         }
+        /* Sprinkler Systems: single hero image spans full gallery width (replaces prior 3-tile row) */
+        #sprinkler-systems .fire-sprinkler-gallery .fire-section-figure {
+            grid-column: 1 / -1;
+            aspect-ratio: 3 / 1;
+        }
+        /* Hydrants: single image spans full gallery width */
+        #fire-hydrants .fire-hydrant-gallery .fire-section-figure {
+            grid-column: 1 / -1;
+            aspect-ratio: 3 / 1;
+        }
+        @media (max-width: 480px) {
+            #sprinkler-systems .fire-sprinkler-gallery .fire-section-figure {
+                aspect-ratio: 16 / 9;
+            }
+            #fire-hydrants .fire-hydrant-gallery .fire-section-figure {
+                aspect-ratio: 16 / 9;
+            }
+        }
         .fire-extinguisher-gallery .fire-section-figure img,
         .fire-sprinkler-gallery .fire-section-figure img,
         .fire-hydrant-gallery .fire-section-figure img,
@@ -470,29 +488,11 @@
                 <figure class="fire-section-figure">
                     <img src="images/extinguishers/extinguisher-red.png" alt="Red portable fire extinguisher" decoding="async" loading="lazy">
                 </figure>
-                <figure class="fire-section-figure">
-                    <img src="images/extinguishers/extinguisher3.jpeg" alt="Fire extinguisher product" decoding="async" loading="lazy">
-                </figure>
-                <figure class="fire-section-figure">
-                    <img src="images/extinguishers/extinguisher4.jpeg" alt="Fire extinguisher product" decoding="async" loading="lazy">
-                </figure>
-                <figure class="fire-section-figure">
-                    <img src="images/extinguishers/extinguisher5.jpeg" alt="Fire extinguisher product" decoding="async" loading="lazy">
-                </figure>
-                <figure class="fire-section-figure">
-                    <img src="images/extinguishers/extinguisher6.jpeg" alt="Fire extinguisher product" decoding="async" loading="lazy">
-                </figure>
             </div>
         </section>
         <section id="sprinkler-systems" class="fire-section">
             <h2>Sprinkler Systems</h2>
             <div class="fire-sprinkler-gallery" role="group" aria-label="Sprinkler system products">
-                <figure class="fire-section-figure">
-                    <img src="images/sprinklers/sprinkler.jpeg" alt="Fire suppression and sprinkler system equipment" decoding="async" loading="lazy">
-                </figure>
-                <figure class="fire-section-figure">
-                    <img src="images/sprinklers/sprinkler1.jpeg" alt="Sprinkler system equipment" decoding="async" loading="lazy">
-                </figure>
                 <figure class="fire-section-figure">
                     <img src="images/sprinklers/sprinkler2.jpeg" alt="Sprinkler system equipment" decoding="async" loading="lazy">
                 </figure>
@@ -503,9 +503,6 @@
             <div class="fire-hydrant-gallery" role="group" aria-label="Hydrant and water supply products">
                 <figure class="fire-section-figure">
                     <img src="images/hydrants/hydrant.jpeg" alt="Fire hydrant equipment" decoding="async" loading="lazy">
-                </figure>
-                <figure class="fire-section-figure">
-                    <img src="images/hydrants/hydrant1.jpeg" alt="Fire hydrant equipment" decoding="async" loading="lazy">
                 </figure>
             </div>
         </section>
