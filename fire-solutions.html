@@ -235,6 +235,12 @@
         .fire-image-link {
             display: block;
             line-height: 0;
+            cursor: pointer;
+        }
+        .fire-image-link:hover img,
+        .fire-image-link:focus-visible img {
+            transform: scale(1.015);
+            transition: transform 0.2s ease;
         }
         .fire-section .fire-section-figure img {
             width: 100%;
@@ -585,7 +591,7 @@
             <h2>Extinguishers</h2>
             <div class="fire-extinguisher-gallery" role="group" aria-label="Fire extinguisher products">
                 <figure class="fire-section-figure">
-                    <a href="fire-smart-gallery.html?top=images%2Fextinguishers%2Fextinguisher-text.png" class="fire-image-link" aria-label="Open extinguisher image gallery">
+                    <a href="fire-smart-gallery.html?top=images%2Fextinguishers%2Fextinguisher-text.png" class="fire-image-link" aria-label="Open extinguisher image gallery" target="_blank" rel="noopener">
                         <img src="images/extinguishers/extinguisher-text.png" alt="Portable fire extinguisher with product labeling" decoding="async" loading="lazy">
                     </a>
                 </figure>
