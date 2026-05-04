@@ -97,8 +97,9 @@
     <nav class="main-nav">
         <div class="nav-container">
             <div class="nav-logo">
-                <img src="images/final-logo.png" alt="Robur Mining Solutions" class="logo-image" fetchpriority="high" decoding="async" loading="eager">
-                <a href="#home" class="nav-link">Home</a>
+                <a href="#home" class="logo-home-link nav-link" aria-label="Robur Mining Solutions — top of page">
+                    <img src="images/final-logo.png" alt="Robur Mining Solutions" class="logo-image" fetchpriority="high" decoding="async" loading="eager">
+                </a>
             </div>
             <div class="nav-links">
                 <a href="#metrics" class="nav-link">Metrics</a>
@@ -238,15 +239,17 @@
         </div>
     </section>
 
-    <!-- Acclaim Section - Header video on top, then testimonials -->
-    <section id="acclaim" class="acclaim-section">
+    <!-- Acclaim — no duplicate page title (nav + aria); sticky branding in sidebar only -->
+    <section id="acclaim" class="acclaim-section" aria-label="Acclaim">
         <div class="container">
-            <div class="acclaim-header-video">
-                <img src="images/acclaim.png" alt="Acclaim" class="acclaim-header-vid" decoding="async" loading="lazy">
-            </div>
-            <div class="sideways-section">
-                <div class="content-area">
-                <div class="acclaim-content-layered">
+            <div class="sideways-section acclaim-sideways">
+                <aside class="acclaim-sidebar" aria-label="Acclaim">
+                    <div class="acclaim-sidebar-visual">
+                        <img src="images/acclaim.png" alt="Acclaim" class="acclaim-sidebar-img" decoding="async" loading="lazy">
+                    </div>
+                </aside>
+                <div class="content-area acclaim-content-col">
+                    <div class="acclaim-content-layered">
                     <div class="acclaim-card fade-in stagger-1">
                         <blockquote>"Great experience, Robur Mining Solutions provides quality products and exceptional customer service."</blockquote>
                         <div class="acclaim-author">
@@ -306,7 +309,7 @@
                             <span>CHIEF EXECUTIVE OFFICER ZIMBUILD</span>
                         </div>
                     </div>
-                </div>
+                    </div>
                     <a href="#about" class="section-cta">Learn more</a>
                 </div>
             </div>
@@ -386,10 +389,6 @@
             </div>
         </div>
     </section>
-
-    
-
-    
 
     <!-- Floating More Button -->
     <div class="floating-more">
@@ -483,26 +482,26 @@
     </script>
 
     <script>
-        // Function to wrap blockquote text into line-by-line spans for true line-by-line translucency
+        // Wrap blockquote into .blockquote-line spans; restore from data-original-quote on resize
         function wrapBlockquoteLines() {
             const blockquotes = document.querySelectorAll('.acclaim-section blockquote');
             blockquotes.forEach(blockquote => {
-                // Check if already wrapped
-                if (blockquote.dataset.wrapped === 'true') return;
-                
-                let originalText = blockquote.textContent.trim();
-                // Remove leading and trailing quotes if present (both double and single quotes)
-                originalText = originalText.replace(/^["'"]+|["'"]+$/g, '');
-                originalText = originalText.replace(/^['']+|['']+$/g, '');
-                const words = originalText.split(' ');
-                
-                // Get computed styles for accurate measurement
+                if (!blockquote.dataset.originalQuote) {
+                    blockquote.dataset.originalQuote = blockquote.textContent.trim();
+                } else {
+                    blockquote.textContent = blockquote.dataset.originalQuote;
+                }
+
+                let inner = blockquote.dataset.originalQuote;
+                inner = inner.replace(/^[\u0022\u0027\u201c\u201d\u2018\u2019]+|[\u0022\u0027\u201c\u201d\u2018\u2019]+$/g, '').trim();
+                const words = inner.split(/\s+/).filter(Boolean);
+                if (!words.length) return;
+
                 const computedStyle = window.getComputedStyle(blockquote);
-                const containerWidth = blockquote.offsetWidth || blockquote.parentElement.offsetWidth || 600;
+                const containerWidth = Math.max(120, blockquote.offsetWidth || blockquote.parentElement.offsetWidth || 600);
                 const fontSize = parseFloat(computedStyle.fontSize) || 16;
                 const fontFamily = computedStyle.fontFamily;
-                
-                // Create a temporary element to measure text width
+
                 const measureEl = document.createElement('span');
                 measureEl.style.position = 'absolute';
                 measureEl.style.visibility = 'hidden';
@@ -510,48 +509,40 @@
                 measureEl.style.fontSize = fontSize + 'px';
                 measureEl.style.fontFamily = fontFamily;
                 document.body.appendChild(measureEl);
-                
-                // Clear blockquote and rebuild with wrapped lines
-                blockquote.innerHTML = '';
-                
-                let currentLine = document.createElement('span');
-                currentLine.className = 'blockquote-line';
-                currentLine.style.display = 'block';
-                currentLine.style.margin = '0';
-                currentLine.style.padding = '0';
-                
-                let currentLineText = '';
-                
-                words.forEach((word, index) => {
-                    const testText = currentLineText + (currentLineText ? ' ' : '') + word;
-                    measureEl.textContent = testText;
-                    const textWidth = measureEl.offsetWidth;
-                    
-                    if (textWidth > containerWidth && currentLineText) {
-                        // Current line is full, start new line
-                        currentLine.textContent = currentLineText;
-                        blockquote.appendChild(currentLine);
-                        
-                        currentLine = document.createElement('span');
-                        currentLine.className = 'blockquote-line';
-                        currentLine.style.display = 'block';
-                        currentLine.style.margin = '0';
-                        currentLine.style.padding = '0';
-                        currentLineText = word;
+
+                const lineStrings = [];
+                let cur = '';
+                words.forEach(word => {
+                    const candidate = cur + (cur ? ' ' : '') + word;
+                    const onFirstLineOfQuote = lineStrings.length === 0;
+                    const measureStr = (onFirstLineOfQuote ? '\u201c' : '') + candidate;
+                    measureEl.textContent = measureStr;
+                    if (measureEl.offsetWidth > containerWidth && cur) {
+                        lineStrings.push(cur);
+                        cur = word;
                     } else {
-                        currentLineText = testText;
+                        cur = candidate;
                     }
                 });
-                
-                // Add the last line
-                if (currentLineText) {
-                    currentLine.textContent = currentLineText;
-                    blockquote.appendChild(currentLine);
-                }
-                
-                // Clean up
+                if (cur) lineStrings.push(cur);
+
                 document.body.removeChild(measureEl);
-                
+
+                const last = lineStrings.length - 1;
+                const decorated = lineStrings.map((s, i) => {
+                    if (lineStrings.length === 1) return '\u201c' + s + '\u201d';
+                    if (i === 0) return '\u201c' + s;
+                    if (i === last) return s + '\u201d';
+                    return s;
+                });
+
+                blockquote.innerHTML = '';
+                decorated.forEach(text => {
+                    const span = document.createElement('span');
+                    span.className = 'blockquote-line';
+                    span.textContent = text;
+                    blockquote.appendChild(span);
+                });
                 blockquote.dataset.wrapped = 'true';
             });
         }
@@ -778,7 +769,9 @@
             navLinks.forEach(navLink => {
                 // Check if already wrapped
                 if (navLink.dataset.wrapped === 'true') return;
-                
+                /* Logo link has no text — only image; never replace innerHTML */
+                if (navLink.querySelector('img')) return;
+
                 const originalText = navLink.textContent.trim();
                 const words = originalText.split(' ');
                 
@@ -902,7 +895,7 @@
         // Highlight active nav link based on scroll position
         function updateActiveNavLink() {
             const sections = document.querySelectorAll('section[id]');
-            const navLinks = document.querySelectorAll('.nav-link');
+            const navLinks = document.querySelectorAll('.main-nav .nav-link');
             const scrollPosition = window.scrollY + 150; // Offset for header height
 
             sections.forEach(section => {

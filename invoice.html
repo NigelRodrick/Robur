@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice — Robur Mining Solutions | Fidinsky Tech Solutions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --fid-ink: #0f172a;
+            --fid-deep: #0c4a6e;
+            --fid-blue: #0369a1;
+            --fid-bright: #0284c7;
+            --fid-light: #e0f2fe;
+            --fid-sky: #f0f9ff;
+            --fid-white: #ffffff;
+            --fid-muted: #64748b;
+            --fid-line: #bae6fd;
+            --fid-accent: #0369a1;
+            --shadow: 0 4px 24px rgba(12, 74, 110, 0.12), 0 1px 3px rgba(15, 23, 42, 0.06);
+            --radius: 12px;
+            --radius-sm: 8px;
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Outfit", system-ui, sans-serif;
+            font-size: 15px;
+            line-height: 1.55;
+            color: var(--fid-ink);
+            background: linear-gradient(165deg, var(--fid-sky) 0%, var(--fid-white) 42%, var(--fid-light) 100%);
+            padding: 2rem 1rem 3rem;
+        }
+        .shell {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .brand-bar {
+            background: linear-gradient(135deg, var(--fid-deep) 0%, var(--fid-blue) 48%, var(--fid-bright) 100%);
+            color: var(--fid-white);
+            border-radius: var(--radius);
+            padding: 1.75rem 1.75rem 1.5rem;
+            margin-bottom: 1.25rem;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        .brand-bar::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 120% 80% at 100% 0%, rgba(255,255,255,0.18) 0%, transparent 55%);
+            pointer-events: none;
+        }
+        .brand-inner {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 1rem 1.5rem;
+        }
+        .brand-name {
+            margin: 0;
+            font-size: clamp(1.35rem, 3.5vw, 1.65rem);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.15;
+        }
+        .brand-tag {
+            margin: 0.35rem 0 0;
+            font-size: 0.82rem;
+            font-weight: 500;
+            opacity: 0.92;
+            letter-spacing: 0.04em;
+        }
+        .invoice-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            border-radius: 999px;
+            padding: 0.45rem 1rem;
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+        }
+        .invoice {
+            background: var(--fid-white);
+            border: 1px solid var(--fid-line);
+            border-radius: var(--radius);
+            padding: 2rem 1.75rem 2.25rem;
+            box-shadow: var(--shadow);
+        }
+        .invoice-title-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 0.75rem 1rem;
+            margin-bottom: 1.75rem;
+            padding-bottom: 1.25rem;
+            border-bottom: 2px solid var(--fid-light);
+        }
+        .invoice-title-row h1 {
+            margin: 0;
+            font-size: clamp(1.65rem, 4vw, 2rem);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            color: var(--fid-deep);
+        }
+        .invoice-title-row .subtitle {
+            margin: 0;
+            font-size: 0.92rem;
+            color: var(--fid-muted);
+            font-weight: 500;
+            max-width: 22rem;
+            text-align: right;
+        }
+        @media (max-width: 560px) {
+            .invoice-title-row .subtitle { text-align: left; }
+        }
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.75rem;
+        }
+        @media (max-width: 520px) {
+            .meta-grid { grid-template-columns: 1fr; }
+        }
+        .meta-card {
+            background: linear-gradient(180deg, var(--fid-sky) 0%, var(--fid-white) 100%);
+            border: 1px solid var(--fid-line);
+            border-radius: var(--radius-sm);
+            padding: 1rem 1.1rem;
+        }
+        .meta-card dt {
+            margin: 0 0 0.35rem;
+            font-size: 0.68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--fid-blue);
+        }
+        .meta-card dd {
+            margin: 0;
+            font-weight: 600;
+            font-size: 0.98rem;
+            color: var(--fid-ink);
+        }
+        .table-wrap {
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--fid-line);
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0;
+            font-size: 0.92rem;
+        }
+        thead {
+            background: linear-gradient(180deg, var(--fid-deep) 0%, var(--fid-blue) 100%);
+            color: var(--fid-white);
+        }
+        th {
+            text-align: left;
+            font-size: 0.68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 0.85rem 1rem;
+            border: none;
+        }
+        th:last-child,
+        td:last-child {
+            text-align: right;
+        }
+        tbody tr:nth-child(even) {
+            background: var(--fid-sky);
+        }
+        tbody tr:nth-child(odd) {
+            background: var(--fid-white);
+        }
+        td {
+            padding: 0.65rem 1rem;
+            border-bottom: 1px solid var(--fid-line);
+            vertical-align: top;
+        }
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+        .page-name {
+            font-weight: 600;
+            color: var(--fid-ink);
+        }
+        .page-file {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--fid-muted);
+            margin-top: 0.15rem;
+        }
+        tfoot tr {
+            background: linear-gradient(90deg, var(--fid-light) 0%, var(--fid-white) 100%) !important;
+        }
+        tfoot td {
+            border-bottom: none;
+            padding: 1rem 1rem 1.1rem;
+            font-weight: 600;
+        }
+        tfoot .total-label {
+            text-align: right;
+            padding-right: 0.5rem;
+            font-size: 0.95rem;
+            color: var(--fid-deep);
+        }
+        tfoot .total-amount {
+            font-size: 1.45rem;
+            font-weight: 700;
+            color: var(--fid-blue);
+            letter-spacing: -0.02em;
+        }
+        .notes {
+            margin: 0;
+            padding: 1.1rem 1.15rem;
+            background: var(--fid-sky);
+            border: 1px solid var(--fid-line);
+            border-radius: var(--radius-sm);
+            font-size: 0.86rem;
+            color: var(--fid-muted);
+            line-height: 1.6;
+        }
+        .notes strong {
+            color: var(--fid-deep);
+            font-weight: 600;
+        }
+        .page-footer {
+            margin-top: 1.75rem;
+            text-align: center;
+            font-size: 0.78rem;
+            color: var(--fid-muted);
+            font-weight: 500;
+        }
+        .page-footer span {
+            color: var(--fid-blue);
+            font-weight: 600;
+        }
+        @media print {
+            body {
+                background: #fff;
+                padding: 0;
+            }
+            .brand-bar {
+                break-inside: avoid;
+                box-shadow: none;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .invoice {
+                box-shadow: none;
+                border: 1px solid #ccc;
+            }
+            .page-footer { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="shell">
+        <header class="brand-bar" aria-label="Fidinsky Tech Solutions">
+            <div class="brand-inner">
+                <div>
+                    <p class="brand-name">Fidinsky Tech Solutions</p>
+                    <p class="brand-tag">Web &amp; software · clear delivery · dependable support</p>
+                </div>
+                <span class="invoice-badge">Invoice</span>
+            </div>
+        </header>
+
+        <article class="invoice">
+            <div class="invoice-title-row">
+                <h1>Robur Mining Solutions</h1>
+                <p class="subtitle">Web development — delivered pages for the Robur website</p>
+            </div>
+
+            <dl class="meta-grid">
+                <div class="meta-card">
+                    <dt>Bill to</dt>
+                    <dd>Robur Mining Solutions</dd>
+                </div>
+                <div class="meta-card">
+                    <dt>Prepared by</dt>
+                    <dd>Fidinsky Tech Solutions</dd>
+                </div>
+                <div class="meta-card">
+                    <dt>Invoice #</dt>
+                    <dd>ROBUR-WEB-2026-001</dd>
+                </div>
+                <div class="meta-card">
+                    <dt>Date</dt>
+                    <dd>4 May 2026</dd>
+                </div>
+            </dl>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Description</th>
+                            <th>Qty</th>
+                            <th>Rate (USD)</th>
+                            <th>Amount (USD)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <span class="page-name">Home</span>
+                                <span class="page-file">index.html</span>
+                            </td>
+                            <td>1</td>
+                            <td>200.00</td>
+                            <td>200.00</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="page-name">About</span>
+                                <span class="page-file">about.html</span>
+                            </td>
+                            <td>1</td>
+                            <td>200.00</td>
+                            <td>200.00</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="page-name">Who we are</span>
+                                <span class="page-file">who-we-are.html</span>
+                            </td>
+                            <td>1</td>
+                            <td>200.00</td>
+                            <td>200.00</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="page-name">Contacts</span>
+                                <span class="page-file">contacts.html</span>
+                            </td>
+                            <td>1</td>
+                            <td>200.00</td>
+                            <td>200.00</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="page-name">Investment opportunities</span>
+                                <span class="page-file">investment-opportunities.html</span>
+                            </td>
+                            <td>1</td>
+                            <td>200.00</td>
+                            <td>200.00</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="page-name">Fire solutions</span>
+                                <span class="page-file">fire-solutions.html</span>
+                            </td>
+                            <td>1</td>
+                            <td>200.00</td>
+                            <td>200.00</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="page-name">Fluid solutions</span>
+                                <span class="page-file">fluid-solutions.html</span>
+                            </td>
+                            <td>1</td>
+                            <td>200.00</td>
+                            <td>200.00</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="page-name">Strata solutions</span>
+                                <span class="page-file">strata-solutions.html</span>
+                            </td>
+                            <td>1</td>
+                            <td>200.00</td>
+                            <td>200.00</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="page-name">Mining technologies</span>
+                                <span class="page-file">mining-technologies.html</span>
+                            </td>
+                            <td>1</td>
+                            <td>200.00</td>
+                            <td>200.00</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="page-name">Drilling tools</span>
+                                <span class="page-file">drilling-tools.html</span>
+                            </td>
+                            <td>1</td>
+                            <td>200.00</td>
+                            <td>200.00</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3" class="total-label">Total due (USD)</td>
+                            <td class="total-amount">2,000.00</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+            <p class="notes">
+                <strong>Terms:</strong> Net 30 days. Each line is one delivered webpage at <strong>USD 200</strong> for work within the Robur Mining Solutions website scope. Update invoice number, dates, tax, or payment instructions before issuing.
+            </p>
+        </article>
+
+        <p class="page-footer">Print-ready · <span>Fidinsky Tech Solutions</span> · Open in browser → Print → Save as PDF</p>
+    </div>
+</body>
+</html>
