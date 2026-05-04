@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fire Image Gallery - Robur Mining Solutions</title>
+    <link rel="stylesheet" href="web-styles.css">
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: #0f0705;
+            color: #fff;
+            font-family: var(--font-default);
+        }
+        .smart-page {
+            width: 100%;
+            box-sizing: border-box;
+            padding: clamp(1.25rem, 3vw, 2rem);
+            display: flex;
+            flex-direction: column;
+            gap: clamp(1rem, 2.25vw, 1.75rem);
+            align-items: center;
+        }
+        .top-picked {
+            margin: 0;
+            width: min(22rem, 92vw);
+            aspect-ratio: 1 / 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+            background: rgba(255, 255, 255, 0.03);
+        }
+        .top-picked img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .smart-grid {
+            width: 100%;
+            max-width: min(72rem, 100%);
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: clamp(0.65rem, 1.75vw, 1.15rem);
+        }
+        .smart-grid-item {
+            margin: 0;
+            aspect-ratio: 1 / 1;
+            border-radius: clamp(4px, 1vw, 10px);
+            overflow: hidden;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+            background: rgba(255, 255, 255, 0.03);
+        }
+        .smart-grid-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        @media (max-width: 900px) {
+            .smart-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+        @media (max-width: 560px) {
+            .smart-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <main class="smart-page">
+        <figure class="top-picked">
+            <img id="pickedTopImage" src="images/extinguishers/extinguisher-text.png" alt="Selected extinguisher image">
+        </figure>
+
+        <section id="smartGrid" class="smart-grid" aria-label="Smart image gallery"></section>
+    </main>
+
+    <script>
+        (function () {
+            var params = new URLSearchParams(window.location.search);
+            var topImage = params.get('top');
+            var topEl = document.getElementById('pickedTopImage');
+            var grid = document.getElementById('smartGrid');
+            if (topImage && topEl) {
+                topEl.src = topImage;
+            }
+
+            var extensions = ["jpg", "jpeg", "png", "webp"];
+            var maxSmart = 7;
+
+            function tryLoadImage(url) {
+                return new Promise(function (resolve) {
+                    var img = new Image();
+                    img.onload = function () { resolve(url); };
+                    img.onerror = function () { resolve(null); };
+                    img.src = url;
+                });
+            }
+
+            async function resolveSmartImage(idx) {
+                for (var i = 0; i < extensions.length; i += 1) {
+                    var candidate = "images/smart-alarm/smart" + idx + "." + extensions[i];
+                    var hit = await tryLoadImage(candidate);
+                    if (hit) return hit;
+                }
+                return null;
+            }
+
+            async function buildSmartGrid() {
+                if (!grid) return;
+                for (var i = 1; i <= maxSmart; i += 1) {
+                    var src = await resolveSmartImage(i);
+                    if (!src) continue;
+
+                    var figure = document.createElement("figure");
+                    figure.className = "smart-grid-item";
+
+                    var img = document.createElement("img");
+                    img.src = src;
+                    img.alt = "Smart image " + i;
+                    img.loading = "lazy";
+
+                    figure.appendChild(img);
+                    grid.appendChild(figure);
+                }
+            }
+
+            buildSmartGrid();
+        })();
+    </script>
+</body>
+</html>
