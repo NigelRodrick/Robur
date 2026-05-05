@@ -255,6 +255,22 @@
             line-height: 0;
             cursor: pointer;
         }
+        /* Full-tile hit target: global web-styles add ::after to .html links unless .fire-image-link is excluded */
+        .fire-page .fire-section-figure:has(> .fire-image-link) {
+            position: relative;
+        }
+        .fire-page .fire-section-figure > .fire-image-link {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            display: block;
+        }
+        .fire-page .fire-section-figure > .fire-image-link img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
         .fire-image-link:hover img,
         .fire-image-link:focus-visible img {
             transform: scale(1.015);
@@ -654,7 +670,9 @@
                     <img src="images/extinguishers/extinguisher1.jpeg" alt="Fire extinguisher product" decoding="async" loading="lazy">
                 </figure>
                 <figure class="fire-section-figure">
-                    <img src="images/extinguishers/extinguisher-red.png" alt="Red portable fire extinguisher" decoding="async" loading="lazy">
+                    <a href="fire-smart-gallery.html?top=images%2Fextinguishers%2Fextinguisher-red.png" class="fire-image-link" aria-label="Open extinguisher image gallery with this product as the header image" target="_blank" rel="noopener">
+                        <img src="images/extinguishers/extinguisher-red.png" alt="Red portable fire extinguisher" decoding="async" loading="lazy">
+                    </a>
                 </figure>
             </div>
         </section>

@@ -17,6 +17,31 @@
                 #7a0c11 100%
             ) fixed;
         }
+        .smart-gallery-back {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 1200;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.46rem 0.88rem;
+            border-radius: 999px;
+            background: rgba(255, 248, 242, 0.12);
+            color: rgba(255, 248, 242, 0.98) !important;
+            text-decoration: none;
+            font-size: 0.84rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            border: 1px solid rgba(255, 235, 224, 0.42);
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+        }
+        .smart-gallery-back:hover {
+            background: rgba(255, 248, 242, 0.2);
+            color: #fff !important;
+        }
         body {
             margin: 0;
             min-height: 100vh;
@@ -132,6 +157,29 @@
         #smartGrid {
             background: transparent;
         }
+        .smart-extinguisher-details {
+            width: 100%;
+            max-width: min(72rem, 100%);
+            margin: 0;
+            padding: 0;
+            border: none;
+            border-radius: clamp(4px, 1vw, 10px);
+            overflow: hidden;
+            background: rgba(0, 0, 0, 0.18);
+            box-shadow:
+                0 12px 32px rgba(0, 0, 0, 0.35),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+            box-sizing: border-box;
+        }
+        .smart-extinguisher-details img {
+            width: 100%;
+            height: auto;
+            max-height: none;
+            display: block;
+            object-fit: contain;
+            object-position: center top;
+            background: transparent;
+        }
         @media (max-width: 900px) {
             .smart-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
         }
@@ -159,12 +207,17 @@
     </style>
 </head>
 <body>
+    <a href="fire-solutions.html" class="smart-gallery-back" id="smartGalleryBack" aria-label="Back to Fire Solutions">← Back</a>
     <main class="smart-page">
         <figure class="top-picked">
             <img id="pickedTopImage" src="images/extinguishers/extinguisher-text.png" alt="Selected extinguisher image">
         </figure>
 
         <section id="smartGrid" class="smart-grid" aria-label="Smart image gallery"></section>
+
+        <figure id="extinguisherDetailsBand" class="smart-extinguisher-details" hidden aria-label="Extinguisher product details">
+            <img id="extinguisherDetailsImg" src="" alt="Extinguisher specifications and product details" decoding="async" loading="lazy">
+        </figure>
 
     </main>
 
@@ -178,8 +231,19 @@
             var topImage = params.get('top');
             var topEl = document.getElementById('pickedTopImage');
             var grid = document.getElementById('smartGrid');
+            var backEl = document.getElementById('smartGalleryBack');
             if (topImage && topEl) {
                 topEl.src = topImage;
+            }
+            if (backEl) {
+                var t = (topImage || "").toLowerCase();
+                if (t.indexOf("extinguishers") !== -1) {
+                    backEl.href = "fire-solutions.html#extinguishers";
+                } else if (t.indexOf("smart-alarm") !== -1 || t.indexOf("smart_alarm") !== -1) {
+                    backEl.href = "fire-solutions.html#smart-alarm-systems";
+                } else {
+                    backEl.href = "fire-solutions.html";
+                }
             }
 
             var gridExtensions = ["webp", "jpeg", "jpg"];
@@ -223,6 +287,58 @@
                 return null;
             }
 
+            /* Extinguisher photos originally supplied from Downloads (repo paths) */
+            var extinguisherDownloadsRel = [
+                "images/extinguishers/exting.jpeg",
+                "images/extinguishers/exting1.jpeg",
+                "images/extinguishers/exting2.jpeg",
+                "images/extinguishers/exting3.jpeg",
+                "images/extinguishers/exting4.jpeg"
+            ];
+
+            async function buildExtinguisherDownloadsGrid() {
+                if (!grid) return;
+                grid.setAttribute("aria-label", "Additional extinguisher images");
+                var heroKey = topEl && topEl.src ? pathKey(topEl.src) : "";
+                var added = 0;
+                for (var i = 0; i < extinguisherDownloadsRel.length; i += 1) {
+                    var rel = extinguisherDownloadsRel[i];
+                    var pk = pathKey(rel);
+                    if (heroKey && pk === heroKey) {
+                        continue;
+                    }
+                    var hit = await tryLoadImage(rel);
+                    if (!hit) {
+                        continue;
+                    }
+                    var figure = document.createElement("figure");
+                    figure.className = "smart-grid-item";
+                    var img = document.createElement("img");
+                    img.src = hit;
+                    img.alt = "Extinguisher image " + (added + 1);
+                    img.loading = "lazy";
+                    figure.appendChild(img);
+                    grid.appendChild(figure);
+                    added += 1;
+                }
+                if (added === 0) {
+                    var empty = document.createElement("p");
+                    empty.className = "smart-empty";
+                    empty.textContent = "No additional extinguisher images were found below the header.";
+                    grid.replaceWith(empty);
+                }
+                var detailRel = "images/extinguishers/exting-details.jpeg";
+                var band = document.getElementById("extinguisherDetailsBand");
+                var bandImg = document.getElementById("extinguisherDetailsImg");
+                if (band && bandImg) {
+                    var detailHit = await tryLoadImage(detailRel);
+                    if (detailHit) {
+                        bandImg.src = detailHit;
+                        band.removeAttribute("hidden");
+                    }
+                }
+            }
+
             function buildCandidateNames() {
                 var list = [];
                 var seen = Object.create(null);
@@ -258,6 +374,14 @@
 
             async function buildSmartGrid() {
                 if (!grid) return;
+                /* Extinguisher deep links: header + Downloads extinguisher set below */
+                if (
+                    topImage &&
+                    topImage.toLowerCase().indexOf("extinguishers") !== -1
+                ) {
+                    await buildExtinguisherDownloadsGrid();
+                    return;
+                }
                 var added = 0;
                 var listPosition = 0;
                 var seenPath = Object.create(null);
@@ -319,7 +443,7 @@
                 }
             }
 
-            buildSmartGrid();
+            buildSmartGrid().catch(function () {});
         })();
     </script>
 </body>
