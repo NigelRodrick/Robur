@@ -373,12 +373,17 @@
             }
 
             async function buildSmartGrid() {
+                var tl = (topImage || "").toLowerCase();
+                /* extinguisher-text.png: header image only (no thumb grid or details strip) */
+                if (tl.indexOf("extinguisher-text") !== -1) {
+                    if (grid) grid.remove();
+                    var bandTextOnly = document.getElementById("extinguisherDetailsBand");
+                    if (bandTextOnly) bandTextOnly.remove();
+                    return;
+                }
                 if (!grid) return;
                 /* Extinguisher deep links: header + Downloads extinguisher set below */
-                if (
-                    topImage &&
-                    topImage.toLowerCase().indexOf("extinguishers") !== -1
-                ) {
+                if (tl.indexOf("extinguishers") !== -1) {
                     await buildExtinguisherDownloadsGrid();
                     return;
                 }
