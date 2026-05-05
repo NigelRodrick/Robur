@@ -279,6 +279,7 @@
         .fire-extinguisher-gallery,
         .fire-sprinkler-gallery,
         .fire-hydrant-gallery,
+        .fire-hose-gallery,
         .fire-aerosol-gallery,
         .fire-smart-alarm-gallery,
         .fire-amfes-gallery,
@@ -297,6 +298,7 @@
             .fire-extinguisher-gallery,
             .fire-sprinkler-gallery,
             .fire-hydrant-gallery,
+            .fire-hose-gallery,
             .fire-aerosol-gallery,
             .fire-smart-alarm-gallery,
             .fire-amfes-gallery,
@@ -307,6 +309,7 @@
         .fire-extinguisher-gallery .fire-section-figure,
         .fire-sprinkler-gallery .fire-section-figure,
         .fire-hydrant-gallery .fire-section-figure,
+        .fire-hose-gallery .fire-section-figure,
         .fire-aerosol-gallery .fire-section-figure,
         .fire-smart-alarm-gallery .fire-section-figure,
         .fire-amfes-gallery .fire-section-figure,
@@ -321,22 +324,62 @@
                 0 12px 32px rgba(0, 0, 0, 0.35),
                 inset 0 0 0 1px rgba(255, 255, 255, 0.06);
         }
-        /* Sprinkler Systems: single hero image spans full gallery width (replaces prior 3-tile row) */
+        /* Keep all product tiles at one consistent size */
+        #sprinkler-systems .fire-sprinkler-gallery .fire-section-figure,
+        #fire-hydrants .fire-hydrant-gallery .fire-section-figure,
+        #hose-reels .fire-hose-gallery .fire-section-figure,
+        #smart-alarm-systems .fire-smart-alarm-gallery .fire-section-figure,
+        #fire-services .fire-services-gallery .fire-section-figure {
+            grid-column: auto;
+            aspect-ratio: 1 / 1;
+        }
+        #smart-alarm-systems .fire-smart-alarm-gallery {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        #sprinkler-systems .fire-sprinkler-gallery {
+            grid-template-columns: 1fr;
+        }
         #sprinkler-systems .fire-sprinkler-gallery .fire-section-figure {
             grid-column: 1 / -1;
-            aspect-ratio: 3 / 1;
+            aspect-ratio: 16 / 9;
         }
-        /* Hydrants: single image spans full gallery width */
-        #fire-hydrants .fire-hydrant-gallery .fire-section-figure {
-            grid-column: 1 / -1;
-            aspect-ratio: 3 / 1;
+        .fire-hydrant-hose-pair {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            column-gap: clamp(1rem, 3vw, 2rem);
+            align-items: start;
+            width: 100%;
+            max-width: min(72rem, 100%);
+            margin: 2.5rem auto 0;
+            padding: 0 clamp(0.75rem, 3vw, 1.5rem);
+            box-sizing: border-box;
         }
-        @media (max-width: 480px) {
-            #sprinkler-systems .fire-sprinkler-gallery .fire-section-figure {
-                aspect-ratio: 16 / 9;
-            }
-            #fire-hydrants .fire-hydrant-gallery .fire-section-figure {
-                aspect-ratio: 16 / 9;
+        .fire-hydrant-hose-pair .fire-section {
+            margin-top: 0;
+            padding: 0;
+            width: 100%;
+            max-width: none;
+        }
+        .fire-hydrant-hose-pair .fire-hydrant-gallery,
+        .fire-hydrant-hose-pair .fire-hose-gallery {
+            grid-template-columns: 1fr;
+            max-width: none;
+            padding: 0;
+            min-width: 0;
+        }
+        .fire-hose-placeholder {
+            width: 100%;
+            height: 100%;
+            display: grid;
+            place-items: center;
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+            color: rgba(255, 255, 255, 0.82);
+            background: linear-gradient(140deg, rgba(255, 255, 255, 0.1), rgba(20, 10, 10, 0.35));
+        }
+        @media (max-width: 768px) {
+            .fire-hydrant-hose-pair {
+                grid-template-columns: 1fr;
             }
         }
         /* Aerosol + AMFEs: titles share one row; images row below (AMFE title + picture stacked on the right) */
@@ -394,26 +437,10 @@
                 margin-top: 2.5rem;
             }
         }
-        /* Smart Alarm: two tiles span the same width as three product columns; row height matches a 3-square row */
-        #smart-alarm-systems .fire-smart-alarm-gallery {
-            grid-template-columns: repeat(6, minmax(0, 1fr));
-        }
-        #smart-alarm-systems .fire-smart-alarm-gallery .fire-section-figure {
-            grid-column: span 3;
-            aspect-ratio: 3 / 2;
-        }
-        @media (max-width: 480px) {
-            #smart-alarm-systems .fire-smart-alarm-gallery {
-                grid-template-columns: 1fr;
-            }
-            #smart-alarm-systems .fire-smart-alarm-gallery .fire-section-figure {
-                grid-column: auto;
-                aspect-ratio: 16 / 9;
-            }
-        }
         .fire-extinguisher-gallery .fire-section-figure img,
         .fire-sprinkler-gallery .fire-section-figure img,
         .fire-hydrant-gallery .fire-section-figure img,
+        .fire-hose-gallery .fire-section-figure img,
         .fire-aerosol-gallery .fire-section-figure img,
         .fire-smart-alarm-gallery .fire-section-figure img,
         .fire-amfes-gallery .fire-section-figure img,
@@ -428,22 +455,26 @@
             margin-bottom: 0.35rem;
             padding-bottom: 0.75rem;
         }
-        /* Services: same gallery track width as other rows; full image visible (no crop) */
+        #fire-services .fire-services-gallery {
+            grid-template-columns: 1fr;
+        }
         #fire-services .fire-services-gallery .fire-section-figure {
             grid-column: 1 / -1;
-            aspect-ratio: auto;
-            min-height: 0;
+            aspect-ratio: 16 / 9;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(0, 0, 0, 0.28);
+            background: transparent;
+            border-radius: 0;
+            box-shadow: none;
         }
         #fire-services .fire-services-gallery .fire-section-figure img {
             width: 100%;
-            height: auto;
-            max-height: none;
+            height: 100%;
             object-fit: contain;
             object-position: center;
+            border-radius: 0;
+            box-shadow: none;
         }
         .fire-page-footer {
             margin-top: 2rem;
@@ -600,6 +631,7 @@
                 <a href="#extinguishers" class="nav-link">Extinguishers</a>
                 <a href="#sprinkler-systems" class="nav-link">Sprinkler Systems</a>
                 <a href="#fire-hydrants" class="nav-link">Hydrants</a>
+                <a href="#hose-reels" class="nav-link">Hose Reels</a>
                 <a href="#aerosol-generators" class="nav-link">Aerosol Generators</a>
                 <a href="#amfes" class="nav-link">AMFEs</a>
                 <a href="#smart-alarm-systems" class="nav-link">Smart Alarm Systems</a>
@@ -633,14 +665,24 @@
                 </figure>
             </div>
         </section>
-        <section id="fire-hydrants" class="fire-section">
-            <h2>Hydrants</h2>
-            <div class="fire-hydrant-gallery" role="group" aria-label="Hydrant and water supply products">
-                <figure class="fire-section-figure">
-                    <img src="images/hydrants/hydrant.jpeg" alt="Fire hydrant equipment" decoding="async" loading="lazy">
-                </figure>
-            </div>
-        </section>
+        <div class="fire-hydrant-hose-pair">
+            <section id="fire-hydrants" class="fire-section">
+                <h2>Hydrants</h2>
+                <div class="fire-hydrant-gallery" role="group" aria-label="Hydrant and water supply products">
+                    <figure class="fire-section-figure">
+                        <img src="images/hydrants/hydrant.jpeg" alt="Fire hydrant equipment" decoding="async" loading="lazy">
+                    </figure>
+                </div>
+            </section>
+            <section id="hose-reels" class="fire-section">
+                <h2>Hose Reels</h2>
+                <div class="fire-hose-gallery" role="group" aria-label="Hose reel products">
+                    <figure class="fire-section-figure">
+                        <img src="file:///C:/Users/Admin/Downloads/hose%20reel.jpeg" alt="Hose reel equipment" decoding="async" loading="lazy">
+                    </figure>
+                </div>
+            </section>
+        </div>
         <div class="fire-aerosol-amfe-pair">
             <section class="fire-section fire-aerosol-amfe-pane" aria-labelledby="aerosol-generators">
                 <h2 id="aerosol-generators">Aerosol Generators</h2>

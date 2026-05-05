@@ -132,30 +132,6 @@
         #smartGrid {
             background: transparent;
         }
-        .smart-xsense-wrap {
-            width: 100%;
-            max-width: min(72rem, 100%);
-            margin: clamp(0.5rem, 2vw, 1.25rem) 0 0;
-            padding: 0;
-            border-radius: clamp(4px, 1vw, 10px);
-            overflow: hidden;
-            background: transparent;
-        }
-        .smart-xsense-frame {
-            display: block;
-            width: 100%;
-            min-height: min(720px, 85vh);
-            height: 85vh;
-            max-height: 1400px;
-            border: none;
-            background: #fff;
-        }
-        @media (max-width: 560px) {
-            .smart-xsense-frame {
-                min-height: 60vh;
-                height: 75vh;
-            }
-        }
         @media (max-width: 900px) {
             .smart-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
         }
@@ -167,8 +143,11 @@
             max-width: min(72rem, 100%);
             text-align: center;
             padding: 1.25rem 1rem 1.75rem;
-            margin: 0;
+            margin: 0 auto;
             box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         .smart-page-footnote p {
             margin: 0;
@@ -187,19 +166,10 @@
 
         <section id="smartGrid" class="smart-grid" aria-label="Smart image gallery"></section>
 
-        <div class="smart-xsense-wrap">
-            <iframe
-                class="smart-xsense-frame"
-                title="X-Sense (saved page)"
-                src="images/smart-alarm/xsense.html"
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-            ></iframe>
-        </div>
     </main>
 
-    <footer class="smart-page-footnote" aria-label="Developer credit">
-        <p>Developed by Fidisnky Tech Solutions</p>
+    <footer class="smart-page-footnote" aria-label="Copyright and developer credit">
+        <p>&copy; 2026 Robur Mining Solutions. All rights reserved. Developed by Fidisnky Tech Solutions.</p>
     </footer>
 
     <script>
@@ -289,12 +259,28 @@
             async function buildSmartGrid() {
                 if (!grid) return;
                 var added = 0;
+                var listPosition = 0;
                 var seenPath = Object.create(null);
                 var candidates = buildCandidateNames();
                 var heroKey = topEl && topEl.src ? pathKey(topEl.src) : "";
                 var heroIsExtinguisher =
                     (topImage && topImage.toLowerCase().indexOf("extinguisher") !== -1) ||
                     (heroKey && heroKey.indexOf("extinguisher") !== -1);
+                var useCustomRemovals =
+                    (topImage && topImage.toLowerCase().indexOf("smart-alarm-systems.jpeg") !== -1) ||
+                    (heroKey && heroKey.indexOf("/images/smart-alarm/smart-alarm-systems.jpeg") !== -1);
+                var removedPositions = {
+                    1: true,
+                    2: true,
+                    4: true,
+                    6: true,
+                    8: true,
+                    10: true,
+                    13: true,
+                    14: true,
+                    15: true,
+                    16: true
+                };
 
                 for (var i = 0; i < candidates.length; i += 1) {
                     var cand = candidates[i];
@@ -309,6 +295,8 @@
                     if (heroKey && pk === heroKey) continue;
                     if (seenPath[pk]) continue;
                     seenPath[pk] = true;
+                    listPosition += 1;
+                    if (useCustomRemovals && removedPositions[listPosition]) continue;
 
                     var figure = document.createElement("figure");
                     figure.className = "smart-grid-item";
