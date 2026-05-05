@@ -38,9 +38,31 @@
         .container, .hero-content, .about-content, .services-grid {
             background: transparent !important;
         }
+
+        .division-back {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 1200;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.48rem 0.9rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.12);
+            color: #ffffff !important;
+            text-decoration: none;
+            font-size: 0.86rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+        }
     </style>
 </head>
 <body>
+    <a href="index.html" class="division-back" aria-label="Back to home">← Back</a>
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">

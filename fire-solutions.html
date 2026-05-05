@@ -47,6 +47,27 @@
             font-size: 0.72rem !important;
             text-transform: uppercase;
         }
+        .division-back {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 1200;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.46rem 0.88rem;
+            border-radius: 999px;
+            background: rgba(255, 248, 242, 0.12);
+            color: var(--fire-cream) !important;
+            text-decoration: none;
+            font-size: 0.84rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            border: 1px solid rgba(255, 235, 224, 0.42);
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+        }
         @media (max-width: 768px) {
             body {
                 background-attachment: scroll;
@@ -562,6 +583,7 @@
     </style>
 </head>
 <body>
+    <a href="index.html" class="division-back" aria-label="Back to home">← Back</a>
     <nav class="main-nav fire-solutions-nav" aria-label="Solutions product categories">
         <div class="nav-container">
             <div class="nav-logo">
