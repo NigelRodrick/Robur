@@ -176,14 +176,19 @@
         (function () {
             var params = new URLSearchParams(window.location.search);
             var topImage = params.get('top');
+            var galleryMode = (params.get('gallery') || '').toLowerCase();
+            var isExtinguisherGallery = galleryMode === 'extinguishers';
             var topEl = document.getElementById('pickedTopImage');
             var grid = document.getElementById('smartGrid');
             if (topImage && topEl) {
                 topEl.src = topImage;
+                topEl.alt = isExtinguisherGallery ? 'Selected extinguisher image' : 'Selected gallery image';
             }
 
-            var gridExtensions = ["webp", "jpeg", "jpg"];
-            var sourceDirs = ["images/smart-alarm", "images/smart"];
+            var gridExtensionsSmart = ["webp", "jpeg", "jpg"];
+            var gridExtensionsExtinguisher = ["png", "webp", "jpeg", "jpg"];
+            var smartSourceDirs = ["images/smart-alarm", "images/smart"];
+            var extinguisherSourceDirs = ["images/extinguishers"];
 
             function pathKey(src) {
                 try {
@@ -211,10 +216,10 @@
                     baseName.replace("smart", "smart "),
                     baseName.replace("smart", "smart(") + ")"
                 ];
-                for (var d = 0; d < sourceDirs.length; d += 1) {
+                for (var d = 0; d < smartSourceDirs.length; d += 1) {
                     for (var b = 0; b < baseNames.length; b += 1) {
-                        for (var e = 0; e < gridExtensions.length; e += 1) {
-                            var candidate = sourceDirs[d] + "/" + baseNames[b] + "." + gridExtensions[e];
+                        for (var e = 0; e < gridExtensionsSmart.length; e += 1) {
+                            var candidate = smartSourceDirs[d] + "/" + baseNames[b] + "." + gridExtensionsSmart[e];
                             var hit = await tryLoadImage(candidate);
                             if (hit) return hit;
                         }
@@ -256,19 +261,55 @@
                 return list;
             }
 
+            function buildExtinguisherCandidateNames() {
+                var list = [];
+                var seen = Object.create(null);
+                function pushUnique(name) {
+                    if (!name || seen[name]) return;
+                    seen[name] = true;
+                    list.push(name);
+                }
+                pushUnique("extinguisher-text");
+                pushUnique("extinguisher-red");
+                pushUnique("extinguisher");
+                for (var i = 1; i <= 12; i += 1) {
+                    pushUnique("extinguisher" + i);
+                }
+                return list;
+            }
+
+            async function resolveExtinguisherImage(baseName) {
+                for (var d = 0; d < extinguisherSourceDirs.length; d += 1) {
+                    for (var e = 0; e < gridExtensionsExtinguisher.length; e += 1) {
+                        var candidate = extinguisherSourceDirs[d] + "/" + baseName + "." + gridExtensionsExtinguisher[e];
+                        var hit = await tryLoadImage(candidate);
+                        if (hit) return hit;
+                    }
+                }
+                return null;
+            }
+
+            async function resolveGridImage(baseName) {
+                if (isExtinguisherGallery) {
+                    return resolveExtinguisherImage(baseName);
+                }
+                return resolveSmartImage(baseName);
+            }
+
             async function buildSmartGrid() {
                 if (!grid) return;
                 var added = 0;
                 var listPosition = 0;
                 var seenPath = Object.create(null);
-                var candidates = buildCandidateNames();
+                var candidates = isExtinguisherGallery ? buildExtinguisherCandidateNames() : buildCandidateNames();
                 var heroKey = topEl && topEl.src ? pathKey(topEl.src) : "";
                 var heroIsExtinguisher =
                     (topImage && topImage.toLowerCase().indexOf("extinguisher") !== -1) ||
                     (heroKey && heroKey.indexOf("extinguisher") !== -1);
                 var useCustomRemovals =
-                    (topImage && topImage.toLowerCase().indexOf("smart-alarm-systems.jpeg") !== -1) ||
-                    (heroKey && heroKey.indexOf("/images/smart-alarm/smart-alarm-systems.jpeg") !== -1);
+                    !isExtinguisherGallery &&
+                    ((topImage && topImage.toLowerCase().indexOf("smart-alarm-systems.jpeg") !== -1) ||
+                    (heroKey && heroKey.indexOf("/images/smart-alarm/smart-alarm-systems.jpeg") !== -1));
                 var removedPositions = {
                     1: true,
                     2: true,
@@ -284,10 +325,10 @@
 
                 for (var i = 0; i < candidates.length; i += 1) {
                     var cand = candidates[i];
-                    if (heroIsExtinguisher && cand === "smart") {
+                    if (!isExtinguisherGallery && heroIsExtinguisher && cand === "smart") {
                         continue;
                     }
-                    var src = await resolveSmartImage(cand);
+                    var src = await resolveGridImage(cand);
                     if (!src) {
                         continue;
                     }
@@ -303,7 +344,7 @@
 
                     var img = document.createElement("img");
                     img.src = src;
-                    img.alt = "Smart image " + (i + 1);
+                    img.alt = isExtinguisherGallery ? ("Extinguisher image " + (added + 1)) : ("Smart image " + (i + 1));
                     img.loading = "lazy";
 
                     figure.appendChild(img);
@@ -314,7 +355,9 @@
                 if (added === 0) {
                     var empty = document.createElement("p");
                     empty.className = "smart-empty";
-                    empty.textContent = "No .webp smart images were found in images/smart-alarm or images/smart.";
+                    empty.textContent = isExtinguisherGallery
+                        ? "No extinguisher images were found in images/extinguishers."
+                        : "No .webp smart images were found in images/smart-alarm or images/smart.";
                     grid.replaceWith(empty);
                 }
             }
