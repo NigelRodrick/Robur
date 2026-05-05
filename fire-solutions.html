@@ -53,10 +53,15 @@
             }
         }
         .fire-solutions-nav.main-nav {
-            background: rgba(16, 6, 3, 0.94) !important;
+            background: rgba(74, 14, 14, 0.95) !important;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border-bottom: none;
+            left: 50%;
+            right: auto;
+            transform: translateX(-50%);
+            width: min(96vw, 1180px);
+            border-radius: 0 0 14px 14px;
         }
         .fire-solutions-nav .nav-logo {
             margin-right: 0;
@@ -535,6 +540,10 @@
             }
         }
         @media (max-width: 768px) {
+            .fire-solutions-nav.main-nav {
+                width: min(98vw, 760px);
+                border-radius: 0 0 10px 10px;
+            }
             .fire-solutions-nav .fire-solutions-nav-logo-wrap {
                 height: 52px;
                 max-width: min(200px, 55vw);
