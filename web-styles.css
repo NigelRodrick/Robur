@@ -716,6 +716,14 @@ a[href$=".html"]:not([href^="#"]):not(.nav-link):not(.fire-image-link):not(.smar
     }
     .products-section .container { padding-left: 2rem; }
     .products-section .sideways-section { padding-left: 20px; margin-left: 0; }
+    .acclaim-branding-row {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .acclaim-section .sideways-section.acclaim-sideways {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
     .products-sidebar-video { margin-left: 0; }
     .outcome-sidebar-video {
         position: static;
@@ -886,7 +894,7 @@ section {
     border-radius: 12px;
     overflow: hidden;
     transition: transform 0.25s ease-out;
-    box-shadow: var(--shadow-card-float);
+    box-shadow: none;
 }
 .products-section .products-video {
     width: 100%;
@@ -1170,7 +1178,7 @@ section {
 
 /* ========== Acclaim ========== */
 .acclaim-section {
-    padding: 2.5rem 0 4rem;
+    padding: 4rem 0;
     background: #000;
 }
 .acclaim-section .container {
@@ -1179,6 +1187,34 @@ section {
     background: transparent;
 }
 .acclaim-section .sideways-section { background: transparent; }
+/* Centered top branding — same panel max-width as Products / Outcome (revert-era layout) */
+.acclaim-branding-row {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto clamp(1.75rem, 3.5vw, 2.75rem);
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+.acclaim-branding-row .acclaim-sidebar-visual {
+    flex: 0 1 900px;
+    width: 100%;
+    max-width: 900px;
+}
+/* Testimonials block centered under hero */
+.acclaim-section .sideways-section.acclaim-sideways {
+    align-items: flex-start;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+.acclaim-section .acclaim-testimonials {
+    max-width: min(40rem, 100%);
+    margin-left: auto;
+    margin-right: auto;
+}
 .acclaim-sideways {
     position: relative;
     z-index: 1;
@@ -1209,8 +1245,15 @@ section {
     height: auto;
     max-height: 90vh;
     object-fit: contain;
+    object-position: center;
     display: block;
     border-radius: 12px;
+}
+/* Match Products branding image sizing (img.products-video) */
+.acclaim-section img.acclaim-sidebar-img {
+    height: auto;
+    max-height: 90vh;
+    object-fit: contain;
 }
 /* Testimonials: one card per row (single column), readable line length on large screens */
 .acclaim-content-col {

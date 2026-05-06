@@ -10,10 +10,10 @@ document.addEventListener('DOMContentLoaded', function() {
         outcomeVideo.muted = true;
         outcomeVideo.play().catch(function() {});
     }
-    var acclaimHeaderVid = document.querySelector('.acclaim-header-vid');
-    if (acclaimHeaderVid && acclaimHeaderVid.tagName === 'VIDEO') {
-        acclaimHeaderVid.muted = true;
-        acclaimHeaderVid.play().catch(function() {});
+    var acclaimSidebarVid = document.querySelector('.acclaim-sidebar-img');
+    if (acclaimSidebarVid && acclaimSidebarVid.tagName === 'VIDEO') {
+        acclaimSidebarVid.muted = true;
+        acclaimSidebarVid.play().catch(function() {});
     }
 
     // Division card videos: defer download/play until near viewport (preload="none" on index)
