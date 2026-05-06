@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var productsLastItem = document.querySelector('.products-section .products-content-layered .product-item:last-child');
     var outcomeSection = document.querySelector('.outcome-section');
     var outcomeSidebar = document.querySelector('.outcome-sidebar-video');
-    var outcomeLastItem = document.querySelector('.outcome-section .outcome-content-layered .outcome-item:nth-child(2)');
+    var outcomeLastItem = document.querySelector('.outcome-section .outcome-content-layered--beginner .outcome-item:last-child');
     var mainNav = document.querySelector('.main-nav');
     var ticking = false;
     function checkStickySections() {
@@ -66,27 +66,17 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
         if (outcomeSidebar && outcomeSection) {
-            var ocRect = outcomeSidebar.getBoundingClientRect();
-            var ocSecRect = outcomeSection.getBoundingClientRect();
+            var orRect = outcomeSidebar.getBoundingClientRect();
+            var orSecRect = outcomeSection.getBoundingClientRect();
             var lastOutcomeRect = outcomeLastItem ? outcomeLastItem.getBoundingClientRect() : null;
-            var navBottom = mainNav ? mainNav.getBoundingClientRect().bottom : 100;
-            // Keep outcome video/header in sticky "center" while the last outcome card
-            // has not yet fully passed the stickPoint.
             var lastOutcomeLeaving = lastOutcomeRect
-                ? lastOutcomeRect.bottom <= stickPoint
-                : ocSecRect.bottom <= 0;
-            // Hide outcome video once the last outcome card is fully inside/behind header.
-            var shouldHideOutcome = lastOutcomeRect
-                ? lastOutcomeRect.bottom <= navBottom
-                : ocSecRect.bottom <= navBottom;
-            if (ocRect.top <= stickPoint && ocSecRect.bottom > 0 && !lastOutcomeLeaving) {
+                ? lastOutcomeRect.top <= stickPoint
+                : orSecRect.bottom <= 0;
+            if (orRect.top <= stickPoint && orSecRect.bottom > 0 && !lastOutcomeLeaving) {
                 outcomeSidebar.classList.add('is-stuck');
             } else {
                 outcomeSidebar.classList.remove('is-stuck');
             }
-            outcomeSidebar.style.transition = 'opacity 0.25s ease';
-            outcomeSidebar.style.opacity = shouldHideOutcome ? '0' : '1';
-            outcomeSidebar.style.pointerEvents = shouldHideOutcome ? 'none' : '';
         }
         ticking = false;
     }
@@ -186,11 +176,11 @@ document.addEventListener('DOMContentLoaded', () => {
         productsPairObserver.observe(productsSideways);
     }
 
-    // Outcome: make video and first outcome item appear together (like products)
-    const outcomeSideways = document.querySelector('.outcome-section .sideways-section');
+    // Outcome: sidebar image and first block appear together (Beginner-style pair)
+    const outcomeShowcase = document.querySelector('.outcome-section .outcome-showcase-component');
     const outcomeSidebarVideo = document.querySelector('.outcome-section .outcome-sidebar-video');
-    const firstOutcomeItem = document.querySelector('.outcome-section .outcome-content-layered .outcome-item:nth-child(1)');
-    if (outcomeSideways && outcomeSidebarVideo && firstOutcomeItem) {
+    const firstOutcomeItem = document.querySelector('.outcome-section .outcome-content-layered--beginner .outcome-item:nth-child(1)');
+    if (outcomeShowcase && outcomeSidebarVideo && firstOutcomeItem) {
         const outcomePairObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -199,8 +189,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
-        outcomePairObserver.observe(outcomeSideways);
+        outcomePairObserver.observe(outcomeShowcase);
     }
+
 });
 
 // Contact form handling
@@ -271,7 +262,7 @@ const enhancedObserver = new IntersectionObserver((entries) => {
             
             // Add staggered animation for grid items
             if (entry.target.classList.contains('division-card') || 
-                entry.target.classList.contains('acclaim-card') ||
+                entry.target.classList.contains('acclaim-quote-item') ||
                 entry.target.classList.contains('metric-item') ||
                 entry.target.classList.contains('contact-item')) {
                 const index = Array.from(entry.target.parentNode.children).indexOf(entry.target);
@@ -284,7 +275,7 @@ const enhancedObserver = new IntersectionObserver((entries) => {
 // Observe all enhanced elements
 document.addEventListener('DOMContentLoaded', () => {
     /* Exclude .product-item — was breaking motion; float now uses script sectionFloatRaf */
-    const enhancedElements = document.querySelectorAll('.division-card, .acclaim-card, .metric-item, .contact-item, .bento-card, .section-header');
+    const enhancedElements = document.querySelectorAll('.division-card, .acclaim-quote-item, .metric-item, .contact-item, .bento-card, .section-header');
     
     enhancedElements.forEach(el => {
         el.style.opacity = '0';
@@ -293,40 +284,43 @@ document.addEventListener('DOMContentLoaded', () => {
         enhancedObserver.observe(el);
     });
 
-    // Acclaim comment emphasis - scale up whichever acclaim is in the viewport center as you scroll
-    const acclaimComments = document.querySelectorAll('.acclaim-card blockquote');
+    // Acclaim: grow quotes as their vertical position aligns with the sticky header column (branding + CTA)
+    const acclaimComments = document.querySelectorAll('.acclaim-quote-item .acclaim-quote-text');
+    const acclaimHeaderEl = document.querySelector('.acclaim-quotes-right-inner');
 
-    if (acclaimComments.length > 0) {
+    if (acclaimComments.length > 0 && acclaimHeaderEl) {
         acclaimComments.forEach(blockquote => {
-            blockquote.style.transition = 'transform 0.4s ease, font-size 0.4s ease';
+            blockquote.style.transition = 'transform 0.35s ease';
+            blockquote.style.transformOrigin = 'left center';
         });
 
         const emphasizeCommentsOnScroll = () => {
-            const viewportCenterY = window.innerHeight / 2;
-            const threshold = 200; // px from viewport center to trigger highlight
+            const headerRect = acclaimHeaderEl.getBoundingClientRect();
+            // Target: vertical middle of the acclaim header block (tracks sticky column)
+            const targetY = (headerRect.top + headerRect.bottom) / 2;
+            const threshold = Math.min(
+                Math.max(headerRect.height * 1.35, 200),
+                window.innerHeight * 0.45
+            );
 
             acclaimComments.forEach(blockquote => {
                 const rect = blockquote.getBoundingClientRect();
                 const commentCenterY = (rect.top + rect.bottom) / 2;
-                const distance = Math.abs(commentCenterY - viewportCenterY);
+                const distance = Math.abs(commentCenterY - targetY);
 
                 if (distance < threshold) {
-                    // Smooth scale: closer to center = larger (1.2 at center, 1.05 at edge of zone)
-                    const proximity = 1 - (distance / threshold) * 0.75;
-                    const scale = 1.05 + proximity * 0.15;
-                    const fontSize = 1.1 + proximity * 0.25;
+                    const proximity = 1 - distance / threshold;
+                    const eased = proximity * proximity;
+                    const scale = 1 + eased * 0.18;
                     blockquote.style.transform = `scale(${scale})`;
-                    blockquote.style.fontSize = `${fontSize}rem`;
                 } else {
                     blockquote.style.transform = 'scale(1)';
-                    blockquote.style.fontSize = '';
                 }
             });
-
-            // Outcome items: scroll-based scale disabled so CSS hover (scale + shadow) works cleanly
         };
 
         window.addEventListener('scroll', emphasizeCommentsOnScroll, { passive: true });
+        window.addEventListener('resize', emphasizeCommentsOnScroll, { passive: true });
         emphasizeCommentsOnScroll();
     }
 });
@@ -792,8 +786,8 @@ document.addEventListener('DOMContentLoaded', () => {
         card.style.animationDelay = `${index * 0.1}s`;
     });
     
-    // Add staggered animation to acclaim cards
-    const acclaimCards = document.querySelectorAll('.acclaim-card');
+    // Add staggered animation to acclaim quote items
+    const acclaimCards = document.querySelectorAll('.acclaim-quote-item');
     acclaimCards.forEach((card, index) => {
         card.style.animationDelay = `${index * 0.1}s`;
     });

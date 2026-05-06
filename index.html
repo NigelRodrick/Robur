@@ -58,6 +58,7 @@
         #home.hero .hero-title {
             text-align: left !important;
             align-items: flex-start !important;
+            font-weight: 400 !important;
         }
         
         /* Mobile fallback styles */
@@ -70,12 +71,13 @@
             }
             
             .hero-title {
-                font-size: 2.5rem !important;
+                font-size: 3rem !important;
+                font-weight: 400 !important;
                 text-align: left !important;
             }
             
             .hero-subtitle {
-                font-size: 0.9375rem !important;
+                font-size: 1rem !important;
                 line-height: 1.6 !important;
                 text-align: justify !important;
                 text-shadow: 0 1px 1px rgba(0, 0, 0, 0.15) !important;
@@ -210,108 +212,129 @@
         </div>
     </section>
 
-    <!-- Outcome Section - Floating copy left, sidebar branding image right -->
-    <section id="outcome" class="outcome-section">
-        <div class="container">
-            <div class="sideways-section outcome-sideways">
-                <div class="content-area">
-                <div class="outcome-content-layered">
-                    <div class="outcome-item">
-                        <div class="section-float">
-                        <h3 class="outcome-title">Proven Results</h3>
-                        <p class="outcome-description">Our solutions are proven to deliver measurable gains in operational efficiency, safety performance, and profitability across mining operations globally.</p>
+    <!-- Outcome — same grid as Acclaim: visual + CTA column (left), copy column (right); section name via aria-label only (avoids duplicating artwork text) -->
+    <section id="outcome" class="outcome-section" aria-label="Outcome">
+        <div class="container outcome-beginner-inner">
+            <div class="outcome-showcase-component">
+                <aside class="outcome-sidebar-video outcome-showcase-visual-col fade-in">
+                    <div class="outcome-showcase-visual-inner">
+                        <div class="outcome-sticky-visual">
+                            <div class="outcome-video-wrapper">
+                                <img src="images/outcome-section.png" alt="" class="outcome-video" decoding="async" loading="lazy">
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="outcome-item">
-                        <div class="section-float">
-                        <h3 class="outcome-title">Client Success</h3>
-                        <p class="outcome-description">We define success by our clients’ results. Every engagement is structured to deliver clear value and sustainable outcomes for their operations.</p>
-                        </div>
-                    </div>
-                </div>
-                </div>
-                <aside class="outcome-sidebar-video fade-in">
-                    <div class="outcome-video-wrapper">
-                        <img src="images/outcome-section.png" alt="Outcome" class="outcome-video" decoding="async" loading="lazy">
+                        <a href="about.html" class="outcome-showcase-cta">See more</a>
                     </div>
                 </aside>
+                <div class="outcome-showcase-copy-col">
+                    <div class="outcome-content-layered outcome-content-layered--beginner">
+                        <div class="outcome-item fade-in stagger-1">
+                            <div class="section-float">
+                                <h3 class="outcome-title">Proven Results</h3>
+                                <p class="outcome-description">Our solutions are proven to deliver measurable gains in operational efficiency, safety performance, and profitability across mining operations globally.</p>
+                            </div>
+                        </div>
+                        <div class="outcome-item fade-in stagger-2">
+                            <div class="section-float">
+                                <h3 class="outcome-title">Client Success</h3>
+                                <p class="outcome-description">We define success by our clients’ results. Every engagement is structured to deliver clear value and sustainable outcomes for their operations.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Acclaim Section - Centered branding (same max width as Products / Outcome) + testimonials -->
+    <!-- Acclaim — Beginner.app-style: quotes column + sticky title / branding / CTA -->
     <section id="acclaim" class="acclaim-section">
-        <div class="container">
-            <div class="acclaim-branding-row fade-in">
-                <div class="acclaim-sidebar-visual">
-                    <img src="images/acclaim.png" alt="Acclaim" class="acclaim-sidebar-img" decoding="async" loading="lazy">
-                </div>
-            </div>
-            <div class="sideways-section acclaim-sideways">
-                <div class="content-area acclaim-testimonials">
-                <div class="acclaim-content-layered">
-                    <div class="acclaim-card fade-in stagger-1">
-                        <blockquote>"Great experience, Robur Mining Solutions provides quality products and exceptional customer service."</blockquote>
-                        <div class="acclaim-author">
-                            <div class="author-name">
-                                <strong>M.Sayi Pro</strong>
-                            </div>
-                            <span>PROCUREMENT DAVIS GRANITE</span>
+        <div class="acclaim-beginner-panel">
+            <div class="container acclaim-beginner-inner">
+                <div class="acclaim-quotes-component">
+                    <div class="acclaim-quotes-left">
+                        <div class="acclaim-quote-list" role="list">
+                            <article class="acclaim-quote-item fade-in stagger-1" role="listitem">
+                                <blockquote class="acclaim-quote-text">"Great experience, Robur Mining Solutions provides quality products and exceptional customer service."</blockquote>
+                                <div class="acclaim-quote-spacer" aria-hidden="true"></div>
+                                <div class="acclaim-quote-meta">
+                                    <div class="acclaim-quote-name">
+                                        <span class="acclaim-name-part">M.Sayi</span>
+                                        <span class="acclaim-name-part">Pro</span>
+                                    </div>
+                                    <span class="acclaim-quote-divider" aria-hidden="true"></span>
+                                    <p class="acclaim-quote-credits">Procurement, Davis Granite</p>
+                                </div>
+                            </article>
+                            <article class="acclaim-quote-item fade-in stagger-2" role="listitem">
+                                <blockquote class="acclaim-quote-text">"Robur Mining Solutions, gets jobs done with velocity and tenacity."</blockquote>
+                                <div class="acclaim-quote-spacer" aria-hidden="true"></div>
+                                <div class="acclaim-quote-meta">
+                                    <div class="acclaim-quote-name">
+                                        <span class="acclaim-name-part">Aaron</span>
+                                        <span class="acclaim-name-part">MPOFU</span>
+                                    </div>
+                                    <span class="acclaim-quote-divider" aria-hidden="true"></span>
+                                    <p class="acclaim-quote-credits">Finance Administrator, Catholic Diocese of Gweru</p>
+                                </div>
+                            </article>
+                            <article class="acclaim-quote-item fade-in stagger-3" role="listitem">
+                                <blockquote class="acclaim-quote-text">"The Robur team are enthusiastic about giving practical and detailed solutions."</blockquote>
+                                <div class="acclaim-quote-spacer" aria-hidden="true"></div>
+                                <div class="acclaim-quote-meta">
+                                    <div class="acclaim-quote-name">
+                                        <span class="acclaim-name-part">Ben</span>
+                                        <span class="acclaim-name-part">Mukandi</span>
+                                    </div>
+                                    <span class="acclaim-quote-divider" aria-hidden="true"></span>
+                                    <p class="acclaim-quote-credits">Executive Chairman, Freightworld</p>
+                                </div>
+                            </article>
+                            <article class="acclaim-quote-item fade-in stagger-4" role="listitem">
+                                <blockquote class="acclaim-quote-text">"Allan and his Robur team are young, vibrant and all about delivering expert insight and tangible results."</blockquote>
+                                <div class="acclaim-quote-spacer" aria-hidden="true"></div>
+                                <div class="acclaim-quote-meta">
+                                    <div class="acclaim-quote-name">
+                                        <span class="acclaim-name-part">Kundai</span>
+                                        <span class="acclaim-name-part">Chidamba</span>
+                                    </div>
+                                    <span class="acclaim-quote-divider" aria-hidden="true"></span>
+                                    <p class="acclaim-quote-credits">Managing Director, T &amp; A Drilling and Blasting</p>
+                                </div>
+                            </article>
+                            <article class="acclaim-quote-item fade-in stagger-5" role="listitem">
+                                <blockquote class="acclaim-quote-text">"They deliver perfectly crafted products 👌"</blockquote>
+                                <div class="acclaim-quote-spacer" aria-hidden="true"></div>
+                                <div class="acclaim-quote-meta">
+                                    <div class="acclaim-quote-name">
+                                        <span class="acclaim-name-part">Tinashe</span>
+                                        <span class="acclaim-name-part">Gwasera</span>
+                                    </div>
+                                    <span class="acclaim-quote-divider" aria-hidden="true"></span>
+                                    <p class="acclaim-quote-credits">Damo Resources</p>
+                                </div>
+                            </article>
+                            <article class="acclaim-quote-item fade-in stagger-6" role="listitem">
+                                <blockquote class="acclaim-quote-text">"When ambition, limitlessness and expertise meet, you get Robur Mining Solutions."</blockquote>
+                                <div class="acclaim-quote-spacer" aria-hidden="true"></div>
+                                <div class="acclaim-quote-meta">
+                                    <div class="acclaim-quote-name">
+                                        <span class="acclaim-name-part">Tinashe</span>
+                                        <span class="acclaim-name-part">Manzungu</span>
+                                    </div>
+                                    <span class="acclaim-quote-divider" aria-hidden="true"></span>
+                                    <p class="acclaim-quote-credits">Chief Executive Officer, Zimbuild</p>
+                                </div>
+                            </article>
                         </div>
                     </div>
-
-                    <div class="acclaim-card fade-in stagger-2">
-                        <blockquote>"Robur Mining Solutions, gets jobs done with velocity and tenacity."</blockquote>
-                        <div class="acclaim-author">
-                            <div class="author-name">
-                                <strong>Aaron MPOFU</strong>
+                    <div class="acclaim-quotes-right">
+                        <div class="acclaim-quotes-right-inner">
+                            <div class="acclaim-sidebar-visual acclaim-sticky-visual fade-in">
+                                <img src="images/acclaim.png" alt="Acclaim — Robur Mining Solutions" class="acclaim-sidebar-img" decoding="async" loading="lazy">
                             </div>
-                            <span>FINANCE ADMINISTRATOR CATHOLIC DIOCESE OF GWERU</span>
+                            <a href="about.html" class="acclaim-sticky-cta">Learn more</a>
                         </div>
                     </div>
-
-                    <div class="acclaim-card fade-in stagger-3">
-                        <blockquote>"The Robur team are enthusiastic about giving practical and detailed solutions."</blockquote>
-                        <div class="acclaim-author">
-                            <div class="author-name">
-                                <strong>Ben Mukandi</strong>
-                            </div>
-                            <span>EXECUTIVE CHAIRMAN FREIGHTWORLD</span>
-                        </div>
-                    </div>
-
-                    <div class="acclaim-card fade-in stagger-4">
-                        <blockquote>"Allan and his Robur team are young, vibrant and all about delivering expert insight and tangible results."</blockquote>
-                        <div class="acclaim-author">
-                            <div class="author-name">
-                                <strong>Kundai Chidamba</strong>
-                            </div>
-                            <span>MANAGING DIRECTOR T & A DRILLING AND BLASTING</span>
-                        </div>
-                    </div>
-
-                    <div class="acclaim-card fade-in stagger-5">
-                        <blockquote>"They deliver perfectly crafted products 👌"</blockquote>
-                        <div class="acclaim-author">
-                            <div class="author-name">
-                                <strong>Tinashe Gwasera</strong>
-                            </div>
-                            <span>DAMO RESOURCES</span>
-                        </div>
-                    </div>
-
-                    <div class="acclaim-card fade-in stagger-6">
-                        <blockquote>"When ambition, limitlessness and expertise meet, you get Robur Mining Solutions."</blockquote>
-                        <div class="acclaim-author">
-                            <div class="author-name">
-                                <strong>Tinashe Manzungu</strong>
-                            </div>
-                            <span>CHIEF EXECUTIVE OFFICER ZIMBUILD</span>
-                        </div>
-                    </div>
-                </div>
-                    <a href="#about" class="section-cta">Learn more</a>
                 </div>
             </div>
         </div>
@@ -555,7 +578,7 @@
                 if (el.classList.contains('blockquote-line')) return false;
                 if (el.classList.contains('title-line')) return false;
                 if (el.tagName === 'DIV' && !el.textContent.trim()) return false;
-                if (el.classList.contains('container') || el.classList.contains('acclaim-grid') || el.classList.contains('acclaim-card')) return false;
+                if (el.classList.contains('container') || el.classList.contains('acclaim-grid') || el.classList.contains('acclaim-quote-item')) return false;
                 return true;
             });
             
@@ -581,16 +604,16 @@
                         return;
                     }
                     
-                    // Skip acclaim author info
-                    if (element.closest('.acclaim-author') || 
-                        element.classList.contains('author-name') || 
-                        element.classList.contains('author-company')) {
+                    // Skip acclaim attribution (Beginner-style meta row)
+                    if (element.closest('.acclaim-quote-meta') ||
+                        element.classList.contains('acclaim-name-part') ||
+                        element.classList.contains('acclaim-quote-credits')) {
                         return;
                     }
                     
-                    // Skip acclaim card containers - only process text elements inside them
-                    if (element.classList.contains('acclaim-card') || 
-                        element.closest('.acclaim-card') && (element.tagName === 'DIV' && !element.classList.contains('blockquote-line'))) {
+                    // Skip acclaim quote item shells
+                    if (element.classList.contains('acclaim-quote-item') ||
+                        (element.closest('.acclaim-quote-item') && element.tagName === 'DIV' && !element.classList.contains('blockquote-line'))) {
                         return;
                     }
                     
