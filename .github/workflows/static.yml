@@ -31,6 +31,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Cache-bust stylesheet on deployed HTML
+        env:
+          SHORT_SHA: ${{ github.sha }}
+        run: |
+          SHORT=$(echo "$SHORT_SHA" | cut -c1-7)
+          find . -name '*.html' -not -path './.git/*' -print0 | while IFS= read -r -d '' f; do
+            if grep -q 'href="web-styles.css"' "$f"; then
+              sed -i "s|href=\"web-styles.css\"|href=\"web-styles.css?v=${SHORT}\"|g" "$f"
+            fi
+          done
       - name: Setup Pages
         uses: actions/configure-pages@v5
         with:
