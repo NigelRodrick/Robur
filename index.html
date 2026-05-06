@@ -75,8 +75,10 @@
             }
             
             .hero-subtitle {
-                font-size: 1rem !important;
-                text-align: left !important;
+                font-size: 0.9375rem !important;
+                line-height: 1.6 !important;
+                text-align: justify !important;
+                text-shadow: 0 1px 1px rgba(0, 0, 0, 0.15) !important;
             }
             
             .divisions-grid {
@@ -485,76 +487,13 @@
     </script>
 
     <script>
-        // Function to wrap blockquote text into line-by-line spans for true line-by-line translucency
+        // One continuous sentence per quote: collapse whitespace, strip old line spans, normalize straight quotes.
         function wrapBlockquoteLines() {
-            const blockquotes = document.querySelectorAll('.acclaim-section blockquote');
-            blockquotes.forEach(blockquote => {
-                // Check if already wrapped
-                if (blockquote.dataset.wrapped === 'true') return;
-                
-                let originalText = blockquote.textContent.trim();
-                // Remove leading and trailing quotes if present (both double and single quotes)
-                originalText = originalText.replace(/^["'"]+|["'"]+$/g, '');
-                originalText = originalText.replace(/^['']+|['']+$/g, '');
-                const words = originalText.split(' ');
-                
-                // Get computed styles for accurate measurement
-                const computedStyle = window.getComputedStyle(blockquote);
-                const containerWidth = blockquote.offsetWidth || blockquote.parentElement.offsetWidth || 600;
-                const fontSize = parseFloat(computedStyle.fontSize) || 16;
-                const fontFamily = computedStyle.fontFamily;
-                
-                // Create a temporary element to measure text width
-                const measureEl = document.createElement('span');
-                measureEl.style.position = 'absolute';
-                measureEl.style.visibility = 'hidden';
-                measureEl.style.whiteSpace = 'nowrap';
-                measureEl.style.fontSize = fontSize + 'px';
-                measureEl.style.fontFamily = fontFamily;
-                document.body.appendChild(measureEl);
-                
-                // Clear blockquote and rebuild with wrapped lines
-                blockquote.innerHTML = '';
-                
-                let currentLine = document.createElement('span');
-                currentLine.className = 'blockquote-line';
-                currentLine.style.display = 'block';
-                currentLine.style.margin = '0';
-                currentLine.style.padding = '0';
-                
-                let currentLineText = '';
-                
-                words.forEach((word, index) => {
-                    const testText = currentLineText + (currentLineText ? ' ' : '') + word;
-                    measureEl.textContent = testText;
-                    const textWidth = measureEl.offsetWidth;
-                    
-                    if (textWidth > containerWidth && currentLineText) {
-                        // Current line is full, start new line
-                        currentLine.textContent = currentLineText;
-                        blockquote.appendChild(currentLine);
-                        
-                        currentLine = document.createElement('span');
-                        currentLine.className = 'blockquote-line';
-                        currentLine.style.display = 'block';
-                        currentLine.style.margin = '0';
-                        currentLine.style.padding = '0';
-                        currentLineText = word;
-                    } else {
-                        currentLineText = testText;
-                    }
-                });
-                
-                // Add the last line
-                if (currentLineText) {
-                    currentLine.textContent = currentLineText;
-                    blockquote.appendChild(currentLine);
-                }
-                
-                // Clean up
-                document.body.removeChild(measureEl);
-                
-                blockquote.dataset.wrapped = 'true';
+            document.querySelectorAll('.acclaim-section blockquote').forEach(function (blockquote) {
+                var inner = blockquote.textContent.replace(/\s+/g, ' ').trim();
+                inner = inner.replace(/^[\u201c\u201d\u2018\u2019"'„«»]+|[\u201c\u201d\u2018\u2019"'„«»]+$/g, '').trim();
+                blockquote.textContent = '"' + inner + '"';
+                delete blockquote.dataset.wrapped;
             });
         }
         
