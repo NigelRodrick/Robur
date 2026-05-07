@@ -177,17 +177,17 @@
         }
         .smart-amfe-video-item {
             margin: 0;
-            border-radius: clamp(4px, 1vw, 10px);
-            overflow: hidden;
             background: transparent;
         }
         .smart-amfe-video-item video {
             width: 100%;
-            height: 100%;
-            aspect-ratio: 1 / 1;
-            object-fit: cover;
+            height: auto;
+            aspect-ratio: auto;
+            object-fit: contain;
             display: block;
-            background: transparent;
+            background: transparent !important;
+            border: 0;
+            box-shadow: none;
         }
         #smartGrid {
             background: transparent;
@@ -331,12 +331,12 @@
         </section>
         <section id="amfeExtraVideos" class="smart-amfe-videos" hidden aria-label="AMFE videos">
             <figure class="smart-amfe-video-item">
-                <video controls preload="metadata" playsinline>
+                <video autoplay muted loop playsinline preload="metadata">
                     <source src="images/amfes/afmevid.mp4" type="video/mp4">
                 </video>
             </figure>
             <figure class="smart-amfe-video-item">
-                <video controls preload="metadata" playsinline>
+                <video autoplay muted loop playsinline preload="metadata">
                     <source src="images/amfes/afdmevid2.mp4" type="video/mp4">
                 </video>
             </figure>
