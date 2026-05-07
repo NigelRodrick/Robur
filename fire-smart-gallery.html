@@ -577,33 +577,19 @@
             ];
 
             async function buildSmartAlarmFireGrid() {
+                var amfeText = document.getElementById("amfeTextIntro");
+                if (amfeText) amfeText.setAttribute("hidden", "");
+                var amfeExtra = document.getElementById("amfeExtraImages");
+                if (amfeExtra) amfeExtra.setAttribute("hidden", "");
+                var amfeNotes = document.getElementById("amfeExtraNotes");
+                if (amfeNotes) amfeNotes.setAttribute("hidden", "");
+                var amfeVideos = document.getElementById("amfeExtraVideos");
+                if (amfeVideos) amfeVideos.setAttribute("hidden", "");
                 var band = document.getElementById("extinguisherDetailsBand");
                 if (band) band.remove();
                 var fireballBand = document.getElementById("extinguisher1FireballBand");
                 if (fireballBand) fireballBand.remove();
-                if (!grid) return;
-                grid.setAttribute("aria-label", "Additional smart alarm images");
-                var added = 0;
-                for (var s = 0; s < smartAlarmFireRel.length; s += 1) {
-                    var srel = smartAlarmFireRel[s];
-                    var shit = await tryLoadImage(srel);
-                    if (!shit) continue;
-                    var sfigure = document.createElement("figure");
-                    sfigure.className = "smart-grid-item";
-                    var simg = document.createElement("img");
-                    simg.src = shit;
-                    simg.alt = "Smart alarm image " + (added + 1);
-                    simg.loading = "lazy";
-                    sfigure.appendChild(simg);
-                    grid.appendChild(sfigure);
-                    added += 1;
-                }
-                if (added === 0) {
-                    var sempty = document.createElement("p");
-                    sempty.className = "smart-empty";
-                    sempty.textContent = "No additional smart alarm images were found below the header.";
-                    grid.replaceWith(sempty);
-                }
+                if (grid) grid.remove();
             }
 
             function buildCandidateNames() {
