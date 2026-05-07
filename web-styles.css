@@ -1004,7 +1004,7 @@ section {
 }
 .products-section .products-video-wrapper {
     width: 100%;
-    max-width: 900px;
+    max-width: 720px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1025,9 +1025,9 @@ section {
 }
 .products-section .products-video {
     width: 100%;
-    max-width: 900px;
-    height: 680px;
-    max-height: 90vh;
+    max-width: 720px;
+    height: auto;
+    max-height: 45vh;
     object-fit: contain;
     display: block;
     border-radius: 12px;
