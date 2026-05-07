@@ -177,13 +177,16 @@
         }
         .smart-amfe-video-item {
             margin: 0;
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
             background: transparent;
         }
         .smart-amfe-video-item video {
-            width: 100%;
-            height: auto;
-            aspect-ratio: auto;
-            object-fit: contain;
+            width: 112%;
+            height: 112%;
+            margin: -6%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
             display: block;
             background: transparent !important;
             border: 0;
