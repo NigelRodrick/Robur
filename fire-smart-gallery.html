@@ -627,6 +627,16 @@
 
             async function buildSmartGrid() {
                 var tl = (topImage || "").toLowerCase();
+                var defaultIntro = document.getElementById("extinguisherTextIntro");
+                if (defaultIntro) defaultIntro.setAttribute("hidden", "");
+                var amfeTextDefault = document.getElementById("amfeTextIntro");
+                if (amfeTextDefault) amfeTextDefault.setAttribute("hidden", "");
+                var amfeExtraDefault = document.getElementById("amfeExtraImages");
+                if (amfeExtraDefault) amfeExtraDefault.setAttribute("hidden", "");
+                var amfeNotesDefault = document.getElementById("amfeExtraNotes");
+                if (amfeNotesDefault) amfeNotesDefault.setAttribute("hidden", "");
+                var amfeVideosDefault = document.getElementById("amfeExtraVideos");
+                if (amfeVideosDefault) amfeVideosDefault.setAttribute("hidden", "");
                 /* AMFEs deep links: header only */
                 if (tl.indexOf("/amfes/") !== -1 || tl.indexOf("amfes/") !== -1 || tl.indexOf("afmes") !== -1) {
                     if (grid) grid.remove();
