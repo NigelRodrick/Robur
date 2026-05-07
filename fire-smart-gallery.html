@@ -168,6 +168,31 @@
             margin: 0;
             aspect-ratio: 1 / 1;
         }
+        .smart-amfe-notes {
+            width: 100%;
+            max-width: min(72rem, 100%);
+            margin: 0;
+            padding: 0 clamp(0.2rem, 1vw, 0.4rem);
+            box-sizing: border-box;
+            text-align: left;
+        }
+        .smart-amfe-notes h3 {
+            margin: 0.8rem 0 0.45rem;
+            font-size: clamp(1rem, 2.3vw, 1.2rem);
+            font-weight: 700;
+            line-height: 1.35;
+            color: rgba(255, 248, 242, 0.98);
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
+        }
+        .smart-amfe-notes p {
+            margin: 0 0 0.8rem;
+            font-size: clamp(0.88rem, 2.05vw, 0.98rem);
+            font-weight: 500;
+            line-height: 1.55;
+            letter-spacing: 0.02em;
+            color: rgba(255, 235, 224, 0.94);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+        }
         .smart-amfe-videos {
             width: 100%;
             max-width: min(72rem, 100%);
@@ -331,6 +356,17 @@
             <figure class="smart-grid-item">
                 <img src="images/amfes/afme2.jpeg" alt="AMFE product image 2" decoding="async" loading="lazy">
             </figure>
+        </section>
+        <section id="amfeExtraNotes" class="smart-amfe-notes" hidden aria-label="AMFE technical notes">
+            <h3>AMFE: Thermal release</h3>
+            <p>The AMFE is installed purely passively directly in a box or cabinet to be protected. It is installed in such a way that it reliably detects an increase in temperature in the closed area, triggered by a fire, and triggers the extinguishing process when the selected trigger temperature is exceeded. This allows the non-conductive, non-toxic, and residue-free extinguishing agent to flow out.</p>
+            <h3>R-AMFE (Remote AMFE): Monitoring &amp; remote activation</h3>
+            <p>In the event of thermal activation, an external signal current running via the S-AMFE is interrupted because the glass ampoule bursts, and the activation is reported. A connected relay or controller recognises this and opens the power contacts, for example. As a result, the power to the device is switched off and reignition is prevented.</p>
+            <h3>R-AMFE (Remote AMFE): Monitoring &amp; remote activation</h3>
+            <p>The R-AMFE can be triggered using an external activation current. The ampoule inside is specifically overheated and bursts when the activation temperature is reached. In addition to this electrical triggering, the R-AMFE can also trigger purely thermally.</p>
+            <h3>How do you choose the right activation temperature?</h3>
+            <p><strong>Ampullen F AMFE</strong></p>
+            <p>Depending on the expected temperature inside the housing to be protected, the trigger temperature is chosen. JOB offers four different trigger temperatures as standard. If other triggering temperatures are of interest, please contact us. Individual release temperatures are possible with appropriate purchase quantities. When retrofitting, we recommend a temperature measurement in normal operation (or thermography measurement) and a safety margin of approx. 20 Kelvin to prevent possible early triggering in special temperature conditions (sunlight in summer).</p>
         </section>
         <section id="amfeExtraVideos" class="smart-amfe-videos" hidden aria-label="AMFE videos">
             <figure class="smart-amfe-video-item">
@@ -612,6 +648,8 @@
                     if (amfeText) amfeText.removeAttribute("hidden");
                     var amfeExtra = document.getElementById("amfeExtraImages");
                     if (amfeExtra) amfeExtra.removeAttribute("hidden");
+                    var amfeNotes = document.getElementById("amfeExtraNotes");
+                    if (amfeNotes) amfeNotes.removeAttribute("hidden");
                     var amfeVideos = document.getElementById("amfeExtraVideos");
                     if (amfeVideos) amfeVideos.removeAttribute("hidden");
                     return;
