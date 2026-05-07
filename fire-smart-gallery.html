@@ -537,6 +537,17 @@
 
             async function buildSmartGrid() {
                 var tl = (topImage || "").toLowerCase();
+                /* AMFEs deep links: header only */
+                if (tl.indexOf("/amfes/") !== -1 || tl.indexOf("amfes/") !== -1 || tl.indexOf("afmes") !== -1) {
+                    if (grid) grid.remove();
+                    var amfeBand = document.getElementById("extinguisherDetailsBand");
+                    if (amfeBand) amfeBand.remove();
+                    var amfeFireball = document.getElementById("extinguisher1FireballBand");
+                    if (amfeFireball) amfeFireball.remove();
+                    var amfeIntro = document.getElementById("extinguisherTextIntro");
+                    if (amfeIntro) amfeIntro.remove();
+                    return;
+                }
                 /* Smart alarm deep links: header only */
                 if (tl.indexOf("smart-alarm") !== -1 || tl.indexOf("smart_alarm") !== -1) {
                     await buildSmartAlarmFireGrid();
