@@ -282,6 +282,12 @@
             <h2 class="smart-extinguisher-text-below__title">9.0kg Automatic Ext 67 Degree</h2>
             <p class="smart-extinguisher-text-below__body">FlameStop Automatic Extinguishers work using a specially modified sprinkler valve which bursts at 67°C. Ideally placed above flammable liquid bays or dangerous goods areas.</p>
         </div>
+        <div id="amfeTextIntro" class="smart-extinguisher-text-below" hidden aria-label="Automatic miniature fire extinguishing unit information">
+            <h2 class="smart-extinguisher-text-below__title">AMFE</h2>
+            <h3 class="smart-extinguisher-text-below__title">AMFE</h3>
+            <p class="smart-extinguisher-text-below__body"><strong>Automatic miniature fire extinguishing unit</strong></p>
+            <p class="smart-extinguisher-text-below__body">The AMFE automatically detects fires in control cabinets and electrical devices. The system prevents the spread of fire and further property damage. JOB's AMFE protects devices and systems in industry-, household- and consumer electronics. (E.g. control cabinets, household appliances, monitors.)</p>
+        </div>
 
         <section id="smartGrid" class="smart-grid" aria-label="Smart image gallery"></section>
 
@@ -546,6 +552,8 @@
                     if (amfeFireball) amfeFireball.remove();
                     var amfeIntro = document.getElementById("extinguisherTextIntro");
                     if (amfeIntro) amfeIntro.remove();
+                    var amfeText = document.getElementById("amfeTextIntro");
+                    if (amfeText) amfeText.removeAttribute("hidden");
                     return;
                 }
                 /* Smart alarm deep links: header only */
