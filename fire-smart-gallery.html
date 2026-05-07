@@ -157,6 +157,39 @@
             display: block;
             background: transparent;
         }
+        .smart-amfe-extra {
+            width: 100%;
+            max-width: min(72rem, 100%);
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: clamp(0.65rem, 1.75vw, 1.15rem);
+        }
+        .smart-amfe-extra .smart-grid-item {
+            margin: 0;
+            aspect-ratio: 1 / 1;
+        }
+        .smart-amfe-videos {
+            width: 100%;
+            max-width: min(72rem, 100%);
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: clamp(0.65rem, 1.75vw, 1.15rem);
+        }
+        .smart-amfe-video-item {
+            margin: 0;
+            border-radius: clamp(4px, 1vw, 10px);
+            overflow: hidden;
+            box-shadow:
+                0 12px 32px rgba(0, 0, 0, 0.35),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+            background: transparent;
+        }
+        .smart-amfe-video-item video {
+            width: 100%;
+            height: auto;
+            display: block;
+            background: #000;
+        }
         #smartGrid {
             background: transparent;
         }
@@ -222,6 +255,8 @@
         }
         @media (max-width: 560px) {
             .smart-grid { grid-template-columns: 1fr; }
+            .smart-amfe-extra { grid-template-columns: 1fr; }
+            .smart-amfe-videos { grid-template-columns: 1fr; }
         }
         .smart-page-footnote {
             flex-shrink: 0;
@@ -287,6 +322,26 @@
             <p class="smart-extinguisher-text-below__body"><strong>Automatic miniature fire extinguishing unit</strong></p>
             <p class="smart-extinguisher-text-below__body">The AMFE automatically detects fires in control cabinets and electrical devices. The system prevents the spread of fire and further property damage. JOB's AMFE protects devices and systems in industry-, household- and consumer electronics. (E.g. control cabinets, household appliances, monitors.)</p>
         </div>
+        <section id="amfeExtraImages" class="smart-amfe-extra" hidden aria-label="Additional AMFE images">
+            <figure class="smart-grid-item">
+                <img src="images/amfes/afme1.jpeg" alt="AMFE product image 1" decoding="async" loading="lazy">
+            </figure>
+            <figure class="smart-grid-item">
+                <img src="images/amfes/afme2.jpeg" alt="AMFE product image 2" decoding="async" loading="lazy">
+            </figure>
+        </section>
+        <section id="amfeExtraVideos" class="smart-amfe-videos" hidden aria-label="AMFE videos">
+            <figure class="smart-amfe-video-item">
+                <video controls preload="metadata" playsinline>
+                    <source src="images/amfes/afmevid.mp4" type="video/mp4">
+                </video>
+            </figure>
+            <figure class="smart-amfe-video-item">
+                <video controls preload="metadata" playsinline>
+                    <source src="images/amfes/afdmevid2.mp4" type="video/mp4">
+                </video>
+            </figure>
+        </section>
 
         <section id="smartGrid" class="smart-grid" aria-label="Smart image gallery"></section>
 
@@ -553,6 +608,10 @@
                     if (amfeIntro) amfeIntro.remove();
                     var amfeText = document.getElementById("amfeTextIntro");
                     if (amfeText) amfeText.removeAttribute("hidden");
+                    var amfeExtra = document.getElementById("amfeExtraImages");
+                    if (amfeExtra) amfeExtra.removeAttribute("hidden");
+                    var amfeVideos = document.getElementById("amfeExtraVideos");
+                    if (amfeVideos) amfeVideos.removeAttribute("hidden");
                     return;
                 }
                 /* Smart alarm deep links: header only */
