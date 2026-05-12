@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Robur Drilling Tools - Advanced Mining Equipment</title>
-    <link rel="preload" as="image" href="images/drilling-theme-hero.jpeg?v=7" fetchpriority="high">
+    <link rel="preload" as="image" href="images/drilling-theme-hero.jpeg?v=8" fetchpriority="high">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" href="Bagerich/Bagerich-Regular.woff2" as="font" type="font/woff2" crossorigin>
@@ -43,13 +43,15 @@
             inset: 0;
             z-index: 0;
             pointer-events: none;
+            background: var(--drill-rock);
         }
 
+        /* contain = full photo visible (letterboxing); bottom bias keeps subject lower in frame */
         .drill-bg img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            object-position: center;
+            object-fit: contain;
+            object-position: center bottom;
             display: block;
         }
 
@@ -123,7 +125,7 @@
 <body class="drill-page">
     <div class="drill-bg" aria-hidden="true">
         <img
-            src="images/drilling-theme-hero.jpeg?v=7"
+            src="images/drilling-theme-hero.jpeg?v=8"
             alt=""
             width="1920"
             height="1080"
