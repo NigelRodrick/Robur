@@ -7,6 +7,7 @@
     <title>Robur Drilling Tools</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="images/drilling-page-logo.png" as="image">
     <link rel="preload" href="Bagerich/Bagerich-Regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="web-styles.css">
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
@@ -193,7 +194,7 @@
             --drill-pad-r: max(clamp(1rem, 3vw, 1.75rem), env(safe-area-inset-right, 0px));
             --drill-pad-b: max(clamp(1rem, 3vw, 1.75rem), env(safe-area-inset-bottom, 0px));
             --drill-pad-l: max(clamp(1rem, 3vw, 1.75rem), env(safe-area-inset-left, 0px));
-            --drill-floating-home-clearance: 3.25rem;
+            --drill-floating-home-clearance: clamp(3.75rem, 12vw, 5.5rem);
             position: absolute;
             inset: 0;
             z-index: 2;
@@ -206,12 +207,25 @@
             flex-direction: column;
         }
 
-        /* Fixed Home — always visible (same role as division-back on other division pages) */
-        .drill-floating-home {
+        /* Fixed top bar: logo on the left, Home to its right */
+        .drill-top-bar {
             position: fixed;
             top: max(1rem, env(safe-area-inset-top, 0px));
             left: max(1rem, env(safe-area-inset-left, 0px));
+            right: auto;
             z-index: 100;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            gap: 0.65rem;
+            max-width: calc(100vw - 2rem);
+        }
+
+        .drill-floating-home {
+            position: static;
+            flex-shrink: 0;
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -236,6 +250,38 @@
             border-color: rgba(255, 255, 255, 0.52);
         }
 
+        .drill-logo-link {
+            display: inline-flex;
+            align-items: center;
+            flex-shrink: 0;
+            line-height: 0;
+            text-decoration: none;
+            padding: 0;
+            border: none;
+            background: transparent;
+            box-shadow: none;
+        }
+
+        .drill-logo-link:focus-visible {
+            outline: 2px solid rgba(255, 255, 255, 0.9);
+            outline-offset: 4px;
+            border-radius: 6px;
+        }
+
+        .drill-logo-img {
+            height: clamp(2.45rem, 8.5vw, 3.35rem);
+            width: auto;
+            max-width: min(280px, 62vw);
+            object-fit: contain;
+            display: block;
+            /* Strong separation on bright + dark radial areas (no frame on the link) */
+            filter:
+                drop-shadow(0 0 0.5px rgba(255, 255, 255, 0.65))
+                drop-shadow(0 0 10px rgba(0, 0, 0, 0.55))
+                drop-shadow(0 2px 6px rgba(0, 0, 0, 0.45))
+                drop-shadow(0 8px 22px rgba(0, 0, 0, 0.28));
+        }
+
         .drill-theme-spacer {
             flex: 1;
             min-height: 0;
@@ -243,7 +289,12 @@
     </style>
 </head>
 <body class="drill-radial-theme">
-    <a href="index.html" class="drill-floating-home division-back" aria-label="Back to home">← Home</a>
+    <div class="drill-top-bar">
+        <a href="index.html" class="drill-logo-link division-back" aria-label="Robur Mining Solutions — home">
+            <img src="images/drilling-page-logo.png" alt="" class="drill-logo-img" decoding="async" fetchpriority="high">
+        </a>
+        <a href="index.html" class="drill-floating-home division-back" aria-label="Back to home">← Home</a>
+    </div>
     <div class="drill-theme-shell" role="presentation">
         <div class="drill-theme-main">
             <div class="drill-theme-inner">
