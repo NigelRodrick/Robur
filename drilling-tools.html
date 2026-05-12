@@ -3,25 +3,223 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Robur Drilling Tools">
     <title>Robur Drilling Tools</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="Bagerich/Bagerich-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="web-styles.css">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"></noscript>
     <style>
+        :root {
+            --drill-outer: #f6e4dc;
+            --drill-backdrop: #241005;
+            --drill-backdrop-mid: #3a1409;
+            --drill-orange-mid: #f26522;
+            --drill-orange-deep: #c94a16;
+            --drill-orange-edge: #7a2c0f;
+        }
+
         *, *::before, *::after { box-sizing: border-box; }
+
+        html {
+            height: 100%;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
         html, body {
             margin: 0;
-            min-height: 100%;
-            height: 100%;
+            width: 100%;
+            max-width: 100%;
         }
-        body {
+
+        body.drill-radial-theme {
+            min-height: 100vh;
             min-height: 100dvh;
-            background-color: #f4f0ec;
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+            background: var(--drill-outer);
+            font-family: var(--font-default);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Edge-to-edge: radial main fills the viewport */
+        .drill-theme-shell {
+            display: flex;
+            flex: 1;
+            width: 100%;
+            min-height: 0;
+            border-radius: 0;
+            overflow: hidden;
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+        }
+
+        /* Same base + gradient stack as themed footer (header bar matches footer colors) */
+        .drill-theme-header,
+        body.drill-radial-theme > .main-footer {
+            background-color: var(--drill-backdrop);
             background-image:
-                radial-gradient(ellipse 90% 70% at 88% -8%, rgba(255, 138, 84, 0.55), transparent 52%),
-                radial-gradient(ellipse 65% 50% at 4% 102%, rgba(255, 154, 98, 0.28), transparent 50%),
-                radial-gradient(ellipse 50% 40% at 50% 50%, rgba(255, 200, 170, 0.12), transparent 60%);
-            background-attachment: fixed;
+                radial-gradient(ellipse 140% 100% at 50% 0%, rgba(255, 122, 58, 0.28) 0%, transparent 52%),
+                radial-gradient(ellipse 100% 90% at 0% 50%, rgba(36, 10, 4, 0.45) 0%, transparent 45%),
+                radial-gradient(ellipse 100% 90% at 100% 50%, rgba(34, 10, 4, 0.45) 0%, transparent 45%),
+                radial-gradient(ellipse 120% 100% at 50% 100%, rgba(8, 2, 0, 0.75) 0%, transparent 50%),
+                radial-gradient(ellipse 100% 80% at 50% 35%, var(--drill-backdrop-mid) 0%, transparent 65%);
+        }
+
+        body.drill-radial-theme > .main-footer {
+            flex-shrink: 0;
+            position: relative;
+            isolation: isolate;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1.1rem;
+            padding-bottom: max(1.5rem, env(safe-area-inset-bottom, 0px));
+        }
+
+        body.drill-radial-theme > .main-footer,
+        body.drill-radial-theme > .main-footer p,
+        body.drill-radial-theme > .main-footer .developer-credit {
+            color: rgba(255, 248, 242, 0.94) !important;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+        }
+
+        body.drill-radial-theme > .main-footer .footer-copyright {
+            opacity: 1;
+        }
+
+        body.drill-radial-theme > .main-footer .developer-credit {
+            opacity: 0.85;
+        }
+
+        .drill-theme-main {
+            flex: 1;
+            min-width: 0;
+            width: 100%;
+            position: relative;
+            isolation: isolate;
+            /* Deepest layer — reads like a stage / backdrop behind the lit orange */
+            background-color: var(--drill-backdrop);
+        }
+
+        /* Mid backdrop: heavier dark orange vignette (pushes more weight to edges + floor) */
+        .drill-theme-main::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(ellipse 125% 100% at 50% 118%, rgba(8, 2, 0, 0.88) 0%, transparent 58%),
+                radial-gradient(ellipse 100% 88% at 0% 0%, rgba(36, 10, 4, 0.9) 0%, transparent 56%),
+                radial-gradient(ellipse 100% 88% at 100% 0%, rgba(34, 10, 4, 0.9) 0%, transparent 56%),
+                radial-gradient(ellipse 95% 88% at 50% 36%, var(--drill-backdrop-mid) 0%, transparent 62%),
+                radial-gradient(ellipse 140% 120% at 50% 50%, rgba(18, 6, 2, 0.35) 0%, transparent 55%);
+        }
+
+        /* Foreground radial — slightly eased so backdrop reads through at the perimeter */
+        .drill-theme-main::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0.94;
+            background-image: radial-gradient(
+                ellipse 82% 72% at 50% 42%,
+                #ff7a3a 0%,
+                var(--drill-orange-mid) 26%,
+                var(--drill-orange-deep) 52%,
+                var(--drill-orange-edge) 100%
+            );
+        }
+
+        .drill-theme-inner {
+            --drill-pad-t: max(clamp(1rem, 3vw, 1.75rem), env(safe-area-inset-top, 0px));
+            --drill-pad-r: max(clamp(1rem, 3vw, 1.75rem), env(safe-area-inset-right, 0px));
+            --drill-pad-b: max(clamp(1rem, 3vw, 1.75rem), env(safe-area-inset-bottom, 0px));
+            --drill-pad-l: max(clamp(1rem, 3vw, 1.75rem), env(safe-area-inset-left, 0px));
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            padding: var(--drill-pad-t) var(--drill-pad-r) var(--drill-pad-b) var(--drill-pad-l);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Same hairline as themed footer border-top; full-bleed across orange panel */
+        .drill-theme-header {
+            position: relative;
+            z-index: 3;
+            isolation: isolate;
+            display: flex;
+            align-items: center;
+            min-height: clamp(3.25rem, 10vw, 4.75rem);
+            margin-left: calc(-1 * var(--drill-pad-l));
+            margin-right: calc(-1 * var(--drill-pad-r));
+            margin-top: calc(-1 * var(--drill-pad-t));
+            padding-left: var(--drill-pad-l);
+            padding-right: var(--drill-pad-r);
+            padding-top: var(--drill-pad-t);
+            padding-bottom: clamp(0.85rem, 2.2vw, 1.15rem);
+            margin-bottom: clamp(0.35rem, 1.2vw, 0.65rem);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .drill-theme-back {
+            align-self: flex-start;
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            border-radius: 999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            color: rgba(255, 255, 255, 0.95) !important;
+            text-decoration: none;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.28);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            transition: background 0.2s ease, border-color 0.2s ease;
+        }
+
+        .drill-theme-back:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.45);
+        }
+
+        .drill-theme-spacer {
+            flex: 1;
+            min-height: 0;
         }
     </style>
 </head>
-<body>
+<body class="drill-radial-theme">
+    <div class="drill-theme-shell" role="presentation">
+        <div class="drill-theme-main">
+            <div class="drill-theme-inner">
+                <header class="drill-theme-header">
+                    <a href="index.html" class="drill-theme-back division-back" aria-label="Back to home">← Home</a>
+                </header>
+                <div class="drill-theme-spacer"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-copyright">
+                    <p>&copy; 2026 Robur Mining Solutions. All rights reserved.</p>
+                    <p class="developer-credit">Developed by Fidinsky Tech Solutions</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js" defer></script>
 </body>
 </html>
