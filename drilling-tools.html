@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Robur Drilling Tools - Advanced Mining Equipment</title>
-    <link rel="preload" as="image" href="images/drilling-theme-hero.jpeg" fetchpriority="high">
+    <link rel="preload" as="image" href="images/drilling-theme-hero.jpeg?v=7" fetchpriority="high">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" href="Bagerich/Bagerich-Regular.woff2" as="font" type="font/woff2" crossorigin>
@@ -17,6 +17,7 @@
             --drill-orange: #ff6b35;
             --drill-rock: #1a1614;
             --drill-text: #f4f0ea;
+            --drill-muted: rgba(244, 240, 234, 0.78);
         }
 
         html,
@@ -25,10 +26,6 @@
             min-height: 100%;
         }
 
-        /*
-         * Global web-styles sets body { background: #000 } (shorthand), which can prevent
-         * a CSS background-image from reading clearly. A real <img> layer keeps the photo visible.
-         */
         body.drill-page {
             min-height: 100vh;
             min-height: 100dvh;
@@ -61,6 +58,8 @@
             top: 1rem;
             left: 1rem;
             z-index: 2;
+            width: fit-content;
+            max-width: calc(100vw - 2rem);
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -109,11 +108,12 @@
             font-size: clamp(0.8rem, 1.8vw, 0.95rem);
             font-weight: 500;
             letter-spacing: 0.06em;
-            color: var(--drill-text);
+            color: var(--drill-muted);
             padding: 0.5rem 1.15rem 0.55rem;
             border-radius: 999px;
             box-sizing: border-box;
             background: rgba(8, 7, 6, 0.42);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             text-shadow:
                 0 1px 2px rgba(0, 0, 0, 0.85),
                 0 0 10px rgba(0, 0, 0, 0.35);
@@ -123,7 +123,7 @@
 <body class="drill-page">
     <div class="drill-bg" aria-hidden="true">
         <img
-            src="images/drilling-theme-hero.jpeg"
+            src="images/drilling-theme-hero.jpeg?v=7"
             alt=""
             width="1920"
             height="1080"

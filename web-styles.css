@@ -792,12 +792,12 @@ section,
 .section-cta:hover { color: var(--text-main); }
 
 /* External link arrow (Beginner.app style) */
-a[href^="http"]:not(.nav-link):not(.floating-nav-item):not(.floating-more-link):not(.fire-image-link):not(.smart-gallery-back),
-a[href$=".html"]:not([href^="#"]):not(.nav-link):not(.fire-image-link):not(.smart-gallery-back) {
+a[href^="http"]:not(.nav-link):not(.floating-nav-item):not(.floating-more-link):not(.fire-image-link):not(.smart-gallery-back):not(.division-back),
+a[href$=".html"]:not([href^="#"]):not(.nav-link):not(.fire-image-link):not(.smart-gallery-back):not(.division-back) {
     position: relative;
 }
-a[href^="http"]:not(.nav-link):not(.floating-nav-item):not(.floating-more-link):not(.fire-image-link):not(.smart-gallery-back)::after,
-a[href$=".html"]:not([href^="#"]):not(.nav-link):not(.fire-image-link):not(.smart-gallery-back)::after {
+a[href^="http"]:not(.nav-link):not(.floating-nav-item):not(.floating-more-link):not(.fire-image-link):not(.smart-gallery-back):not(.division-back)::after,
+a[href$=".html"]:not([href^="#"]):not(.nav-link):not(.fire-image-link):not(.smart-gallery-back):not(.division-back)::after {
     content: '';
     display: inline-block;
     width: 0.5em;
