@@ -54,26 +54,51 @@
             min-height: 0;
             border-radius: 0;
             overflow: hidden;
-            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.07);
         }
 
-        /* Same base + gradient stack as themed footer (header bar matches footer colors) */
+        /* Same base as footer; long color ramps (no hard edges) */
         .drill-theme-header,
         body.drill-radial-theme > .main-footer {
             background-color: var(--drill-backdrop);
             background-image:
-                radial-gradient(ellipse 140% 100% at 50% 0%, rgba(255, 122, 58, 0.28) 0%, transparent 52%),
-                radial-gradient(ellipse 100% 90% at 0% 50%, rgba(36, 10, 4, 0.45) 0%, transparent 45%),
-                radial-gradient(ellipse 100% 90% at 100% 50%, rgba(34, 10, 4, 0.45) 0%, transparent 45%),
-                radial-gradient(ellipse 120% 100% at 50% 100%, rgba(8, 2, 0, 0.75) 0%, transparent 50%),
-                radial-gradient(ellipse 100% 80% at 50% 35%, var(--drill-backdrop-mid) 0%, transparent 65%);
+                radial-gradient(ellipse 150% 115% at 50% -5%,
+                    rgba(255, 122, 58, 0.14) 0%,
+                    rgba(255, 122, 58, 0.24) 24%,
+                    rgba(255, 130, 88, 0.12) 46%,
+                    rgba(255, 120, 70, 0.04) 68%,
+                    transparent 82%),
+                radial-gradient(ellipse 115% 95% at 0% 48%,
+                    rgba(52, 22, 14, 0.18) 0%,
+                    rgba(36, 10, 4, 0.42) 36%,
+                    rgba(36, 10, 4, 0.2) 58%,
+                    rgba(36, 10, 4, 0.06) 76%,
+                    transparent 90%),
+                radial-gradient(ellipse 115% 95% at 100% 48%,
+                    rgba(48, 20, 12, 0.18) 0%,
+                    rgba(34, 10, 4, 0.42) 36%,
+                    rgba(34, 10, 4, 0.2) 58%,
+                    rgba(34, 10, 4, 0.06) 76%,
+                    transparent 90%),
+                radial-gradient(ellipse 130% 110% at 50% 100%,
+                    rgba(12, 4, 2, 0.22) 0%,
+                    rgba(8, 2, 0, 0.52) 34%,
+                    rgba(8, 2, 0, 0.26) 58%,
+                    rgba(8, 2, 0, 0.08) 78%,
+                    transparent 92%),
+                radial-gradient(ellipse 110% 95% at 50% 32%,
+                    rgba(58, 22, 10, 0.5) 0%,
+                    var(--drill-backdrop-mid) 26%,
+                    rgba(58, 22, 10, 0.22) 52%,
+                    rgba(58, 22, 10, 0.06) 74%,
+                    transparent 88%);
         }
 
         body.drill-radial-theme > .main-footer {
             flex-shrink: 0;
             position: relative;
             isolation: isolate;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.07);
             padding-top: 1.1rem;
             padding-bottom: max(1.5rem, env(safe-area-inset-bottom, 0px));
         }
@@ -103,7 +128,7 @@
             background-color: var(--drill-backdrop);
         }
 
-        /* Mid backdrop: heavier dark orange vignette (pushes more weight to edges + floor) */
+        /* Mid backdrop: soft vignettes (multi-stop ramps, wide fades) */
         .drill-theme-main::before {
             content: "";
             position: absolute;
@@ -111,26 +136,55 @@
             z-index: 0;
             pointer-events: none;
             background:
-                radial-gradient(ellipse 125% 100% at 50% 118%, rgba(8, 2, 0, 0.88) 0%, transparent 58%),
-                radial-gradient(ellipse 100% 88% at 0% 0%, rgba(36, 10, 4, 0.9) 0%, transparent 56%),
-                radial-gradient(ellipse 100% 88% at 100% 0%, rgba(34, 10, 4, 0.9) 0%, transparent 56%),
-                radial-gradient(ellipse 95% 88% at 50% 36%, var(--drill-backdrop-mid) 0%, transparent 62%),
-                radial-gradient(ellipse 140% 120% at 50% 50%, rgba(18, 6, 2, 0.35) 0%, transparent 55%);
+                radial-gradient(ellipse 135% 115% at 50% 112%,
+                    rgba(8, 2, 0, 0.22) 0%,
+                    rgba(8, 2, 0, 0.55) 28%,
+                    rgba(8, 2, 0, 0.32) 52%,
+                    rgba(8, 2, 0, 0.1) 74%,
+                    transparent 90%),
+                radial-gradient(ellipse 105% 92% at 0% 6%,
+                    rgba(48, 18, 10, 0.2) 0%,
+                    rgba(36, 10, 4, 0.55) 38%,
+                    rgba(36, 10, 4, 0.28) 62%,
+                    rgba(36, 10, 4, 0.08) 82%,
+                    transparent 94%),
+                radial-gradient(ellipse 105% 92% at 100% 6%,
+                    rgba(44, 16, 10, 0.2) 0%,
+                    rgba(34, 10, 4, 0.55) 38%,
+                    rgba(34, 10, 4, 0.28) 62%,
+                    rgba(34, 10, 4, 0.08) 82%,
+                    transparent 94%),
+                radial-gradient(ellipse 100% 92% at 50% 38%,
+                    rgba(58, 22, 10, 0.42) 0%,
+                    var(--drill-backdrop-mid) 22%,
+                    rgba(58, 22, 10, 0.28) 48%,
+                    rgba(58, 22, 10, 0.1) 72%,
+                    transparent 88%),
+                radial-gradient(ellipse 150% 130% at 50% 52%,
+                    rgba(22, 8, 4, 0.1) 0%,
+                    rgba(18, 6, 2, 0.22) 42%,
+                    rgba(18, 6, 2, 0.1) 68%,
+                    rgba(18, 6, 2, 0.03) 86%,
+                    transparent 96%);
         }
 
-        /* Foreground radial — slightly eased so backdrop reads through at the perimeter */
+        /* Foreground radial — smooth stepped ramp (less banding / sharp rings) */
         .drill-theme-main::after {
             content: "";
             position: absolute;
             inset: 0;
             z-index: 1;
             pointer-events: none;
-            opacity: 0.94;
+            opacity: 0.9;
             background-image: radial-gradient(
-                ellipse 82% 72% at 50% 42%,
-                #ff7a3a 0%,
-                var(--drill-orange-mid) 26%,
-                var(--drill-orange-deep) 52%,
+                ellipse 90% 78% at 50% 42%,
+                #ff9a68 0%,
+                #ff8548 12%,
+                #ff7a3a 24%,
+                var(--drill-orange-mid) 40%,
+                #e85a1c 56%,
+                var(--drill-orange-deep) 72%,
+                #903210 88%,
                 var(--drill-orange-edge) 100%
             );
         }
@@ -164,7 +218,7 @@
             padding-top: var(--drill-pad-t);
             padding-bottom: clamp(0.85rem, 2.2vw, 1.15rem);
             margin-bottom: clamp(0.35rem, 1.2vw, 0.65rem);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
         }
 
         .drill-theme-back {
