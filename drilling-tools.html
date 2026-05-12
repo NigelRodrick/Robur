@@ -7,7 +7,6 @@
     <title>Robur Drilling Tools</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" href="images/drilling-page-logo.png" as="image">
     <link rel="preload" href="Bagerich/Bagerich-Regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="web-styles.css">
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
@@ -58,8 +57,7 @@
             box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.07);
         }
 
-        /* Same base as footer; long color ramps (no hard edges) */
-        .drill-theme-header,
+        /* Same base as footer; long color ramps */
         body.drill-radial-theme > .main-footer {
             background-color: var(--drill-backdrop);
             background-image:
@@ -195,78 +193,47 @@
             --drill-pad-r: max(clamp(1rem, 3vw, 1.75rem), env(safe-area-inset-right, 0px));
             --drill-pad-b: max(clamp(1rem, 3vw, 1.75rem), env(safe-area-inset-bottom, 0px));
             --drill-pad-l: max(clamp(1rem, 3vw, 1.75rem), env(safe-area-inset-left, 0px));
+            --drill-floating-home-clearance: 3.25rem;
             position: absolute;
             inset: 0;
             z-index: 2;
-            padding: var(--drill-pad-t) var(--drill-pad-r) var(--drill-pad-b) var(--drill-pad-l);
+            padding:
+                calc(var(--drill-pad-t) + var(--drill-floating-home-clearance))
+                var(--drill-pad-r)
+                var(--drill-pad-b)
+                var(--drill-pad-l);
             display: flex;
             flex-direction: column;
         }
 
-        /* Same hairline as themed footer border-top; full-bleed across orange panel */
-        .drill-theme-header {
-            position: relative;
-            z-index: 3;
-            isolation: isolate;
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            gap: clamp(0.75rem, 2vw, 1.25rem);
-            min-height: clamp(3.25rem, 10vw, 4.75rem);
-            margin-left: calc(-1 * var(--drill-pad-l));
-            margin-right: calc(-1 * var(--drill-pad-r));
-            margin-top: calc(-1 * var(--drill-pad-t));
-            padding-left: var(--drill-pad-l);
-            padding-right: var(--drill-pad-r);
-            padding-top: var(--drill-pad-t);
-            padding-bottom: clamp(0.85rem, 2.2vw, 1.15rem);
-            margin-bottom: clamp(0.35rem, 1.2vw, 0.65rem);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-        }
-
-        .drill-theme-logo-link {
+        /* Fixed Home — always visible (same role as division-back on other division pages) */
+        .drill-floating-home {
+            position: fixed;
+            top: max(1rem, env(safe-area-inset-top, 0px));
+            left: max(1rem, env(safe-area-inset-left, 0px));
+            z-index: 100;
             display: inline-flex;
             align-items: center;
-            flex-shrink: 0;
-            line-height: 0;
-            text-decoration: none;
-        }
-
-        .drill-theme-logo {
-            height: clamp(2rem, 5.5vw, 3rem);
-            width: auto;
-            max-width: min(220px, 46vw);
-            object-fit: contain;
-            display: block;
-            filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.35));
-        }
-
-        .drill-theme-header-spacer {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .drill-theme-back {
-            display: inline-flex;
-            align-items: center;
+            justify-content: center;
             padding: 0.5rem 1rem;
             border-radius: 999px;
             font-size: 0.875rem;
             font-weight: 600;
             letter-spacing: 0.04em;
-            color: rgba(255, 255, 255, 0.95) !important;
+            color: rgba(255, 255, 255, 0.96) !important;
             text-decoration: none;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
-            background: rgba(255, 255, 255, 0.12);
-            border: 1px solid rgba(255, 255, 255, 0.28);
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+            background: rgba(255, 255, 255, 0.16);
+            border: 1px solid rgba(255, 255, 255, 0.38);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
             transition: background 0.2s ease, border-color 0.2s ease;
         }
 
-        .drill-theme-back:hover {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.45);
+        .drill-floating-home:hover {
+            background: rgba(255, 255, 255, 0.26);
+            border-color: rgba(255, 255, 255, 0.52);
         }
 
         .drill-theme-spacer {
@@ -276,16 +243,10 @@
     </style>
 </head>
 <body class="drill-radial-theme">
+    <a href="index.html" class="drill-floating-home division-back" aria-label="Back to home">← Home</a>
     <div class="drill-theme-shell" role="presentation">
         <div class="drill-theme-main">
             <div class="drill-theme-inner">
-                <header class="drill-theme-header">
-                    <a href="index.html" class="drill-theme-logo-link" aria-label="Robur Mining Solutions — home">
-                        <img src="images/drilling-page-logo.png" alt="" class="drill-theme-logo" decoding="async" fetchpriority="high">
-                    </a>
-                    <span class="drill-theme-header-spacer" aria-hidden="true"></span>
-                    <a href="index.html" class="drill-theme-back division-back" aria-label="Back to home">← Home</a>
-                </header>
                 <div class="drill-theme-spacer"></div>
             </div>
         </div>
