@@ -32,14 +32,17 @@
             /* Average of hero JPEG corners — matches flat orange in file (vs pure #e6812e) */
             --drill-hero-letterbox: rgb(228, 123, 45);
             --drill-stretch-gap: clamp(0.65rem, 2.2vw, 1.05rem);
+            /* Measured at runtime (see script); fallback until then */
+            --drill-header-measured-px: 5.75rem;
+            --drill-bar-pad-bottom: 0.35rem;
         }
 
         *, *::before, *::after { box-sizing: border-box; }
 
         html {
-            height: 100%;
             margin: 0;
-            overflow: hidden;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
         html, body {
@@ -52,13 +55,13 @@
             --bg: var(--drill-outer);
             --text-main: rgba(72, 38, 18, 0.95);
             --text-muted: rgba(110, 58, 32, 0.78);
-            height: 100%;
             min-height: 100vh;
             min-height: 100dvh;
             display: flex;
             flex-direction: column;
             padding: 0;
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
             background:
                 linear-gradient(
                     180deg,
@@ -72,12 +75,12 @@
         }
 
         .drill-theme-shell {
-            flex: 1;
-            min-height: 0;
+            flex: 1 0 auto;
             width: 100%;
+            min-height: min(100dvh, 100vh);
             position: relative;
             isolation: isolate;
-            overflow: hidden;
+            overflow: visible;
             background-color: #ce7228;
         }
 
@@ -119,65 +122,223 @@
                 );
         }
 
-        .drill-hero-center {
-            position: absolute;
-            inset: 0;
+        /* Single primary column: hero + category stack share one rail width */
+        .drill-page-main {
+            position: relative;
             z-index: 1;
+            width: 100%;
+            max-width: min(72rem, 100%);
+            margin: 0 auto;
             display: flex;
+            flex-direction: column;
             align-items: stretch;
-            justify-content: center;
-            /* Solid only — gradients here showed as a “frame” against the JPEG */
-            background: var(--drill-hero-letterbox);
-            padding:
-                clamp(4.75rem, 12vw, 6.75rem)
-                max(0.5rem, calc(env(safe-area-inset-right, 0px) + 3.5rem))
-                clamp(0.35rem, 2vh, 0.75rem)
-                max(0.5rem, env(safe-area-inset-left, 0px));
-            pointer-events: none;
+            row-gap: clamp(1.5rem, 4vw, 2.75rem);
+            box-sizing: border-box;
         }
 
-        .drill-hero-img-shell {
-            flex: 1 1 auto;
-            width: 100%;
-            max-width: min(100%, calc(100vw - 3.5rem));
+        /*
+         * Hero band: 16:9 tile (contain). JS sets padding-top for fixed bar.
+         * Page title is visually hidden (see .drill-sr-only) so the hero is image-only.
+         */
+        body.drill-radial-theme .drill-theme-shell .drill-hero-center {
+            position: relative;
+            z-index: 2;
             min-height: 0;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            line-height: 0;
-            border-radius: 0;
-            box-shadow: none;
-            border: none;
-            outline: none;
+            flex-direction: column;
+            align-items: stretch;
+            justify-content: flex-start;
             background: var(--drill-hero-letterbox);
+            padding: var(--drill-header-measured-px, 5.75rem) 0 clamp(2rem, 6vw, 3.25rem);
+            pointer-events: none;
+            overflow-x: hidden;
+            overflow-y: visible;
+            border-bottom: 1px solid rgba(45, 24, 10, 0.18);
+            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06);
         }
 
-        .drill-hero-img-wrap {
-            max-width: 100%;
-            max-height: 100%;
+        .drill-sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip-path: inset(50%);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .drill-hero-gallery,
+        .drill-cat-gallery {
+            --drill-hero-gallery-gap: clamp(0.65rem, 1.75vw, 1.15rem);
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--drill-hero-gallery-gap);
+            width: 100%;
+            margin: 0;
+            padding: 0 clamp(0.75rem, 3vw, 1.5rem);
+            padding-left: max(clamp(0.75rem, 3vw, 1.5rem), env(safe-area-inset-left, 0px));
+            padding-right: max(clamp(0.75rem, 3vw, 1.5rem), calc(env(safe-area-inset-right, 0px) + 3.5rem));
+            box-sizing: border-box;
+        }
+
+        /* Sit hero tile higher — into space where the visible intro used to sit */
+        .drill-hero-gallery {
+            margin-top: clamp(-2.75rem, -7vw, -0.85rem);
+        }
+
+        .drill-cat-gallery {
+            margin-top: clamp(0.75rem, 2vw, 1.25rem);
+        }
+
+        .drill-hero-figure,
+        .drill-cat-figure {
+            margin: 0;
+            overflow: hidden;
+            line-height: 0;
+            min-width: 0;
+            min-height: 0;
+            grid-column: 1 / -1;
+            aspect-ratio: 16 / 9;
             display: flex;
             align-items: center;
             justify-content: center;
             background: var(--drill-hero-letterbox);
-            border: none;
-            outline: none;
-            overflow: hidden;
+            border-radius: clamp(4px, 1vw, 10px);
+            box-shadow:
+                0 12px 32px rgba(0, 0, 0, 0.35),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.06);
         }
 
-        .drill-hero-img {
+        .drill-hero-figure {
+            transform: translateZ(0);
+            animation: drill-hero-float 5.5s ease-in-out infinite;
+        }
+
+        @keyframes drill-hero-float {
+            0%, 100% {
+                transform: translate3d(0, 0, 0);
+                box-shadow:
+                    0 12px 28px rgba(0, 0, 0, 0.32),
+                    0 4px 12px rgba(35, 18, 8, 0.18),
+                    inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+            }
+            50% {
+                transform: translate3d(0, -10px, 0);
+                box-shadow:
+                    0 22px 48px rgba(35, 18, 8, 0.38),
+                    0 8px 20px rgba(0, 0, 0, 0.28),
+                    inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .drill-hero-figure {
+                animation: none;
+                transform: none;
+                box-shadow:
+                    0 12px 32px rgba(0, 0, 0, 0.35),
+                    inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+            }
+        }
+
+        body.drill-radial-theme .drill-hero-figure .drill-tile-img,
+        body.drill-radial-theme .drill-cat-figure .drill-tile-img {
             display: block;
-            width: auto;
-            height: auto;
-            max-width: 100%;
-            max-height: 100%;
+            width: 100%;
+            height: 100%;
+            max-width: none;
+            max-height: none;
             object-fit: contain;
+            object-position: center;
+            margin: 0;
             border: none;
             outline: none;
             box-shadow: none;
-            transform: scale(1.015);
+            border-radius: 0 !important;
+            transform: none;
             transform-origin: center center;
             -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
+        }
+
+        /* Category stack: rhythm + panels aligned to page rail */
+        .drill-cat-page {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            margin: 0;
+            padding: clamp(0.35rem, 1.5vw, 0.85rem) 0 clamp(2.25rem, 5vw, 3.25rem);
+            box-sizing: border-box;
+        }
+
+        .drill-cat-stack {
+            display: flex;
+            flex-direction: column;
+            gap: clamp(1.35rem, 3.5vw, 2.25rem);
+            width: 100%;
+        }
+
+        .drill-cat-section {
+            scroll-margin-top: clamp(5.5rem, 14vw, 8.75rem);
+            margin: 0;
+            padding: clamp(1.25rem, 3.2vw, 1.85rem) max(clamp(0.75rem, 3vw, 1.5rem), env(safe-area-inset-left, 0px))
+                clamp(1.25rem, 3.2vw, 1.85rem)
+                max(clamp(0.75rem, 3vw, 1.5rem), calc(env(safe-area-inset-right, 0px) + 3.5rem));
+            border-radius: clamp(10px, 1.5vw, 16px);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow:
+                0 4px 24px rgba(35, 18, 8, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .drill-cat-section h2 {
+            position: relative;
+            margin: 0 0 0.15rem;
+            padding: 0 0 0.85rem;
+            font-size: clamp(1.45rem, 4.1vw, 2.1rem);
+            font-weight: 700;
+            line-height: 1.15;
+            text-align: center;
+            color: rgba(255, 252, 248, 0.98);
+            letter-spacing: -0.02em;
+            text-shadow:
+                0 2px 6px rgba(0, 0, 0, 0.72),
+                0 0 26px rgba(0, 0, 0, 0.32);
+        }
+
+        .drill-cat-section h2::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: 0.2rem;
+            transform: translateX(-50%);
+            width: min(5rem, 40vw);
+            height: 2px;
+            border-radius: 2px;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 220, 190, 0.65),
+                rgba(255, 255, 255, 0.45),
+                rgba(255, 220, 190, 0.65),
+                transparent
+            );
+        }
+
+        .drill-cat-section .drill-cat-gallery {
+            margin-top: clamp(0.35rem, 1.2vw, 0.65rem);
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        /* Tapered image deferred until scroll / in-page nav (see inline script) */
+        #drill-section-tapered.drill-tapered-pending .drill-cat-gallery {
+            display: none;
         }
 
         /* Fixed header: logo + Home + category menu */
@@ -190,7 +351,7 @@
             padding:
                 max(1rem, env(safe-area-inset-top, 0px))
                 max(1rem, env(safe-area-inset-right, 0px))
-                0.65rem
+                var(--drill-bar-pad-bottom)
                 max(1rem, env(safe-area-inset-left, 0px));
             display: grid;
             grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1fr);
@@ -486,71 +647,6 @@
                 min-height: 0 !important;
             }
         }
-
-        .drill-tool-lightbox {
-            position: fixed;
-            inset: 0;
-            z-index: 200;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: clamp(0.75rem, 3vw, 1.5rem);
-            box-sizing: border-box;
-        }
-
-        .drill-tool-lightbox.is-open {
-            display: flex;
-        }
-
-        .drill-tool-lightbox-backdrop {
-            position: absolute;
-            inset: 0;
-            background: rgba(12, 10, 8, 0.78);
-            cursor: pointer;
-        }
-
-        .drill-tool-lightbox-panel {
-            position: relative;
-            z-index: 1;
-            max-width: min(94vw, 56rem);
-            max-height: 88vh;
-            border-radius: 0.35rem;
-            overflow: hidden;
-            box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.45);
-        }
-
-        .drill-tool-lightbox-img {
-            display: block;
-            max-width: 100%;
-            max-height: 88vh;
-            width: auto;
-            height: auto;
-            object-fit: contain;
-        }
-
-        .drill-tool-lightbox-close {
-            position: absolute;
-            top: 0.5rem;
-            right: 0.5rem;
-            z-index: 2;
-            width: 2.5rem;
-            height: 2.5rem;
-            border: none;
-            border-radius: 50%;
-            background: rgba(0, 0, 0, 0.55);
-            color: #fff;
-            font-size: 1.5rem;
-            line-height: 1;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.15s ease;
-        }
-
-        .drill-tool-lightbox-close:hover {
-            background: rgba(210, 87, 17, 0.95);
-        }
     </style>
 </head>
 <body class="drill-radial-theme">
@@ -562,11 +658,11 @@
             <a href="index.html" class="drill-floating-home division-back" aria-label="Back to home">← Home</a>
         </div>
         <nav class="drill-nav" aria-label="Drilling tools categories">
-            <a class="drill-nav-link drill-nav-tapered" href="#" role="button" aria-expanded="false" aria-controls="drill-tapered-lightbox">Tapered</a>
-            <a class="drill-nav-link drill-nav-top-hammer" href="#" role="button" aria-expanded="false" aria-controls="drill-top-hammer-lightbox">Top Hammer</a>
-            <a class="drill-nav-link drill-nav-dth" href="#" role="button" aria-expanded="false" aria-controls="drill-dth-lightbox">(DTH) Down The Hole</a>
-            <a class="drill-nav-link drill-nav-pneumatic" href="#" role="button" aria-expanded="false" aria-controls="drill-pneumatic-lightbox">Pneumatic Rockdrills</a>
-            <a class="drill-nav-link" href="#">Services</a>
+            <a class="drill-nav-link" href="#drill-section-tapered">Tapered</a>
+            <a class="drill-nav-link" href="#drill-section-top-hammer">Top Hammer</a>
+            <a class="drill-nav-link" href="#drill-section-dth">(DTH) Down The Hole</a>
+            <a class="drill-nav-link" href="#drill-section-pneumatic">Pneumatic Rockdrills</a>
+            <a class="drill-nav-link" href="#drill-section-services">Services</a>
         </nav>
         <div class="drill-top-bar-end" aria-hidden="true"></div>
     </div>
@@ -595,81 +691,147 @@
         </ul>
     </aside>
     <div class="drill-theme-shell">
-        <div class="drill-hero-center">
-            <div class="drill-hero-img-shell">
-                <div class="drill-hero-img-wrap">
-                    <img
-                        src="images/drilling-hero-full.jpeg"
-                        alt="Drill bit"
-                        class="drill-hero-img"
-                        width="672"
-                        height="1536"
-                        decoding="async"
-                        fetchpriority="high"
-                    >
+        <main class="drill-page-main" id="drill-page-main" aria-label="Drilling Tools — Robur Mining Solutions">
+            <section class="drill-hero-center" id="drill-hero-center" aria-labelledby="drill-page-title">
+                <h1 id="drill-page-title" class="drill-sr-only">Drilling Tools</h1>
+                <div class="drill-hero-gallery" role="group" aria-label="Drilling tools hero">
+                    <figure class="drill-hero-figure">
+                        <img
+                            src="images/drilling-hero-full.jpeg"
+                            alt="Robur drill bit and tooling"
+                            class="drill-tile-img"
+                            width="672"
+                            height="1536"
+                            decoding="async"
+                            fetchpriority="high"
+                        >
+                    </figure>
+                </div>
+            </section>
+
+            <div class="drill-cat-page" aria-label="Product categories">
+                <div class="drill-cat-stack">
+                    <section id="drill-section-tapered" class="drill-cat-section drill-tapered-pending" aria-labelledby="drill-heading-tapered">
+                        <h2 id="drill-heading-tapered">Tapered</h2>
+                        <div class="drill-cat-gallery" role="group" aria-label="Tapered drilling tools">
+                            <figure class="drill-cat-figure">
+                                <img src="images/tapered.jpeg" alt="Tapered drilling tools" class="drill-tile-img" decoding="async" loading="lazy">
+                            </figure>
+                        </div>
+                    </section>
+                    <section id="drill-section-top-hammer" class="drill-cat-section" aria-labelledby="drill-heading-top-hammer">
+                        <h2 id="drill-heading-top-hammer">Top Hammer</h2>
+                        <div class="drill-cat-gallery" role="group" aria-label="Top hammer drilling tools">
+                            <figure class="drill-cat-figure">
+                                <img src="images/top-hammer.jpeg" alt="Top hammer drilling equipment" class="drill-tile-img" decoding="async" loading="lazy">
+                            </figure>
+                        </div>
+                    </section>
+                    <section id="drill-section-dth" class="drill-cat-section" aria-labelledby="drill-heading-dth">
+                        <h2 id="drill-heading-dth">(DTH) Down The Hole</h2>
+                        <div class="drill-cat-gallery" role="group" aria-label="Down the hole drilling tools">
+                            <figure class="drill-cat-figure">
+                                <img src="images/down-the-hole.jpeg" alt="Down-the-hole drilling tools" class="drill-tile-img" decoding="async" loading="lazy">
+                            </figure>
+                        </div>
+                    </section>
+                    <section id="drill-section-pneumatic" class="drill-cat-section" aria-labelledby="drill-heading-pneumatic">
+                        <h2 id="drill-heading-pneumatic">Pneumatic Rockdrills</h2>
+                        <div class="drill-cat-gallery" role="group" aria-label="Pneumatic rockdrills">
+                            <figure class="drill-cat-figure">
+                                <img src="images/pneumatic-rockdrills.jpeg" alt="Pneumatic rockdrills" class="drill-tile-img" decoding="async" loading="lazy">
+                            </figure>
+                        </div>
+                    </section>
+                    <section id="drill-section-services" class="drill-cat-section" aria-labelledby="drill-heading-services">
+                        <h2 id="drill-heading-services">Services</h2>
+                        <div class="drill-cat-gallery" role="group" aria-label="Drilling services">
+                            <figure class="drill-cat-figure">
+                                <img src="images/drilling-theme-hero.jpeg" alt="Drilling tools — sales, support, and services" class="drill-tile-img" decoding="async" loading="lazy">
+                            </figure>
+                        </div>
+                    </section>
                 </div>
             </div>
-        </div>
-    </div>
+        </main>
 
-    <div id="drill-tapered-lightbox" class="drill-tool-lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Tapered drilling tools">
-        <div class="drill-tool-lightbox-backdrop" aria-hidden="true"></div>
-        <div class="drill-tool-lightbox-panel">
-            <button type="button" class="drill-tool-lightbox-close" aria-label="Close">&times;</button>
-            <img
-                src="images/tapered.jpeg"
-                alt="Tapered drilling tools"
-                class="drill-tool-lightbox-img"
-                width="1131"
-                height="1600"
-                decoding="async"
-            >
-        </div>
-    </div>
+        <script>
+            (function () {
+                var bar = document.querySelector(".drill-top-bar");
+                var hero = document.getElementById("drill-hero-center");
+                function syncDrillHeroPad() {
+                    if (!bar || !hero) return;
+                    var h = bar.getBoundingClientRect().height;
+                    /* padding-top on .drill-hero-center clears fixed bar; keep in sync with bar height */
+                    var px = Math.max(44, Math.round(h - 10)) + "px";
+                    hero.style.setProperty("padding-top", px, "important");
+                }
+                var ro;
+                function start() {
+                    syncDrillHeroPad();
+                    requestAnimationFrame(syncDrillHeroPad);
+                    if (typeof ResizeObserver !== "undefined" && !ro) {
+                        ro = new ResizeObserver(syncDrillHeroPad);
+                        ro.observe(bar);
+                    }
+                }
+                syncDrillHeroPad();
+                if (document.readyState === "loading") {
+                    document.addEventListener("DOMContentLoaded", start);
+                } else {
+                    start();
+                }
+                window.addEventListener("resize", syncDrillHeroPad);
+                window.addEventListener("load", syncDrillHeroPad);
+                if (document.fonts && document.fonts.ready) {
+                    document.fonts.ready.then(function () {
+                        requestAnimationFrame(syncDrillHeroPad);
+                    });
+                }
+            })();
 
-    <div id="drill-top-hammer-lightbox" class="drill-tool-lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Top hammer drilling tools">
-        <div class="drill-tool-lightbox-backdrop" aria-hidden="true"></div>
-        <div class="drill-tool-lightbox-panel">
-            <button type="button" class="drill-tool-lightbox-close" aria-label="Close">&times;</button>
-            <img
-                src="images/top-hammer.jpeg"
-                alt="Top hammer drilling tools"
-                class="drill-tool-lightbox-img"
-                width="600"
-                height="353"
-                decoding="async"
-            >
-        </div>
-    </div>
-
-    <div id="drill-dth-lightbox" class="drill-tool-lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Down the hole (DTH) drilling tools">
-        <div class="drill-tool-lightbox-backdrop" aria-hidden="true"></div>
-        <div class="drill-tool-lightbox-panel">
-            <button type="button" class="drill-tool-lightbox-close" aria-label="Close">&times;</button>
-            <img
-                src="images/down-the-hole.jpeg"
-                alt="Down the hole (DTH) drilling tools"
-                class="drill-tool-lightbox-img"
-                width="1199"
-                height="1600"
-                decoding="async"
-            >
-        </div>
-    </div>
-
-    <div id="drill-pneumatic-lightbox" class="drill-tool-lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Pneumatic rockdrills">
-        <div class="drill-tool-lightbox-backdrop" aria-hidden="true"></div>
-        <div class="drill-tool-lightbox-panel">
-            <button type="button" class="drill-tool-lightbox-close" aria-label="Close">&times;</button>
-            <img
-                src="images/pneumatic-rockdrills.jpeg"
-                alt="Pneumatic rockdrills"
-                class="drill-tool-lightbox-img"
-                width="685"
-                height="1024"
-                decoding="async"
-            >
-        </div>
+            /* Hide Tapered tile on first paint; show after scroll to section or #drill-section-tapered */
+            (function () {
+                var tapered = document.getElementById("drill-section-tapered");
+                if (!tapered) return;
+                function reveal() {
+                    tapered.classList.remove("drill-tapered-pending");
+                }
+                function hashIsTapered() {
+                    return (location.hash || "").replace(/^#/, "") === "drill-section-tapered";
+                }
+                function arm() {
+                    if (hashIsTapered()) {
+                        reveal();
+                        return;
+                    }
+                    window.addEventListener("hashchange", function () {
+                        if (hashIsTapered()) reveal();
+                    });
+                    if (typeof IntersectionObserver !== "undefined") {
+                        var io = new IntersectionObserver(
+                            function (entries) {
+                                entries.forEach(function (e) {
+                                    if (e.isIntersecting) {
+                                        reveal();
+                                        io.disconnect();
+                                    }
+                                });
+                            },
+                            { root: null, rootMargin: "100px 0px 0px 0px", threshold: 0.02 }
+                        );
+                        io.observe(tapered);
+                    } else {
+                        reveal();
+                    }
+                }
+                if (document.readyState === "loading") {
+                    document.addEventListener("DOMContentLoaded", arm);
+                } else {
+                    arm();
+                }
+            })();
+        </script>
     </div>
 
     <footer class="main-footer">
@@ -683,65 +845,5 @@
         </div>
     </footer>
     <script src="script.js" defer></script>
-    <script>
-        (function () {
-            function syncPageScroll() {
-                document.documentElement.style.overflow = document.querySelector(".drill-tool-lightbox.is-open")
-                    ? "hidden"
-                    : "";
-            }
-
-            function closeLb(lb, restoreFocus) {
-                if (!lb || !lb.classList.contains("is-open")) return;
-                if (restoreFocus === undefined) restoreFocus = true;
-                var id = lb.id;
-                var openBtn = document.querySelector('[aria-controls="' + id + '"]');
-                lb.classList.remove("is-open");
-                lb.setAttribute("aria-hidden", "true");
-                if (openBtn) openBtn.setAttribute("aria-expanded", "false");
-                syncPageScroll();
-                if (restoreFocus && openBtn) openBtn.focus();
-            }
-
-            function openLb(lb) {
-                document.querySelectorAll(".drill-tool-lightbox.is-open").forEach(function (other) {
-                    if (other !== lb) closeLb(other, false);
-                });
-                var id = lb.id;
-                var openBtn = document.querySelector('[aria-controls="' + id + '"]');
-                lb.classList.add("is-open");
-                lb.setAttribute("aria-hidden", "false");
-                if (openBtn) openBtn.setAttribute("aria-expanded", "true");
-                syncPageScroll();
-                var closeBtn = lb.querySelector(".drill-tool-lightbox-close");
-                if (closeBtn) closeBtn.focus();
-            }
-
-            document.querySelectorAll(".drill-tool-lightbox").forEach(function (lb) {
-                var id = lb.id;
-                var openBtn = document.querySelector('[aria-controls="' + id + '"]');
-                if (!openBtn) return;
-                var closeBtn = lb.querySelector(".drill-tool-lightbox-close");
-                var backdrop = lb.querySelector(".drill-tool-lightbox-backdrop");
-                openBtn.addEventListener("click", function (e) {
-                    e.preventDefault();
-                    openLb(lb);
-                });
-                if (closeBtn) closeBtn.addEventListener("click", function () {
-                    closeLb(lb);
-                });
-                if (backdrop)
-                    backdrop.addEventListener("click", function () {
-                        closeLb(lb);
-                    });
-            });
-
-            document.addEventListener("keydown", function (e) {
-                if (e.key !== "Escape") return;
-                var open = document.querySelector(".drill-tool-lightbox.is-open");
-                if (open) closeLb(open);
-            });
-        })();
-    </script>
 </body>
 </html>
