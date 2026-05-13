@@ -137,19 +137,21 @@
         }
 
         /*
-         * Hero band: 16:9 tile (contain). JS sets padding-top for fixed bar.
-         * Page title is visually hidden (see .drill-sr-only) so the hero is image-only.
+         * First screen: hero fills viewport (below fixed bar); image tile centered.
+         * JS sets padding-top on this section. Category sections follow on scroll.
          */
         body.drill-radial-theme .drill-theme-shell .drill-hero-center {
             position: relative;
             z-index: 2;
-            min-height: 0;
+            box-sizing: border-box;
+            min-height: 100vh;
+            min-height: 100dvh;
             display: flex;
             flex-direction: column;
             align-items: stretch;
-            justify-content: flex-start;
+            justify-content: center;
             background: var(--drill-hero-letterbox);
-            padding: var(--drill-header-measured-px, 5.75rem) 0 clamp(2rem, 6vw, 3.25rem);
+            padding: var(--drill-header-measured-px, 5.75rem) 0 clamp(1rem, 2.5vh, 1.75rem);
             pointer-events: none;
             overflow-x: hidden;
             overflow-y: visible;
@@ -183,9 +185,10 @@
             box-sizing: border-box;
         }
 
-        /* Sit hero tile higher — into space where the visible intro used to sit */
         .drill-hero-gallery {
-            margin-top: clamp(-2.75rem, -7vw, -0.85rem);
+            flex: 0 1 auto;
+            align-self: stretch;
+            margin-top: 0;
         }
 
         .drill-cat-gallery {
@@ -212,6 +215,7 @@
         }
 
         .drill-hero-figure {
+            max-height: min(70vh, calc(100dvh - 10rem));
             transform: translateZ(0);
             animation: drill-hero-float 5.5s ease-in-out infinite;
         }
