@@ -25,7 +25,9 @@
             --drill-orange-solid: #e6812e;
             --drill-orange-mid: var(--drill-orange-solid);
             --drill-orange-deep: #9d5c1f;
-            /* Header & footer bar — user spec */
+            /* Sampled from drilling-page-logo.jpeg border (~#d25711) — header matches logo plate */
+            --drill-logo-plate: rgb(210, 87, 17);
+            /* Footer bar */
             --drill-header-footer: #8b2500;
             /* Average of hero JPEG corners — matches flat orange in file (vs pure #e6812e) */
             --drill-hero-letterbox: rgb(228, 123, 45);
@@ -195,18 +197,7 @@
             align-items: center;
             column-gap: 1rem;
             row-gap: 0.75rem;
-            background:
-                linear-gradient(
-                    180deg,
-                    rgba(255, 255, 255, 0.1) 0%,
-                    transparent 42%
-                ),
-                linear-gradient(
-                    180deg,
-                    #9a3008 0%,
-                    var(--drill-header-footer) 38%,
-                    var(--drill-header-footer) 100%
-                );
+            background: var(--drill-logo-plate);
             box-shadow:
                 0 1px 0 rgba(255, 255, 255, 0.14),
                 0 20px 40px -14px rgba(35, 18, 8, 0.28);
@@ -365,10 +356,6 @@
             max-width: min(280px, 62vw);
             object-fit: contain;
             display: block;
-            filter:
-                drop-shadow(0 0 0.5px rgba(255, 230, 210, 0.75))
-                drop-shadow(0 2px 10px rgba(90, 38, 14, 0.38))
-                drop-shadow(0 6px 18px rgba(130, 52, 18, 0.22));
         }
 
         .drill-social-rail {
