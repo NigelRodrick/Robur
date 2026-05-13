@@ -486,6 +486,71 @@
                 min-height: 0 !important;
             }
         }
+
+        .drill-tool-lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 200;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: clamp(0.75rem, 3vw, 1.5rem);
+            box-sizing: border-box;
+        }
+
+        .drill-tool-lightbox.is-open {
+            display: flex;
+        }
+
+        .drill-tool-lightbox-backdrop {
+            position: absolute;
+            inset: 0;
+            background: rgba(12, 10, 8, 0.78);
+            cursor: pointer;
+        }
+
+        .drill-tool-lightbox-panel {
+            position: relative;
+            z-index: 1;
+            max-width: min(94vw, 56rem);
+            max-height: 88vh;
+            border-radius: 0.35rem;
+            overflow: hidden;
+            box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.45);
+        }
+
+        .drill-tool-lightbox-img {
+            display: block;
+            max-width: 100%;
+            max-height: 88vh;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .drill-tool-lightbox-close {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            z-index: 2;
+            width: 2.5rem;
+            height: 2.5rem;
+            border: none;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.55);
+            color: #fff;
+            font-size: 1.5rem;
+            line-height: 1;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.15s ease;
+        }
+
+        .drill-tool-lightbox-close:hover {
+            background: rgba(210, 87, 17, 0.95);
+        }
     </style>
 </head>
 <body class="drill-radial-theme">
@@ -497,10 +562,10 @@
             <a href="index.html" class="drill-floating-home division-back" aria-label="Back to home">← Home</a>
         </div>
         <nav class="drill-nav" aria-label="Drilling tools categories">
-            <a class="drill-nav-link" href="#">Tapered</a>
-            <a class="drill-nav-link" href="#">Top Hammer</a>
-            <a class="drill-nav-link" href="#">(DTH) Down The Hole</a>
-            <a class="drill-nav-link" href="#">Pneumatic Rockdrills</a>
+            <a class="drill-nav-link drill-nav-tapered" href="#" role="button" aria-expanded="false" aria-controls="drill-tapered-lightbox">Tapered</a>
+            <a class="drill-nav-link drill-nav-top-hammer" href="#" role="button" aria-expanded="false" aria-controls="drill-top-hammer-lightbox">Top Hammer</a>
+            <a class="drill-nav-link drill-nav-dth" href="#" role="button" aria-expanded="false" aria-controls="drill-dth-lightbox">(DTH) Down The Hole</a>
+            <a class="drill-nav-link drill-nav-pneumatic" href="#" role="button" aria-expanded="false" aria-controls="drill-pneumatic-lightbox">Pneumatic Rockdrills</a>
             <a class="drill-nav-link" href="#">Services</a>
         </nav>
         <div class="drill-top-bar-end" aria-hidden="true"></div>
@@ -547,6 +612,66 @@
         </div>
     </div>
 
+    <div id="drill-tapered-lightbox" class="drill-tool-lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Tapered drilling tools">
+        <div class="drill-tool-lightbox-backdrop" aria-hidden="true"></div>
+        <div class="drill-tool-lightbox-panel">
+            <button type="button" class="drill-tool-lightbox-close" aria-label="Close">&times;</button>
+            <img
+                src="images/tapered.jpeg"
+                alt="Tapered drilling tools"
+                class="drill-tool-lightbox-img"
+                width="1131"
+                height="1600"
+                decoding="async"
+            >
+        </div>
+    </div>
+
+    <div id="drill-top-hammer-lightbox" class="drill-tool-lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Top hammer drilling tools">
+        <div class="drill-tool-lightbox-backdrop" aria-hidden="true"></div>
+        <div class="drill-tool-lightbox-panel">
+            <button type="button" class="drill-tool-lightbox-close" aria-label="Close">&times;</button>
+            <img
+                src="images/top-hammer.jpeg"
+                alt="Top hammer drilling tools"
+                class="drill-tool-lightbox-img"
+                width="600"
+                height="353"
+                decoding="async"
+            >
+        </div>
+    </div>
+
+    <div id="drill-dth-lightbox" class="drill-tool-lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Down the hole (DTH) drilling tools">
+        <div class="drill-tool-lightbox-backdrop" aria-hidden="true"></div>
+        <div class="drill-tool-lightbox-panel">
+            <button type="button" class="drill-tool-lightbox-close" aria-label="Close">&times;</button>
+            <img
+                src="images/down-the-hole.jpeg"
+                alt="Down the hole (DTH) drilling tools"
+                class="drill-tool-lightbox-img"
+                width="1199"
+                height="1600"
+                decoding="async"
+            >
+        </div>
+    </div>
+
+    <div id="drill-pneumatic-lightbox" class="drill-tool-lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Pneumatic rockdrills">
+        <div class="drill-tool-lightbox-backdrop" aria-hidden="true"></div>
+        <div class="drill-tool-lightbox-panel">
+            <button type="button" class="drill-tool-lightbox-close" aria-label="Close">&times;</button>
+            <img
+                src="images/pneumatic-rockdrills.jpeg"
+                alt="Pneumatic rockdrills"
+                class="drill-tool-lightbox-img"
+                width="685"
+                height="1024"
+                decoding="async"
+            >
+        </div>
+    </div>
+
     <footer class="main-footer">
         <div class="container">
             <div class="footer-content">
@@ -558,5 +683,65 @@
         </div>
     </footer>
     <script src="script.js" defer></script>
+    <script>
+        (function () {
+            function syncPageScroll() {
+                document.documentElement.style.overflow = document.querySelector(".drill-tool-lightbox.is-open")
+                    ? "hidden"
+                    : "";
+            }
+
+            function closeLb(lb, restoreFocus) {
+                if (!lb || !lb.classList.contains("is-open")) return;
+                if (restoreFocus === undefined) restoreFocus = true;
+                var id = lb.id;
+                var openBtn = document.querySelector('[aria-controls="' + id + '"]');
+                lb.classList.remove("is-open");
+                lb.setAttribute("aria-hidden", "true");
+                if (openBtn) openBtn.setAttribute("aria-expanded", "false");
+                syncPageScroll();
+                if (restoreFocus && openBtn) openBtn.focus();
+            }
+
+            function openLb(lb) {
+                document.querySelectorAll(".drill-tool-lightbox.is-open").forEach(function (other) {
+                    if (other !== lb) closeLb(other, false);
+                });
+                var id = lb.id;
+                var openBtn = document.querySelector('[aria-controls="' + id + '"]');
+                lb.classList.add("is-open");
+                lb.setAttribute("aria-hidden", "false");
+                if (openBtn) openBtn.setAttribute("aria-expanded", "true");
+                syncPageScroll();
+                var closeBtn = lb.querySelector(".drill-tool-lightbox-close");
+                if (closeBtn) closeBtn.focus();
+            }
+
+            document.querySelectorAll(".drill-tool-lightbox").forEach(function (lb) {
+                var id = lb.id;
+                var openBtn = document.querySelector('[aria-controls="' + id + '"]');
+                if (!openBtn) return;
+                var closeBtn = lb.querySelector(".drill-tool-lightbox-close");
+                var backdrop = lb.querySelector(".drill-tool-lightbox-backdrop");
+                openBtn.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    openLb(lb);
+                });
+                if (closeBtn) closeBtn.addEventListener("click", function () {
+                    closeLb(lb);
+                });
+                if (backdrop)
+                    backdrop.addEventListener("click", function () {
+                        closeLb(lb);
+                    });
+            });
+
+            document.addEventListener("keydown", function (e) {
+                if (e.key !== "Escape") return;
+                var open = document.querySelector(".drill-tool-lightbox.is-open");
+                if (open) closeLb(open);
+            });
+        })();
+    </script>
 </body>
 </html>
