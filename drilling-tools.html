@@ -316,19 +316,36 @@
             object-position: top center;
         }
 
-        /* Services: same as Top Hammer — cover fills the 3:4 tile so letterbox orange is not mistaken for “gap” above the footer. */
-        #drill-section-services .drill-cat-figure .drill-tile-img {
-            object-fit: cover;
-            object-position: center;
+        /* Services: intrinsic-height tile (no forced 3:4) so layout ends where the bitmap ends and the footer can sit flush. */
+        #drill-section-services .drill-cat-figure {
+            align-items: flex-start;
+            justify-content: flex-start;
+            aspect-ratio: auto;
+            width: 100%;
+            height: auto;
+            min-height: 0;
+            background: transparent;
         }
 
-        /* Last category: tuck footer up to the services tile (trim section + page tail padding). */
-        #drill-section-services.drill-cat-section {
-            padding-bottom: max(0.12rem, env(safe-area-inset-bottom, 0px));
+        #drill-section-services .drill-cat-figure .drill-tile-img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            object-position: top center;
         }
 
         #drill-section-services .drill-cat-gallery {
+            margin-top: 0;
             margin-bottom: 0;
+        }
+
+        #drill-section-services.drill-cat-section {
+            padding-bottom: max(0px, env(safe-area-inset-bottom, 0px));
+        }
+
+        /* No extra orange rail after the last category — footer follows the Services image bottom. */
+        body.drill-radial-theme .drill-theme-shell .drill-cat-page {
+            padding-bottom: max(0px, env(safe-area-inset-bottom, 0px));
         }
 
         /* Tapered tile hidden: less dead air before Top Hammer. */
@@ -599,7 +616,7 @@
             position: relative;
             isolation: isolate;
             border-top: none;
-            padding: 0.25rem 0 max(0.35rem, env(safe-area-inset-bottom, 0px)) 0;
+            padding: 0 0 max(0.35rem, env(safe-area-inset-bottom, 0px)) 0;
             /* Solid bar — stacked gradients read as extra orange above the footer. */
             background: var(--drill-header-footer) !important;
         }
@@ -745,7 +762,7 @@
                         <h2 id="drill-heading-services">Services</h2>
                         <div class="drill-cat-gallery" role="group" aria-label="Drilling services">
                             <figure class="drill-cat-figure">
-                                <img src="images/drilling-theme-hero.jpeg" alt="Drilling tools — sales, support, and services" class="drill-tile-img" decoding="async" loading="lazy">
+                                <img src="images/services-cover.jpeg" alt="Robur drilling services — sales, support, and services" class="drill-tile-img" decoding="async" loading="lazy">
                             </figure>
                         </div>
                     </section>
